@@ -4,38 +4,203 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Silent Knights — Cyber Security Team</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Web fonts: berlin (if available on system), fallback to Poppins; Fira Code for terminal -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Fira+Code:wght@400;700&display=swap" rel="stylesheet" />
+
   <style>
     :root {
       --font-main: "Berlin Sans FB", "Poppins", "Arial Rounded MT Bold", system-ui, -apple-system, sans-serif;
+      --font-mono: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+
       --color-primary: #1E3A8A;      /* Deep Blue */
       --color-primary-dark: #0A1F44; /* Dark Navy */
       --color-secondary: #1F4E78;    /* Blue Steel */
       --color-bg: #0A0A0A;           /* Jet Black */
       --color-gray: #4B4B4B;         /* Graphite Gray */
       --color-light: #F1F1F1;        /* Light text */
+
       --radius: 14px;
       --shadow: 0 10px 30px rgba(30, 58, 138, 0.35);
     }
 
-    * { box-sizing: border-box; }
+    /* ========== Base ========== */
+    * { box-sizing: border-box; margin:0; padding:0; }
     html { scroll-behavior: smooth; }
-    body { margin: 0; font-family: var(--font-main); background: var(--color-bg); color: var(--color-light); line-height: 1.65; }
+    body {
+      margin: 0;
+      font-family: var(--font-main);
+      font-weight: 400; /* Berlin normal */
+      background: var(--color-bg);
+      color: var(--color-light);
+      line-height: 1.65;
+    }
     a { color: var(--color-secondary); text-decoration: none; }
     a:hover { color: var(--color-primary); text-shadow: 0 0 8px var(--color-primary); }
 
-    /* ======= NAVBAR ======= */
-    .nav { position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(8px); background: rgba(10, 31, 68, 0.8); border-bottom: 1px solid rgba(75,75,75,.4); }
-    .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 14px 22px; }
-    .brand { font-weight: 800; letter-spacing: 1px; display: flex; align-items: center; gap: 10px; color: #fff; }
-    .brand-badge { width: 34px; height: 34px; border-radius: 50%; background: radial-gradient( circle at 30% 30%, #2e57c7, #0A1F44 70% ); box-shadow: 0 0 12px rgba(30,58,138,.8) inset, 0 0 14px rgba(30,58,138,.6); }
-    .menu { display: flex; gap: 18px; flex-wrap: wrap; }
-    .menu a { color: #fff; font-weight: 600; padding: 8px 10px; border-radius: 10px; transition: .25s; }
-    .menu a.active, .menu a:hover { background: rgba(30,58,138,.2); box-shadow: 0 0 12px rgba(30,58,138,.5); }
+    /* ========== INTRO (Terminal + Improved Glitch Logo) ========== */
+    .intro {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      z-index: 9999;
+      background:
+        radial-gradient(800px 400px at 50% -10%, rgba(30,58,138,.25), transparent),
+        linear-gradient(to right, #0A0A0A, #0A1F44);
+      padding: 20px;
+    }
 
-    /* ======= LAYOUT HELPERS ======= */
+    .terminal-wrap {
+      width: min(920px, 94vw);
+      max-height: 76vh;
+      background: #050505;
+      border-radius: 14px;
+      border: 1px solid #0f0f0f;
+      padding: 18px;
+      box-shadow: 0 0 40px rgba(30,58,138,.12), inset 0 0 24px rgba(0,0,0,.6);
+    }
+
+    .term-header { display:flex; align-items:center; gap:10px; margin-bottom:8px; color:#c6c9cf; font-family: var(--font-mono); font-size:12px; }
+    .term-dots { display:flex; gap:6px; }
+    .dot { width:10px; height:10px; border-radius:50%; }
+    .dot.r { background:#ff5f56; } .dot.y { background:#ffbd2e; } .dot.g { background:#27c93f; }
+
+    /* ===== IMPROVED GLITCH LOGO (copied from your improved snippet) ===== */
+    .logo-glitch {
+      --size: clamp(34px, 5.2vw, 64px);
+      position: relative;
+      display: inline-block;
+      font-family: var(--font-main);
+      font-weight: 400; /* normal */
+      text-transform: uppercase;
+      color: #dbe9ff;
+      font-size: var(--size);
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+      filter: contrast(1.05) saturate(1.1);
+      animation: flicker 3s linear infinite;
+    }
+
+    .logo-glitch::before,
+    .logo-glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      mix-blend-mode: screen;
+      opacity: 0.95;
+    }
+
+    .logo-glitch::before {
+      color: rgba(255,59,59,0.95);
+      transform: translate(3px, -2px);
+      clip-path: inset(0 0 60% 0);
+      animation: gl1 1.8s infinite linear alternate-reverse;
+      text-shadow: 0 0 12px rgba(255,59,59,0.25);
+    }
+
+    .logo-glitch::after {
+      color: rgba(0,255,149,0.95);
+      transform: translate(-3px, 2px);
+      clip-path: inset(60% 0 0 0);
+      animation: gl2 1.6s infinite linear alternate;
+      text-shadow: 0 0 12px rgba(0,255,149,0.18);
+    }
+
+    @keyframes flicker {
+      0% { opacity: 1; transform: translateY(0) scale(1); filter: drop-shadow(0 0 0 rgba(0,0,0,0)); }
+      5% { opacity: 0.97; transform: translateY(-1px) scale(1.002); }
+      10% { opacity: 1; transform: translateY(0) scale(1); }
+      30% { opacity: 0.96; transform: translateY(0.5px) scale(0.999); }
+      70% { opacity: 1; transform: translateY(0) scale(1); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes gl1 {
+      0%   { clip-path: inset(0 0 85% 0); transform: translate(2px,-1px) skewX(-1deg); opacity:0.95;}
+      25%  { clip-path: inset(20% 0 60% 0); transform: translate(5px,-3px) skewX(2deg); opacity:0.9;}
+      50%  { clip-path: inset(40% 0 40% 0); transform: translate(1px,-1px) skewX(-0.5deg); opacity:0.95;}
+      75%  { clip-path: inset(10% 0 70% 0); transform: translate(4px,-2px) skewX(3deg); opacity:0.88;}
+      100% { clip-path: inset(0 0 85% 0); transform: translate(2px,-1px) skewX(-1deg); opacity:0.95;}
+    }
+    @keyframes gl2 {
+      0%   { clip-path: inset(60% 0 0 0); transform: translate(-2px,1px) skewX(1deg); opacity:0.95;}
+      20%  { clip-path: inset(50% 0 10% 0); transform: translate(-5px,3px) skewX(-2deg); opacity:0.9;}
+      45%  { clip-path: inset(30% 0 30% 0); transform: translate(-1px,1px) skewX(0.2deg); opacity:0.95;}
+      70%  { clip-path: inset(55% 0 5% 0); transform: translate(-4px,2px) skewX(-2.5deg); opacity:0.88;}
+      100% { clip-path: inset(60% 0 0 0); transform: translate(-2px,1px) skewX(1deg); opacity:0.95;}
+    }
+
+    .term-body {
+      font-family: var(--font-mono);
+      color: #00ff99;
+      font-size: 14px;
+      white-space: pre-wrap;
+      overflow:auto;
+      max-height: calc(76vh - 120px);
+      line-height: 1.6;
+      padding-right: 6px;
+    }
+    .enter-tip { margin-top:10px; font-family:var(--font-mono); color:#8fffd5; font-size:12px; opacity:.9; }
+
+    .intro.fade-out { animation: fadeOut .8s ease forwards; }
+    @keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
+
+    /* ========== NAVBAR ========== */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(8px);
+      background: rgba(10, 31, 68, 0.8);
+      border-bottom: 1px solid rgba(75,75,75,.4);
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 22px;
+    }
+    .brand {
+      font-weight: 400; /* Berlin normal */
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+    }
+    .brand-badge {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #2e57c7, #0A1F44 70%);
+      box-shadow: 0 0 12px rgba(30,58,138,.8) inset, 0 0 14px rgba(30,58,138,.6);
+    }
+    .menu { display: flex; gap: 18px; flex-wrap: wrap; }
+    .menu a {
+      color: #fff;
+      font-weight: 400; /* Berlin normal */
+      padding: 8px 10px;
+      border-radius: 10px;
+      transition: .25s;
+    }
+    .menu a.active, .menu a:hover {
+      background: rgba(30,58,138,.2);
+      box-shadow: 0 0 12px rgba(30,58,138,.5);
+    }
+
+    /* ========== LAYOUT HELPERS ========== */
     .container { max-width: 1200px; margin: 0 auto; padding: 70px 22px; }
-    .section-title { font-size: clamp(26px, 3vw, 36px); color: var(--color-primary); margin: 0 0 14px; font-weight: 800; }
+    .section-title {
+      font-size: clamp(26px, 3vw, 36px);
+      color: var(--color-primary);
+      margin: 0 0 14px;
+      font-weight: 400; /* Berlin normal */
+    }
     .section-sub { color: #cfd3dc; margin-bottom: 28px; }
     .grid { display: grid; gap: 20px; }
     .grid-3 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
@@ -43,7 +208,8 @@
 
     .card { background: #111; border: 1px solid var(--color-gray); border-radius: var(--radius); padding: 20px; transition: transform .25s ease, box-shadow .25s ease, border-color .25s; }
     .card:hover { transform: translateY(-6px); box-shadow: var(--shadow); border-color: #2b3e7a; }
-    .card h3 { margin: 0 0 8px; color: var(--color-primary); }
+    .card h3 { margin: 0 0 8px; color: var(--color-primary); font-weight: 400; } /* Berlin normal for headings */
+
     .muted { color: #a2a7b3; }
 
     .btn { display: inline-block; padding: 12px 20px; border-radius: 12px; background: var(--color-primary); color: #fff; font-weight: 700; border: 0; cursor: pointer; transition: .25s; }
@@ -51,47 +217,82 @@
     .btn-outline { background: transparent; border: 1px solid var(--color-secondary); color: #fff; }
     .btn-outline:hover { background: rgba(31,78,120,.15); box-shadow: 0 0 12px rgba(31,78,120,.6); }
 
-    /* ======= HERO ======= */
-    .hero { background: radial-gradient(1200px 500px at 50% -10%, rgba(30,58,138,.35), transparent), linear-gradient( to right, #0A0A0A, #0A1F44 ); padding: 100px 22px 70px; border-bottom: 1px solid rgba(75,75,75,.35); }
+    /* ========== HERO ========== */
+    .hero {
+      background: radial-gradient(1200px 500px at 50% -10%, rgba(30,58,138,.35), transparent),
+                  linear-gradient( to right, #0A0A0A, #0A1F44 );
+      padding: 100px 22px 70px;
+      border-bottom: 1px solid rgba(75,75,75,.35);
+    }
     .hero-inner { max-width: 1200px; margin: 0 auto; text-align: center; }
-    .hero h1 { font-size: clamp(34px, 5vw, 56px); color: var(--color-primary); margin: 0 0 14px; font-weight: 900; letter-spacing: .5px; }
+    .hero h1 {
+      font-size: clamp(34px, 5vw, 56px);
+      color: var(--color-primary);
+      margin: 0 0 14px;
+      font-weight: 400; /* Berlin normal */
+      letter-spacing: .5px;
+    }
     .hero p { color: #c0c8d6; margin: 0 auto 26px; max-width: 780px; }
     .hero-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
-    /* ======= ABOUT ======= */
+    /* ========== ABOUT ========== */
     .about { display: grid; grid-template-columns: 1.2fr .8fr; gap: 26px; }
     .about .panel { background: #0e0e0e; border: 1px solid #1d1d1d; padding: 20px; border-radius: var(--radius); }
     .about ul { margin: 0; padding-left: 18px; }
 
-    /* ======= SERVICES ======= */
+    /* ========== SERVICES ========== */
     .service-icon { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: rgba(30,58,138,.18); margin-bottom: 10px; }
 
-    /* ======= PROJECTS / PORTFOLIO ======= */
+    /* ========== PROJECTS / PORTFOLIO ========== */
     .project { display: flex; flex-direction: column; gap: 10px; }
     .tags { display: flex; flex-wrap: wrap; gap: 8px; }
     .tag { font-size: 12px; padding: 6px 10px; border-radius: 999px; background: rgba(31,78,120,.18); border: 1px solid rgba(31,78,120,.4); color: #cfe3ff; }
 
-    /* ======= BLOG ======= */
+    /* ========== BLOG ========== */
     .post-meta { font-size: 12px; color: #aab1c0; }
 
-    /* ======= TEAM ======= */
+    /* ========== TEAM ========== */
     .avatar { width: 72px; height: 72px; border-radius: 50%; background: linear-gradient(145deg, #1E3A8A, #0A1F44); box-shadow: inset 0 0 12px rgba(255,255,255,.06), 0 0 18px rgba(30,58,138,.4); }
 
-    /* ======= CONTACT ======= */
+    /* ========== CONTACT ========== */
     form { display: grid; gap: 12px; }
     input, textarea { width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid #2a2a2a; background: #0f0f0f; color: #fff; outline: none; transition: .2s; }
     input:focus, textarea:focus { border-color: #2b3e7a; box-shadow: 0 0 0 3px rgba(30,58,138,.2); }
 
-    /* ======= FOOTER ======= */
+    /* ========== FOOTER ========== */
     footer { background: var(--color-primary-dark); color: #e6e8ee; padding: 24px; text-align: center; border-top: 1px solid #14213b; }
 
-    /* ======= RESPONSIVE ======= */
+    /* ========== Responsive ========== */
     @media (max-width: 900px) { .about { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
+
+  <!-- INTRO: Terminal + Glitch logo -->
+  <div id="intro" class="intro" role="dialog" aria-modal="true" aria-label="Intro terminal">
+    <div class="terminal-wrap" role="document" aria-live="polite">
+      <div class="term-header">
+        <div class="term-dots">
+          <span class="dot r" aria-hidden="true"></span>
+          <span class="dot y" aria-hidden="true"></span>
+          <span class="dot g" aria-hidden="true"></span>
+        </div>
+        <div style="margin-left:10px; font-family:var(--font-mono); font-size:12px; color:#c6c9cf;">/usr/bin/knight-console — UTF-8</div>
+      </div>
+
+      <!-- improved glitch logo inserted -->
+      <div class="logo-glitch" data-text="Silent Knights">Silent Knights</div>
+
+      <div id="term" class="term-body" aria-hidden="false"></div>
+
+      <div style="display:flex; justify-content:flex-end; align-items:center; gap:12px; margin-top:12px;">
+        <div class="enter-tip">Press <strong style="font-family:var(--font-mono)">Enter</strong> to continue</div>
+      </div>
+    </div>
+  </div>
+
   <!-- NAV -->
-  <header class="nav">
+  <header class="nav" id="nav">
     <div class="nav-inner">
       <div class="brand"><span class="brand-badge" aria-hidden="true"></span> Silent Knights</div>
       <nav class="menu" aria-label="Primary Navigation">
@@ -107,7 +308,7 @@
   </header>
 
   <!-- HERO -->
-  <section id="home" class="hero">
+  <section id="home" class="hero" tabindex="-1">
     <div class="hero-inner">
       <h1>Silent Knights</h1>
       <p>Cyber Security • Ethical Hacking • Incident Response • Training & Awareness. We protect, test, and strengthen digital infrastructures with elite blue and red team capabilities.</p>
@@ -121,12 +322,12 @@
   <!-- ABOUT -->
   <section id="about" class="container">
     <h2 class="section-title">About Silent Knights</h2>
-    <p class="section-sub">We are a collective of cyber security professionals and white‑hat hackers focused on defense, research, and responsible disclosure.</p>
+    <p class="section-sub">We are a collective of cyber security professionals and white-hat hackers focused on defense, research, and responsible disclosure.</p>
     <div class="about">
       <div class="panel">
-        <h3>Mission & Vision</h3>
+        <h3 style="font-weight:400">Mission & Vision</h3>
         <p class="muted">Mission: defend organizations by finding and fixing weaknesses before adversaries do.<br/>Vision: a safer digital world built on transparency, education, and secure-by-design systems.</p>
-        <h3>Values</h3>
+        <h3 style="font-weight:400">Values</h3>
         <ul>
           <li>Ethical Hacking & Responsible Disclosure</li>
           <li>Defense in Depth & Zero Trust</li>
@@ -134,7 +335,7 @@
         </ul>
       </div>
       <div class="panel">
-        <h3>Highlights</h3>
+        <h3 style="font-weight:400">Highlights</h3>
         <ul>
           <li>Top 3 CTF placements (local & regional)</li>
           <li>Multiple CVEs disclosed responsibly</li>
@@ -150,32 +351,32 @@
     <p class="section-sub">What we do to harden your systems and uplift your security posture.</p>
     <div class="grid grid-3">
       <article class="card">
-        <div class="service-icon">🛡️</div>
+        <div class="service-icon" aria-hidden="true">🛡️</div>
         <h3>Cyber Defense</h3>
-        <p class="muted">Blue‑team architecture reviews, hardening guides, SIEM use‑cases, and detection engineering.</p>
+        <p class="muted">Blue-team architecture reviews, hardening guides, SIEM use-cases, and detection engineering.</p>
       </article>
       <article class="card">
-        <div class="service-icon">🕵️</div>
+        <div class="service-icon" aria-hidden="true">🕵️</div>
         <h3>Penetration Testing</h3>
         <p class="muted">Web, API, mobile, network, and cloud pentests with actionable remediation steps.</p>
       </article>
       <article class="card">
-        <div class="service-icon">🔎</div>
+        <div class="service-icon" aria-hidden="true">🔎</div>
         <h3>Vulnerability Assessment</h3>
         <p class="muted">Identify, prioritize, and track vulnerabilities across assets and environments.</p>
       </article>
       <article class="card">
-        <div class="service-icon">🚨</div>
+        <div class="service-icon" aria-hidden="true">🚨</div>
         <h3>Incident Response</h3>
         <p class="muted">Triage, forensics, containment, and recovery playbooks tailored to your org.</p>
       </article>
       <article class="card">
-        <div class="service-icon">🎯</div>
+        <div class="service-icon" aria-hidden="true">🎯</div>
         <h3>Red & Purple Teaming</h3>
         <p class="muted">Adversary emulation and collaborative exercises to validate detection & response.</p>
       </article>
       <article class="card">
-        <div class="service-icon">🎓</div>
+        <div class="service-icon" aria-hidden="true">🎓</div>
         <h3>Training & Awareness</h3>
         <p class="muted">Workshops, tabletop exercises, phishing simulations, and secure coding bootcamps.</p>
       </article>
@@ -185,24 +386,24 @@
   <!-- PROJECTS / PORTFOLIO -->
   <section id="projects" class="container">
     <h2 class="section-title">Projects & Disclosures</h2>
-    <p class="section-sub">Selected work, PoCs, CTF write‑ups, and security advisories.</p>
+    <p class="section-sub">Selected work, PoCs, CTF write-ups, and security advisories.</p>
     <div class="grid grid-3">
       <article class="card project">
         <h3>ACME Web App Pentest</h3>
-        <p class="muted">Black‑box assessment revealing auth bypass and IDOR. Coordinated fix + retest.</p>
+        <p class="muted">Black-box assessment revealing auth bypass and IDOR. Coordinated fix + retest.</p>
         <div class="tags">
           <span class="tag">Web</span><span class="tag">IDOR</span><span class="tag">Auth</span>
         </div>
       </article>
       <article class="card project">
-        <h3>CTF Write‑up: Crypto Knights</h3>
+        <h3>CTF Write-up: Crypto Knights</h3>
         <p class="muted">Breakdown of a RSA padding oracle challenge and custom tooling.</p>
         <div class="tags">
-          <span class="tag">CTF</span><span class="tag">Crypto</span><span class="tag">Write‑up</span>
+          <span class="tag">CTF</span><span class="tag">Crypto</span><span class="tag">Write-up</span>
         </div>
       </article>
       <article class="card project">
-        <h3>Advisory: CVE‑2025‑XXXX</h3>
+        <h3>Advisory: CVE-2025-XXXX</h3>
         <p class="muted">Stored XSS in dashboard widget (responsible disclosure & vendor patch).</p>
         <div class="tags">
           <span class="tag">Advisory</span><span class="tag">XSS</span><span class="tag">Disclosure</span>
@@ -219,7 +420,7 @@
       <article class="card">
         <h3>10 Ways to Stop Phishing</h3>
         <p class="post-meta">5 min read • Awareness</p>
-        <p class="muted">Practical measures users can take today to reduce phishing risk organization‑wide.</p>
+        <p class="muted">Practical measures users can take today to reduce phishing risk organization-wide.</p>
         <a href="#contact" class="btn btn-outline" aria-label="Read article">Read</a>
       </article>
       <article class="card">
@@ -231,7 +432,7 @@
       <article class="card">
         <h3>From Alerts to Detections</h3>
         <p class="post-meta">6 min read • Blue Team</p>
-        <p class="muted">Turning noisy logs into meaningful detections with ATT&CK‑mapped use cases.</p>
+        <p class="muted">Turning noisy logs into meaningful detections with ATT&CK-mapped use cases.</p>
         <a href="#contact" class="btn btn-outline" aria-label="Read article">Read</a>
       </article>
     </div>
@@ -243,18 +444,18 @@
     <p class="section-sub">Security researchers, engineers, and educators working as one.</p>
     <div class="grid grid-3">
       <article class="card" aria-label="Team member">
-        <div class="avatar"></div>
-        <h3>SK‑Knight</h3>
+        <div class="avatar" aria-hidden="true"></div>
+        <h3>SK-Knight</h3>
         <p class="muted">Lead Pentester • Web/API</p>
       </article>
       <article class="card" aria-label="Team member">
-        <div class="avatar"></div>
-        <h3>SK‑Shield</h3>
+        <div class="avatar" aria-hidden="true"></div>
+        <h3>SK-Shield</h3>
         <p class="muted">Blue Team • DFIR</p>
       </article>
       <article class="card" aria-label="Team member">
-        <div class="avatar"></div>
-        <h3>SK‑Cipher</h3>
+        <div class="avatar" aria-hidden="true"></div>
+        <h3>SK-Cipher</h3>
         <p class="muted">Research • Crypto/RE</p>
       </article>
     </div>
@@ -283,9 +484,9 @@
         </form>
       </div>
       <div class="card">
-        <h3>Channels</h3>
+        <h3 style="font-weight:400">Channels</h3>
         <p class="muted">Email: contact@silentknights.example<br/>GitHub • LinkedIn • X (Twitter) • Telegram</p>
-        <h3>PGP</h3>
+        <h3 style="font-weight:400">PGP</h3>
         <p class="muted">Public key available upon request for secure communications.</p>
       </div>
     </div>
@@ -296,18 +497,72 @@
   </footer>
 
   <script>
-    // Highlight active menu link on scroll
-    const links = document.querySelectorAll('.menu a');
-    const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href')));
-    const onScroll = () => {
-      const y = scrollY + 120; // offset for sticky nav
-      let idx = 0;
-      sections.forEach((sec, i) => { if (sec && sec.offsetTop <= y) idx = i; });
-      links.forEach(l => l.classList.remove('active'));
-      links[idx]?.classList.add('active');
-    };
-    document.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
+    // ========== Intro typing (terminal) ==========
+    (function () {
+      const lines = [
+        '> Initializing SilentKnights...',
+        '> Loading modules: [defense] [redteam] [dfir] [training] — OK',
+        '> Handshake TLSv1.3 — OK',
+        '> Access Granted [200]',
+        'Welcome to SilentKnights Cyber Security Team',
+        ''
+      ];
+      const term = document.getElementById('term');
+      const intro = document.getElementById('intro');
+      let li = 0, ci = 0;
+      let skipped = false;
+
+      function type() {
+        if (skipped) return;
+        if (li < lines.length) {
+          const line = lines[li];
+          if (ci < line.length) {
+            term.textContent += line.charAt(ci++);
+            setTimeout(type, 22 + Math.random() * 40);
+          } else {
+            term.textContent += '\n';
+            li++; ci = 0;
+            setTimeout(type, 350);
+          }
+          term.scrollTop = term.scrollHeight;
+        } else {
+          // finished typing -> fade
+          setTimeout(closeIntro, 800);
+        }
+      }
+
+      function closeIntro() {
+        if (skipped) return;
+        skipped = true;
+        intro.classList.add('fade-out');
+        setTimeout(() => { intro.remove(); document.getElementById('home').focus(); }, 850);
+      }
+
+      // allow Enter or click to skip
+      document.addEventListener('keydown', (e) => { if (e.key === 'Enter') closeIntro(); });
+      intro.addEventListener('click', closeIntro);
+
+      // auto-run
+      type();
+
+      // auto-skip after 7.5s in case user waits
+      setTimeout(closeIntro, 7500);
+    })();
+
+    // ========== Highlight active menu link on scroll ==========
+    (function () {
+      const links = document.querySelectorAll('.menu a');
+      const sections = Array.from(links).map(a => document.querySelector(a.getAttribute('href')));
+      const onScroll = () => {
+        const y = window.scrollY + 140; // offset for sticky nav
+        let idx = 0;
+        sections.forEach((sec, i) => { if (sec && sec.offsetTop <= y) idx = i; });
+        links.forEach(l => l.classList.remove('active'));
+        links[idx]?.classList.add('active');
+      };
+      document.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
   </script>
 </body>
 </html>
