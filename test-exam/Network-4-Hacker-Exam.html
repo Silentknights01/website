@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network 4 Hacker Exam - Dark Mode</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0a0a0a, #1a1a1a, #252525);
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #203a43;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            color: #2c5364;
+            text-shadow: 0 0 10px #203a43;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-bottom: 20px;
+            color: #aaa;
+        }
+        
+        .timer-container {
+            background: rgba(20, 20, 20, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px auto;
+            max-width: 300px;
+            border: 1px solid #203a43;
+            box-shadow: 0 0 15px #203a43;
+        }
+        
+        #timer {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #2C5364;
+            text-shadow: 0 0 5px #203a43;
+        }
+        
+        .instructions {
+            background: rgba(20, 20, 20, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #2C5364;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .instructions h2 {
+            margin-bottom: 10px;
+            color: #2C5364;
+        }
+        
+        .instructions ul {
+            margin-left: 20px;
+            line-height: 1.6;
+            color: #ccc;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+        }
+        
+        .question-container {
+            background: rgba(20, 20, 20, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .question {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .question-number {
+            font-weight: bold;
+            color: #2C5364;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .question-text {
+            margin-bottom: 15px;
+            line-height: 1.5;
+            color: #e0e0e0;
+        }
+        
+        .options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+        
+        @media (min-width: 768px) {
+            .options {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        .option {
+            background: rgba(30, 30, 30, 0.8);
+            padding: 12px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid #2c5364;
+            color: #ddd;
+        }
+        
+        .option:hover {
+            background: #2c5364;
+            transform: translateY(-2px);
+            border-color: #2C5364;
+        }
+        
+        .option.selected {
+            background: #203a43;
+            border-color: #2C5364;
+            color: #fff;
+        }
+        
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        
+        #submit-btn {
+            background: linear-gradient(135deg, #2C5364, #0f2027);
+            color: #ffff;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px #0f2027;
+        }
+        
+        #submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px #2c5364;
+        }
+        
+        #submit-btn:active {
+            transform: translateY(0);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+            border: 2px solid #2C5364;
+            color: #e0e0e0;
+        }
+        
+        .modal h2 {
+            color: #2C5364;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+        
+        .modal p {
+            margin-bottom: 25px;
+            line-height: 1.6;
+            color: #ccc;
+        }
+        
+        #start-exam {
+            background: linear-gradient(135deg, #2C5364, #ff9900);
+            color: #000;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        #start-exam:hover {
+            transform: scale(1.05);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(30, 30, 30, 0.8);
+            border: 1px solid #2C5364;
+            color: #2C5364;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            z-index: 200;
+            font-weight: bold;
+        }
+        
+        /* استایل‌های جدید برای نمایش نتایج */
+        .results-container {
+            text-align: left;
+            margin-top: 20px;
+        }
+        
+        .result-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background: rgba(30, 30, 30, 0.7);
+            border-left: 5px solid #2C5364;
+        }
+        
+        .result-item.correct {
+            border-left-color: #4CAF50;
+        }
+        
+        .result-item.incorrect {
+            border-left-color: #F44336;
+        }
+        
+        .result-question {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #e0e0e0;
+        }
+        
+        .result-answer {
+            margin: 5px 0;
+            padding: 8px;
+            border-radius: 4px;
+        }
+        
+        .user-answer {
+            background: rgba(244, 67, 54, 0.2);
+            border: 1px solid #F44336;
+        }
+        
+        .correct-answer {
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid #4CAF50;
+        }
+        
+        .score-display {
+            font-size: 1.5rem;
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 8px;
+            background: rgba(30, 30, 30, 0.7);
+        }
+        
+        .review-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .review-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        #review-answers {
+            background: #2C5364;
+            color: white;
+        }
+        
+        #close-results {
+            background: #ff9900;
+            color: black;
+        }
+        
+        /* استایل‌های جدید برای فرم کاربر */
+        .user-form {
+            background: rgba(20, 20, 20, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #2C5364;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #2C5364;
+            font-weight: bold;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #2C5364;
+            background: rgba(30, 30, 30, 0.8);
+            color: #e0e0e0;
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #ff9900;
+            box-shadow: 0 0 8px #ff9900;
+        }
+        
+        #user-submit {
+            background: linear-gradient(135deg, #2C5364, #ff9900);
+            color: #000;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        
+        #user-submit:hover {
+            transform: scale(1.05);
+        }
+        
+        .user-info {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: rgba(20, 20, 20, 0.6);
+            border-radius: 8px;
+            border-left: 4px solid #ff9900;
+        }
+        
+        .sending-email {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(20, 20, 20, 0.6);
+            border-radius: 8px;
+            border-left: 4px solid #ff9900;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Network 4 Hacker Exam</h1>
+            <div class="subtitle">Test your networking knowledge with this challenging 35-question exam</div>
+            <div class="timer-container">
+                <div id="timer">40:00</div>
+            </div>
+        </header>
+        
+        <div class="user-info" id="user-info" style="display: none;">
+            <h3>Exam Taker Information</h3>
+            <p>Name: <span id="user-name-display"></span></p>
+            <p>Email: <span id="user-email-display"></span></p>
+        </div>
+        
+        <div class="user-form" id="user-form">
+            <h2>Please Enter Your Information</h2>
+            <div class="form-group">
+                <label for="first-name">First Name</label>
+                <input type="text" id="first-name" placeholder="Enter your first name" required>
+            </div>
+            <div class="form-group">
+                <label for="last-name">Last Name</label>
+                <input type="text" id="last-name" placeholder="Enter your last name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" placeholder="Enter your email address" required>
+            </div>
+            <button id="user-submit">Continue to Exam</button>
+        </div>
+        
+        <div class="instructions" style="display: none;" id="instructions">
+            <h2>Exam Instructions</h2>
+            <ul>
+                <li>You have 40 minutes to complete this exam</li>
+                <li>This exam contains 35 multiple-choice questions</li>
+                <li>Select the best answer for each question</li>
+                <li>You can change your answers at any time before submitting</li>
+                <li>The timer will start when you click "Start Exam"</li>
+                <li>When finished, click the "Submit Exam" button</li>
+            </ul>
+        </div>
+        
+        <div class="question-container" style="display: none;" id="question-container">
+            <!-- Questions will be dynamically inserted here -->
+        </div>
+        
+        <div class="btn-container" style="display: none;" id="submit-btn-container">
+            <button id="submit-btn">Submit Exam</button>
+        </div>
+        
+        <div class="sending-email" id="sending-email">
+            <h3>Sending exam results to instructor...</h3>
+            <p>Please wait while we process your results.</p>
+        </div>
+        
+        <footer>
+            <p>Network 4 Hacker Exam &copy; 2023 | Good luck!</p>
+        </footer>
+    </div>
+    
+    <div class="modal" id="start-modal">
+        <div class="modal-content">
+            <h2>Ready to Begin?</h2>
+            <p>You will have 40 minutes to complete 35 multiple-choice questions. The timer will start as soon as you click "Start Exam".</p>
+            <button id="start-exam">Start Exam</button>
+        </div>
+    </div>
+    
+    <div class="modal" id="finished-modal">
+        <div class="modal-content">
+            <h2>Exam Submitted!</h2>
+            <p>Your answers have been submitted successfully. Your results will be available soon.</p>
+        </div>
+    </div>
+    
+    <!-- مودال جدید برای نمایش نتایج دقیق -->
+    <div class="modal" id="results-modal">
+        <div class="modal-content">
+            <h2>Exam Results</h2>
+            <div class="score-display">
+                You scored <span id="score-value">0</span> out of <span id="total-questions">35</span>
+            </div>
+            <div class="results-container" id="results-container">
+                <!-- نتایج هر سوال اینجا نمایش داده می‌شود -->
+            </div>
+            <div class="review-buttons">
+                <button class="review-btn" id="review-answers">Review Answers</button>
+                <button class="review-btn" id="close-results">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Questions data
+        const questions = [
+            {
+                question: "What is the primary difference between a Network and the Internet?",
+                options: [
+                    "A network is wireless, the Internet is wired.",
+                    "A network is a local collection of connected devices, while the Internet is a global network of networks.",
+                    "The Internet uses TCP, and networks use UDP.",
+                    "There is no difference; the terms are interchangeable."
+                ],
+                correct: 1
+            },
+            {
+                question: "In a Client-Server model, what is the role of the client?",
+                options: [
+                    "To provide services and resources",
+                    "To control access and central management",
+                    "To send requests for resources",
+                    "To act as an equal peer to all other systems"
+                ],
+                correct: 2
+            },
+            {
+                question: "Which network topology is characterized by a single central device (like a switch) to which all other devices connect?",
+                options: [
+                    "Bus",
+                    "Ring",
+                    "Star",
+                    "Mesh"
+                ],
+                correct: 2
+            },
+            {
+                question: "A Bluetooth connection between a phone and a headset is an example of which type of network?",
+                options: [
+                    "LAN",
+                    "PAN/WPAN",
+                    "WAN",
+                    "MAN"
+                ],
+                correct: 1
+            },
+            {
+                question: "Which OSI layer is responsible for routing, logical addressing (IP addresses), and finding the best path across networks?",
+                options: [
+                    "Physical",
+                    "Data Link",
+                    "Network",
+                    "Transport"
+                ],
+                correct: 2
+            },
+            {
+                question: "At which OSI layer would you find TCP and UDP protocols?",
+                options: [
+                    "Network",
+                    "Transport",
+                    "Session",
+                    "Application"
+                ],
+                correct: 1
+            },
+            {
+                question: "ARP Spoofing is a common attack that manipulates the mapping of IP addresses to MAC addresses. At which OSI layer does this attack occur?",
+                options: [
+                    "Layer 1",
+                    "Layer 2",
+                    "Layer 3",
+                    "Layer 4"
+                ],
+                correct: 1
+            },
+            {
+                question: "A SQL Injection attack primarily targets which layer of the OSI model?",
+                options: [
+                    "Presentation (Layer 6)",
+                    "Session (Layer 5)",
+                    "Application (Layer 7)",
+                    "Network (Layer 3)"
+                ],
+                correct: 2
+            },
+            {
+                question: "The TCP/IP model combines the functions of the OSI model's top three layers (5,6,7) into a single layer called the:",
+                options: [
+                    "Internet Layer",
+                    "Transport Layer",
+                    "Application Layer",
+                    "Network Access Layer"
+                ],
+                correct: 2
+            },
+            {
+                question: "What is the default subnet mask for a Class B IP address (e.g., 172.16.45.10)?",
+                options: [
+                    "255.0.0.0",
+                    "255.255.0.0",
+                    "255.255.255.0",
+                    "255.255.255.255"
+                ],
+                correct: 1
+            },
+            {
+                question: "Which of the following is a private IP address range?",
+                options: [
+                    "192.169.1.10",
+                    "172.32.10.5",
+                    "11.5.10.100",
+                    "10.0.0.5"
+                ],
+                correct: 3
+            },
+            {
+                question: "The address 127.0.0.1 is known as:",
+                options: [
+                    "A broadcast address",
+                    "A default gateway",
+                    "The loopback address",
+                    "A public IP address"
+                ],
+                correct: 2
+            },
+            {
+                question: "The main purpose of subnetting is to:",
+                options: [
+                    "Increase the total number of available public IP addresses",
+                    "Divide a large network into smaller, more manageable sub-networks",
+                    "Convert IPv4 addresses to IPv6",
+                    "Encrypt network traffic"
+                ],
+                correct: 1
+            },
+            {
+                question: "Which port number is used by HTTPS for secure web browsing?",
+                options: [
+                    "Port 21",
+                    "Port 80",
+                    "Port 443",
+                    "Port 53"
+                ],
+                correct: 2
+            },
+            {
+                question: "Which protocol is used for translating domain names (like google.com) into IP addresses?",
+                options: [
+                    "DHCP",
+                    "FTP",
+                    "DNS",
+                    "SMTP"
+                ],
+                correct: 2
+            },
+            {
+                question: "A hacker sets up a fake Wi-Fi access point with the same name as a legitimate coffee shop network. This is an example of:",
+                options: [
+                    "DNS Poisoning",
+                    "An Evil Twin attack",
+                    "ARP Spoofing",
+                    "A DDoS attack"
+                ],
+                correct: 1
+            },
+            {
+                question: "Which protocol is connection-oriented, provides reliable delivery, and uses error checking and retransmission?",
+                options: [
+                    "IP",
+                    "UDP",
+                    "TCP",
+                    "ICMP"
+                ],
+                correct: 2
+            },
+            {
+                question: "The `ping` command uses which protocol to check network connectivity?",
+                options: [
+                    "TCP",
+                    "UDP",
+                    "ICMP",
+                    "IPsec"
+                ],
+                correct: 2
+            },
+            {
+                question: "What is the purpose of a DHCP server on a network?",
+                options: [
+                    "To block malicious traffic",
+                    "To automatically assign IP addresses to clients",
+                    "to resolve domain names",
+                    "To provide secure remote access"
+                ],
+                correct: 1
+            },
+            {
+                question: "In the shared responsibility model of cloud security, what is typically the responsibility of the cloud provider (e.g., AWS, Azure)?",
+                options: [
+                    "Securing the customer's data stored in the cloud",
+                    "Managing user access permissions for the customer's applications",
+                    "Securing the underlying infrastructure (hardware, hypervisor)",
+                    "Ensuring the customer's application code is free of vulnerabilities"
+                ],
+                correct: 2
+            },
+            {
+                question: "Which type of network cable uses light pulses to transmit data and is immune to electromagnetic interference?",
+                options: [
+                    "Coaxial Cable",
+                    "UTP Cable (Cat6)",
+                    "Fiber Optic Cable",
+                    "Console Cable"
+                ],
+                correct: 2
+            },
+            {
+                question: "A network device that operates at Layer 2 and forwards frames based on MAC addresses is a:",
+                options: [
+                    "Hub",
+                    "Router",
+                    "Switch",
+                    "Repeater"
+                ],
+                correct: 2
+            },
+            {
+                question: "What is the key function of a router?",
+                options: [
+                    "To connect devices within the same LAN using MAC addresses",
+                    "To amplify a network signal to cover a longer distance",
+                    "To filter traffic between networks based on IP addresses",
+                    "To broadcast data to every device on the network"
+                ],
+                correct: 2
+            },
+            {
+                question: "A security system that monitors network traffic for suspicious activity and generates alerts is called a(n):",
+                options: [
+                    "Firewall",
+                    "IDS (Intrusion Detection System)",
+                    "IPS (Intrusion Prevention System)",
+                    "VPN Concentrator"
+                ],
+                correct: 1
+            },
+            {
+                question: "The latest and most secure Wi-Fi encryption standard is:",
+                options: [
+                    "WEP",
+                    "WPA",
+                    "WPA2",
+                    "WPA3"
+                ],
+                correct: 3
+            },
+            {
+                question: "The CIA Triad in cybersecurity stands for:",
+                options: [
+                    "Confidentiality, Integrity, Availability",
+                    "Central Intelligence Agency",
+                    "Control, Inspection, Authorization",
+                    "Connection, Internet, Access"
+                ],
+                correct: 0
+            },
+            {
+                question: "Flooding a web server with so much traffic that it becomes unavailable to legitimate users is a:",
+                options: [
+                    "Phishing Attack",
+                    "Man-in-the-Middle (MITM) Attack",
+                    "Denial-of-Service (DoS) Attack",
+                    "SQL Injection Attack"
+                ],
+                correct: 2
+            },
+            {
+                question: "Sending fraudulent emails that appear to be from a reputable source to trick individuals into revealing personal information is called:",
+                options: [
+                    "Spoofing",
+                    "Phishing",
+                    "Ransomware",
+                    "Brute-forcing"
+                ],
+                correct: 1
+            },
+            {
+                question: "Which of the following is a common IoT security risk?",
+                options: [
+                    "Using strong, unique passwords by default",
+                    "Regular automatic security updates",
+                    "Leaving default passwords unchanged",
+                    "Being isolated on a separate network segment"
+                ],
+                correct: 2
+            },
+            {
+                question: "The Windows command `ipconfig /all` is used to:",
+                options: [
+                    "Test connectivity to a host",
+                    "Show detailed IP configuration for all adapters",
+                    "Display the path to a destination",
+                    "Show the ARP table"
+                ],
+                correct: 1
+            },
+            {
+                question: "Which tool is a powerful GUI-based packet analyzer?",
+                options: [
+                    "Nmap",
+                    "Wireshark",
+                    "Traceroute",
+                    "Ping"
+                ],
+                correct: 1
+            },
+            {
+                question: "The Linux command `traceroute 8.8.8.8` is used to:",
+                options: [
+                    "Check if you can reach Google's DNS server",
+                    "Find all open ports on 8.8.8.8",
+                    "Display the route packets take to reach 8.8.8.8",
+                    "Look up the domain name for 8.8.8.8"
+                ],
+                correct: 2
+            },
+            {
+                question: "What does the 'S' in HTTPS provide?",
+                options: [
+                    "Faster page load times",
+                    "Search engine optimization",
+                    "Encryption and secure communication",
+                    "Larger data storage"
+                ],
+                correct: 2
+            },
+            {
+                question: "A VLAN (Virtual LAN) is primarily used for:",
+                options: [
+                    "Extending the wireless signal range",
+                    "Logically segmenting a network without physical changes",
+                    "Connecting to the internet",
+                    "Blocking all incoming traffic"
+                ],
+                correct: 1
+            },
+            {
+                question: "The concept of 'Zero Trust' in security is best described as:",
+                options: [
+                    "Trusting all devices inside the corporate firewall",
+                    "Never trusting any user or device by default, even inside the network",
+                    "Using only the most trusted encryption algorithms",
+                    "Having zero vulnerabilities in your systems"
+                ],
+                correct: 1
+            }
+        ];
+
+        // DOM elements
+        const questionContainer = document.querySelector('.question-container');
+        const timerElement = document.getElementById('timer');
+        const startModal = document.getElementById('start-modal');
+        const finishedModal = document.getElementById('finished-modal');
+        const resultsModal = document.getElementById('results-modal');
+        const startExamBtn = document.getElementById('start-exam');
+        const submitBtn = document.getElementById('submit-btn');
+        const resultsContainer = document.getElementById('results-container');
+        const scoreValue = document.getElementById('score-value');
+        const totalQuestions = document.getElementById('total-questions');
+        const reviewAnswersBtn = document.getElementById('review-answers');
+        const closeResultsBtn = document.getElementById('close-results');
+        const userForm = document.getElementById('user-form');
+        const userSubmitBtn = document.getElementById('user-submit');
+        const firstNameInput = document.getElementById('first-name');
+        const lastNameInput = document.getElementById('last-name');
+        const emailInput = document.getElementById('email');
+        const instructions = document.getElementById('instructions');
+        const submitBtnContainer = document.getElementById('submit-btn-container');
+        const userInfo = document.getElementById('user-info');
+        const userNameDisplay = document.getElementById('user-name-display');
+        const userEmailDisplay = document.getElementById('user-email-display');
+        const sendingEmail = document.getElementById('sending-email');
+        
+        // User data
+        let userData = {
+            firstName: '',
+            lastName: '',
+            email: ''
+        };
+        
+        // Timer variables
+        let timeLeft = 40 * 60; // 40 minutes in seconds
+        let timerInterval;
+        let userAnswers = new Array(questions.length).fill(null);
+        
+        // Initialize the exam
+        function initExam() {
+            // Display all questions
+            questions.forEach((q, index) => {
+                const questionEl = document.createElement('div');
+                questionEl.className = 'question';
+                questionEl.innerHTML = `
+                    <div class="question-number">Question ${index + 1}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options">
+                        ${q.options.map((option, i) => `
+                            <div class="option" data-question="${index}" data-option="${i}">${option}</div>
+                        `).join('')}
+                    </div>
+                `;
+                questionContainer.appendChild(questionEl);
+            });
+            
+            // Add event listeners to options
+            document.querySelectorAll('.option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const questionIndex = parseInt(this.dataset.question);
+                    const optionIndex = parseInt(this.dataset.option);
+                    
+                    // Remove selected class from all options in this question
+                    document.querySelectorAll(`.option[data-question="${questionIndex}"]`).forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    
+                    // Add selected class to clicked option
+                    this.classList.add('selected');
+                    
+                    // Save user's answer
+                    userAnswers[questionIndex] = optionIndex;
+                });
+            });
+        }
+        
+        // Handle user form submission
+        userSubmitBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Validate form
+            if (!firstNameInput.value.trim() || !lastNameInput.value.trim() || !emailInput.value.trim()) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            if (!isValidEmail(emailInput.value)) {
+                alert('Please enter a valid email address');
+                return;
+            }
+            
+            // Save user data
+            userData.firstName = firstNameInput.value.trim();
+            userData.lastName = lastNameInput.value.trim();
+            userData.email = emailInput.value.trim();
+            
+            // Hide form and show exam info
+            userForm.style.display = 'none';
+            userInfo.style.display = 'block';
+            userNameDisplay.textContent = `${userData.firstName} ${userData.lastName}`;
+            userEmailDisplay.textContent = userData.email;
+            
+            // Show instructions and start modal
+            instructions.style.display = 'block';
+            startModal.style.display = 'flex';
+        });
+        
+        // Email validation
+        function isValidEmail(email) {
+            const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(String(email).toLowerCase());
+        }
+        
+        // Start the exam
+        function startExam() {
+            startModal.style.display = 'none';
+            questionContainer.style.display = 'block';
+            submitBtnContainer.style.display = 'flex';
+            
+            // Start timer
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+        
+        // Update timer
+        function updateTimer() {
+            timeLeft--;
+            
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                submitExam();
+            }
+            
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            
+            timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            // Change color when time is running out
+            if (minutes < 5) {
+                timerElement.style.color = '#ff5555';
+            }
+        }
+        
+        // Submit exam
+        function submitExam() {
+            clearInterval(timerInterval);
+            
+            // Calculate score
+            let score = 0;
+            questions.forEach((q, index) => {
+                if (userAnswers[index] === q.correct) {
+                    score++;
+                }
+            });
+            
+            // Show sending email notification
+            sendingEmail.style.display = 'block';
+            
+            // Send email with results
+            sendEmailResults(score);
+            
+            // Show results modal
+            showResults(score);
+        }
+        
+        // Send email with results
+        function sendEmailResults(score) {
+            // Prepare email content
+            const subject = `Network 4 Hacker Exam Results - ${userData.firstName} ${userData.lastName}`;
+            
+            let body = `Exam Results for ${userData.firstName} ${userData.lastName}\n`;
+            body += `Email: ${userData.email}\n`;
+            body += `Score: ${score}/${questions.length}\n`;
+            body += `Percentage: ${((score/questions.length)*100).toFixed(2)}%\n\n`;
+            
+            body += "Detailed Results:\n";
+            questions.forEach((q, index) => {
+                const userAnswerIndex = userAnswers[index];
+                const isCorrect = userAnswerIndex === q.correct;
+                
+                body += `\nQuestion ${index + 1}: ${q.question}\n`;
+                body += `User Answer: ${userAnswerIndex !== null ? q.options[userAnswerIndex] : 'Not answered'}\n`;
+                body += `Correct Answer: ${q.options[q.correct]}\n`;
+                body += `Status: ${isCorrect ? 'CORRECT' : 'INCORRECT'}\n`;
+            });
+            
+            // Use EmailJS to send the email
+            emailjs.send("service_b9r47cr", "template_sqx8wkj", {
+                to_email: "modasirhashimi0101@gmail.com",
+                from_name: "Network 4 Hacker Exam",
+                subject: subject,
+                message: body
+            })
+            .then(function(response) {
+                console.log("Email sent successfully", response);
+                sendingEmail.innerHTML = "<h3>Results sent successfully!</h3><p>Your exam results have been delivered to the instructor.</p>";
+            })
+            .catch(function(error) {
+                console.error("Failed to send email", error);
+                sendingEmail.innerHTML = "<h3>Email sending failed</h3><p>But your exam has been submitted. Please contact the instructor directly.</p>";
+            });
+        }
+        
+        // Show detailed results
+        function showResults(score) {
+            scoreValue.textContent = score;
+            totalQuestions.textContent = questions.length;
+            
+            // Clear previous results
+            resultsContainer.innerHTML = '';
+            
+            // Generate results for each question
+            questions.forEach((q, index) => {
+                const userAnswerIndex = userAnswers[index];
+                const isCorrect = userAnswerIndex === q.correct;
+                
+                const resultItem = document.createElement('div');
+                resultItem.className = `result-item ${isCorrect ? 'correct' : 'incorrect'}`;
+                
+                resultItem.innerHTML = `
+                    <div class="result-question">${index + 1}. ${q.question}</div>
+                    ${!isCorrect ? `
+                        <div class="result-answer user-answer">
+                            <strong>Your answer:</strong> ${userAnswerIndex !== null ? q.options[userAnswerIndex] : 'Not answered'}
+                        </div>
+                    ` : ''}
+                    <div class="result-answer correct-answer">
+                        <strong>Correct answer:</strong> ${q.options[q.correct]}
+                    </div>
+                `;
+                
+                resultsContainer.appendChild(resultItem);
+            });
+            
+            // Show results modal
+            resultsModal.style.display = 'flex';
+        }
+        
+        // Event listeners
+        startExamBtn.addEventListener('click', startExam);
+        submitBtn.addEventListener('click', submitExam);
+        
+        reviewAnswersBtn.addEventListener('click', function() {
+            resultsModal.style.display = 'none';
+            // اسکرول به بالای صفحه برای مشاهده سوالات
+            window.scrollTo(0, 0);
+            
+            // علامت‌گذاری پاسخ‌های کاربر و پاسخ‌های صحیح
+            questions.forEach((q, index) => {
+                const userAnswerIndex = userAnswers[index];
+                const isCorrect = userAnswerIndex === q.correct;
+                
+                // علامت‌گذاری پاسخ کاربر
+                if (userAnswerIndex !== null) {
+                    const userOption = document.querySelector(`.option[data-question="${index}"][data-option="${userAnswerIndex}"]`);
+                    if (userOption) {
+                        userOption.classList.add('selected');
+                        if (!isCorrect) {
+                            userOption.style.borderColor = '#F44336';
+                        }
+                    }
+                }
+                
+                // علامت‌گذاری پاسخ صحیح
+                const correctOption = document.querySelector(`.option[data-question="${index}"][data-option="${q.correct}"]`);
+                if (correctOption) {
+                    correctOption.style.borderColor = '#4CAF50';
+                    correctOption.style.boxShadow = '0 0 8px #4CAF50';
+                }
+            });
+        });
+        
+        closeResultsBtn.addEventListener('click', function() {
+            resultsModal.style.display = 'none';
+        });
+        
+        // Initialize the exam when page loads
+        window.addEventListener('load', initExam);
+    </script>
+    
+    <!-- Load EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        // Initialize EmailJS with your public key
+        (function() {
+            emailjs.init("zTlaq0rOCJbPFLB-t"); // Replace with your actual EmailJS public key
+        })();
+    </script>
+</body>
+</html>
