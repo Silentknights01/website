@@ -209,6 +209,17 @@
 
     .term-body{font-family:var(--font-mono);color:#00ff99;font-size:14px;white-space:pre-wrap;overflow:auto;line-height:1.6;padding-right:6px;max-height:calc(76vh - 120px)}
     .enter-tip{margin-top:10px;font-family:var(--font-mono);color:#8fffd5;font-size:12px;opacity:.95}
+    
+    /* شمارش معکوس جدید */
+    .countdown {
+      margin-top: 10px;
+      font-family: var(--font-mono);
+      color: #8fffd5;
+      font-size: 12px;
+      opacity: .95;
+      text-align: left;
+      direction: ltr;
+    }
 
     .intro.fade-out{animation:fadeOut .6s ease forwards}
     @keyframes fadeOut{to{opacity:0;visibility:hidden}}
@@ -309,8 +320,9 @@
 
       <div id="term" class="term-body" aria-hidden="false"></div>
 
-      <div style="display:flex;justify-content:flex-end;align-items:center;gap:12px;margin-top:8px;">
+      <div style="display:flex;justify-content:flex-end;align-items:center;gap:12px;margin-top:8px;flex-direction: column;">
         <div class="enter-tip">فشار <strong style="font-family:var(--font-mono)">Enter</strong> برای ادامه</div>
+        <!-- <div id="countdown" class="countdown">ورود خودکار در 3 ثانیه...</div> -->
       </div>
     </div>
   </div>
@@ -534,105 +546,127 @@
         <h3>???</h3>
         <!-- <h3>علی (تحلیلگر)</h3> -->
         <p class="muted">تحلیلگر • عملیات و دفاع</p>
-        <p class="muted" style="margin-top:8px">علی: کار روی سناریوها، واکنش به رخدادها و کمک به تقویت مهارت‌های تیم.</p>
+        <p class="muted" style="margin-top:8px">علی: کار روی سناریوهای عملی و تحلیل تهدید برای بهبود دفاع و واکنش سریع.</p>
       </article>
-    </div>
-
-    <div style="margin-top:16px" class="card">
-      <h3 style="font-weight:600">بیانیهٔ تیم</h3>
-      <p class="muted">ما مستقل کار می‌کنیم، بدون اسپانسر یا حمایت رسمی؛ هدف‌مان رشد شخصی و ساختن الگویی برای هکرهای جوان افغانستان است. ما به اخلاق و مسئولیت‌پذیری پایبندیم.</p>
     </div>
   </section>
 
   <!-- CONTACT -->
   <section id="contact" class="container" aria-labelledby="contact-heading">
     <h2 id="contact-heading" class="section-title">ارتباط با ما</h2>
-    <p class="section-sub">برای همکاری، آموزش یا گزارش یک آسیب‌پذیری با ما تماس بگیرید.</p>
+    <p class="section-sub">برای همکاری، درخواست مشاوره یا گزارش مسئولانه یک آسیب‌پذیری می‌توانید از طریق فرم زیر یا ایمیل با ما در تماس باشید.</p>
     <div class="grid grid-2">
-      <div class="card">
-        <h3>ارتباط مستقیم</h3>
-        <p class="muted">ایمیل: <a href="mailto:silentknights@proton.me">silentknights@proton.me</a></p>
-        <p class="muted">سیگنال: <span class="muted">در صورت نیاز به اشتراک گذاشته می‌شود</span></p>
-        <p class="muted" style="margin-top:12px">توجه: ما از ایمیل‌های رمزنگاری‌شده و پیام‌رسان‌های امن برای ارتباطات حساس استفاده می‌کنیم.</p>
+      <div>
+        <h3 style="font-weight:600;margin-bottom:12px">اطلاعات تماس</h3>
+        <p class="muted">ایمیل: <a href="mailto:contact@silentknights.af">contact@silentknights.af</a></p>
+        <p class="muted" style="margin-top:8px">تیم Silent Knights در حال حاضر از طریق ایمیل و شبکه‌های اجتماعی در دسترس است.</p>
       </div>
-      <div class="card">
-        <h3>فرم تماس</h3>
-        <form id="contact-form" aria-label="فرم تماس">
-          <input type="text" placeholder="نام" aria-label="نام" required />
-          <input type="email" placeholder="ایمیل" aria-label="ایمیل" required />
-          <textarea placeholder="پیام" rows="4" aria-label="پیام" required></textarea>
-          <button type="submit" class="btn">ارسال پیام</button>
-        </form>
-      </div>
+      <form id="contact-form" aria-label="فرم تماس">
+        <input type="text" placeholder="نام شما" aria-label="نام شما" required />
+        <input type="email" placeholder="ایمیل شما" aria-label="ایمیل شما" required />
+        <textarea rows="4" placeholder="پیام شما" aria-label="پیام شما" required></textarea>
+        <button type="submit" class="btn">ارسال پیام</button>
+      </form>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer>
-    <p>© 2025 — Silent Knights. تمامی حقوق محفوظ است.</p>
-    <p class="muted" style="margin-top:6px;font-size:14px">ما برای امنیت، آموزش و آینده بهتر افغانستان کار می‌کنیم.</p>
+    <p>© 2025 — تیم Silent Knights. تمام حقوق محفوظ است.</p>
+    <p style="margin-top:8px;font-size:13px">این وب‌سایت صرفاً برای اهداف آموزشی و معرفی تیم طراحی شده است.</p>
   </footer>
 
-  <!-- SCRIPT -->
+
   <script>
-    // Intro terminal
-    const intro = document.getElementById('intro');
-    const term = document.getElementById('term');
-    const text = `
-      Silent Knights — Cyber Security Team
-      ------------------------------------
-      [*] تیم Silent Knights فعال شد.
-      [*] هدف: رشد مهارت‌های امنیت سایبری در افغانستان.
-      [*] تمرکز: تست نفوذ اخلاقی، پژوهش و آموزش.
-      [*] شعار: "ما بهترین‌ها را تربیت می‌کنیم."
-      [*] وضعیت: آماده به کار.
-      ------------------------------------
-      [INFO] برای ادامه، کلید Enter را فشار دهید.
-    `;
-    let i = 0;
-    function typeWriter() {
-      if (i < text.length) {
-        term.innerHTML += text.charAt(i);
-        i++;
-        setTimeout(typeWriter, 20);
-      }
-    }
-    typeWriter();
+    // Intro typing & skip
+    (function(){
+      const lines = [
+  '> در حال راه‌اندازی SilentKnights...',
+  // '> بارگذاری ماژول‌ها: [training] [research] [redteam] [blueteam] — موفق',
+  '> دسترسی صادر شد [200]',
+  'به SilentKnights خوش آمدید — وب سایت مستقلِ امنیتِ سایبریِ افغانستان',
+  ''
+];
 
-    // Skip intro on Enter
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') {
+      const term = document.getElementById('term');
+      const intro = document.getElementById('intro');
+      let li = 0, ci = 0, skipped = false;
+
+      function type(){
+        if(skipped) return;
+        if(li < lines.length){
+          const line = lines[li];
+          if(ci < line.length){
+            term.textContent += line.charAt(ci++);
+            setTimeout(type, 18 + Math.random()*20);
+          } else {
+            term.textContent += '\n';
+            li++;ci=0;setTimeout(type, 400);
+          }
+          term.scrollTop = term.scrollHeight;
+        } else {
+          setTimeout(closeIntro, 700);
+        }
+      }
+      function closeIntro(){
+        if(skipped) return; skipped=true;
         intro.classList.add('fade-out');
-        setTimeout(() => intro.style.display = 'none', 600);
+        setTimeout(()=>{ try{ intro.remove(); document.getElementById('home').focus(); }catch(e){} },650);
       }
-    });
+      document.addEventListener('keydown', (e)=>{ if(e.key==='Enter') closeIntro(); if(e.key==='Escape') closeIntro(); });
+      intro.addEventListener('click', closeIntro);
+      type();
+      setTimeout(closeIntro, 7500);
+    })();
 
-    // Mobile nav
-    const hamburger = document.getElementById('hamburger');
-    const navDrawer = document.getElementById('nav-drawer');
-    const navPanel = document.getElementById('nav-panel');
-    const navClose = document.getElementById('nav-close');
-    hamburger.addEventListener('click', () => {
-      navDrawer.style.display = 'block';
-      setTimeout(() => navPanel.classList.add('open'), 10);
-      hamburger.setAttribute('aria-expanded', 'true');
-    });
-    navClose.addEventListener('click', closeNav);
-    navDrawer.addEventListener('click', (e) => {
-      if (e.target === navDrawer) closeNav();
-    });
-    function closeNav() {
-      navPanel.classList.remove('open');
-      setTimeout(() => navDrawer.style.display = 'none', 280);
-      hamburger.setAttribute('aria-expanded', 'false');
-    }
+    // Active menu highlight on scroll (RTL aware)
+    (function(){
+      const links = Array.from(document.querySelectorAll('nav.menu a'));
+      const allLinks = links.concat(Array.from(document.querySelectorAll('#nav-panel nav a')));
+      const sections = allLinks.map(a => document.querySelector(a.getAttribute('href')));
+      function onScroll(){
+        const offset = window.scrollY + (parseInt(getComputedStyle(document.documentElement).fontSize) * 6) + 30;
+        let idx = 0;
+        sections.forEach((sec,i)=>{ if(sec && sec.offsetTop <= offset) idx = i; });
+        links.forEach(l=>l.classList.remove('active'));
+        if(links[idx]) links[idx].classList.add('active');
+      }
+      document.addEventListener('scroll', onScroll, {passive:true});
+      onScroll();
+    })();
 
-    // Form submission
-    document.getElementById('contact-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      alert('پیام شما ارسال شد. با تشکر!');
-      this.reset();
-    });
+    // Mobile nav toggle
+    (function(){
+      const hamburger = document.getElementById('hamburger');
+      const drawer = document.getElementById('nav-drawer');
+      const panel = document.getElementById('nav-panel');
+      const closeBtn = document.getElementById('nav-close');
+
+      function openNav(){
+        drawer.style.display = 'block';
+        panel.classList.add('open');
+        drawer.setAttribute('aria-hidden','false');
+        hamburger.setAttribute('aria-expanded','true');
+        // focus first link
+        const first = panel.querySelector('a');
+        if(first) first.focus();
+        document.body.style.overflow = 'hidden';
+      }
+      function closeNav(){
+        panel.classList.remove('open');
+        drawer.setAttribute('aria-hidden','true');
+        hamburger.setAttribute('aria-expanded','false');
+        document.body.style.overflow = '';
+        setTimeout(()=>{ drawer.style.display = 'none'; hamburger.focus(); }, 280);
+      }
+      hamburger.addEventListener('click', openNav);
+      closeBtn.addEventListener('click', closeNav);
+      drawer.addEventListener('click', (e)=>{ if(e.target === drawer) closeNav(); });
+      // close on link click
+      panel.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeNav));
+      // escape to close
+      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && drawer.style.display==='block') closeNav(); });
+    })();
   </script>
 </body>
 </html>
