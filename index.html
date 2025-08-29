@@ -195,6 +195,9 @@
         display:flex;
         gap:12px;
         align-items:center;
+        margin-left:auto;            /* push menu to the right side */
+        direction: rtl;              /* order items right-to-left */
+        justify-content:flex-start;  /* with RTL, start is right */
       }
       .menu a{
         color:#fff;padding:8px 10px;border-radius:8px;font-weight:500;transition:all .18s;
