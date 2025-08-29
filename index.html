@@ -114,7 +114,7 @@
         box-shadow:0 4px 18px rgba(0,0,0,.4);
         padding:0 16px;
         position: relative;
-        overflow: hidden;
+        overflow: visible;
       }
       
       .nav::before {
@@ -145,6 +145,7 @@
         display:flex;
         align-items:center;
         justify-content:flex-start;
+        direction:ltr;
         gap:12px;
       }
       
@@ -155,8 +156,7 @@
         color:#fff;
         font-weight:600;
         position: relative;
-        order:3;
-        margin-inline-start:auto;
+        direction:ltr;
       }
       
       .brand::after {
@@ -197,7 +197,7 @@
         display:flex;
         gap:12px;
         align-items:center;
-        order:1;
+        margin-inline-start:auto;
       }
       .menu a{
         color:#fff;padding:8px 10px;border-radius:8px;font-weight:500;transition:all .18s;
@@ -253,7 +253,7 @@
         visibility:hidden;
         transform:translateY(-10px);
         transition:all .2s ease;
-        z-index:1000;
+        z-index:2000;
         overflow:hidden;
       }
       .dropdown-content.show{
@@ -289,7 +289,6 @@
         display:none;
         background:transparent;border:0;color:var(--color-text);padding:8px;border-radius:8px;
         cursor:pointer;font-size:20px;
-        order:2;
       }
       .nav-drawer{
         position:fixed;inset:0;z-index:1150;display:none;
