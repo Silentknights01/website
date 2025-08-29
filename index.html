@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Silent Knights — Cyber Security Team</title>
-    <meta name="theme-color" content="#0A1F44" />
+    <meta name="theme-color" content="#0A1022" />
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Fira+Code:wght@400;700&display=swap" rel="stylesheet" />
     <style>
@@ -14,25 +14,25 @@
         --font-mono: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
 
         /* Silent Knights Brand Colors */
-        --color-primary: #1E3A8A;        /* Deep Blue - Main color for logo, buttons, links, titles */
-        --color-primary-dark: #0A1F44;   /* Dark Navy - Background, header, dark sections */
-        --color-secondary: #1F4E78;      /* Blue Steel - Secondary for highlights, hover, special text */
-        --color-accent: #1E3A8A;         /* Deep Blue - Accent elements */
-        --color-neon: #1F4E78;           /* Blue Steel - Hover effects */
-        --color-bg: #0A0A0A;             /* Jet Black - Main background */
-        --color-bg-secondary: #0A1F44;   /* Dark Navy - Secondary background */
-        --color-bg-card: #0A1F44;        /* Dark Navy - Card backgrounds */
-        --color-gray: #4B4B4B;           /* Graphite Gray - Explanatory text, sidebar, secondary icons */
-        --color-light: #F1F1F1;          /* Light White - Text on dark background */
-        --color-text: #F1F1F1;           /* Light White - Main text */
-        --color-text-muted: #4B4B4B;     /* Graphite Gray - Muted text */
+        --color-primary: #2F6DF6;        /* Deep Blue - Main color for logo, buttons, links, titles */
+        --color-primary-dark: #0A1022;   /* Dark Navy - Background, header, dark sections */
+        --color-secondary: #1E3A8A;      /* Blue Steel - Secondary for highlights, hover, special text */
+        --color-accent: #3B82F6;         /* Deep Blue - Accent elements */
+        --color-neon: #9CC2FF;           /* Blue Steel - Hover effects */
+        --color-bg: #0B1223;             /* Jet Black - Main background */
+        --color-bg-secondary: #0D1733;   /* Dark Navy - Secondary background */
+        --color-bg-card: #101C3A;        /* Dark Navy - Card backgrounds */
+        --color-gray: #8FA3C6;           /* Graphite Gray - Explanatory text, sidebar, secondary icons */
+        --color-light: #EDF3FF;          /* Light White - Text on dark background */
+        --color-text: #D9E6FF;           /* Light White - Main text */
+        --color-text-muted: #9AAED6;     /* Graphite Gray - Muted text */
 
               /* Enhanced Shadows & Effects - Silent Knights Brand Compliant */
       --radius: 16px;
       --radius-small: 8px;
-      --shadow: 0 8px 32px rgba(30, 58, 138, 0.3);
-      --shadow-neon: 0 0 20px rgba(31, 78, 120, 0.4);
-      --shadow-glow: 0 0 40px rgba(30, 58, 138, 0.2);
+      --shadow: 0 8px 32px rgba(60, 130, 246, 0.22);
+      --shadow-neon: 0 0 22px rgba(156, 194, 255, 0.50);
+      --shadow-glow: 0 0 40px rgba(60, 130, 246, 0.28);
       --nav-height: 70px;
         
         /* Animation Speeds */
@@ -195,6 +195,9 @@
         display:flex;
         gap:12px;
         align-items:center;
+        margin-left:auto;            /* push menu to the right side */
+        direction: rtl;              /* order items right-to-left */
+        justify-content:flex-start;  /* with RTL, start is right */
       }
       .menu a{
         color:#fff;padding:8px 10px;border-radius:8px;font-weight:500;transition:all .18s;
