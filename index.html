@@ -1,672 +1,1263 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Silent Knights — Cyber Security Team</title>
-  <meta name="theme-color" content="#0A1F44" />
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Fira+Code:wght@400;700&display=swap" rel="stylesheet" />
-  <style>
-    /* ========== VARIABLES ========== */
-    :root{
-      --font-main: "Poppins", "Berlin Sans FB", system-ui, -apple-system, sans-serif;
-      --font-mono: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+  <!DOCTYPE html>
+  <html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Silent Knights — Cyber Security Team</title>
+    <meta name="theme-color" content="#0A1F44" />
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Fira+Code:wght@400;700&display=swap" rel="stylesheet" />
+    <style>
+      /* ========== VARIABLES ========== */
+      :root{
+        --font-main: "Poppins", "Berlin Sans FB", system-ui, -apple-system, sans-serif;
+        --font-mono: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
 
-      --color-primary: #1E3A8A;
-      --color-primary-dark: #0A1F44;
-      --color-secondary: #1F4E78;
-      --color-bg: #0A0A0A;
-      --color-gray: #4B4B4B;
-      --color-light: #F1F1F1;
+        /* Silent Knights Brand Colors */
+        --color-primary: #1E3A8A;        /* Deep Blue - Main color for logo, buttons, links, titles */
+        --color-primary-dark: #0A1F44;   /* Dark Navy - Background, header, dark sections */
+        --color-secondary: #1F4E78;      /* Blue Steel - Secondary for highlights, hover, special text */
+        --color-accent: #1E3A8A;         /* Deep Blue - Accent elements */
+        --color-neon: #1F4E78;           /* Blue Steel - Hover effects */
+        --color-bg: #0A0A0A;             /* Jet Black - Main background */
+        --color-bg-secondary: #0A1F44;   /* Dark Navy - Secondary background */
+        --color-bg-card: #0A1F44;        /* Dark Navy - Card backgrounds */
+        --color-gray: #4B4B4B;           /* Graphite Gray - Explanatory text, sidebar, secondary icons */
+        --color-light: #F1F1F1;          /* Light White - Text on dark background */
+        --color-text: #F1F1F1;           /* Light White - Main text */
+        --color-text-muted: #4B4B4B;     /* Graphite Gray - Muted text */
 
-      --radius: 12px;
-      --shadow: 0 10px 30px rgba(30,58,138,0.35);
-      --nav-height: 64px;
-    }
-
-    /* ========== RESET & BASE ========== */
-    *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-
-    html, body {
-      font-family: var(--font-main);
-      font-weight: 400;
-      font-synthesis: none; /* جلوگیری از بولد/ایتالیک مصنوعی */
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      background:var(--color-bg);
-      color:var(--color-light);
-      line-height:1.6;
-      min-height:100vh;
-    }
-
-    a{color:var(--color-secondary);text-decoration:none}
-    img{max-width:100%;height:auto;display:block}
-    .muted{color:#a7adb8}
-
-    /* ========== NAV ========== */
-    .nav{
-      position:sticky;
-      top:0;
-      z-index:1200;
-      backdrop-filter: blur(8px);
-      background:linear-gradient(180deg, rgba(10,31,68,0.9), rgba(10,31,68,0.8));
-      border-bottom:1px solid rgba(75,75,75,.25);
-      height:var(--nav-height);
-      display:flex;
-      align-items:center;
-      box-shadow:0 4px 18px rgba(0,0,0,.4);
-      padding:0 16px;
-    }
-    .nav-inner{
-      width:100%;
-      max-width:1200px;
-      margin:0 auto;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-    }
-    .brand{display:flex;align-items:center;gap:10px;color:#fff;font-weight:600}
-    /* logo image (replace with your path) */
-    .brand-logo{
-      width:40px;
-      height:40px;
-      border-radius:50%;
-      object-fit:cover;
-      display:inline-block;
-      box-shadow: inset 0 0 10px rgba(255,255,255,.03), 0 0 14px rgba(30,58,138,0.14);
-    }
-
-    /* menu */
-    .menu{
-      display:flex;
-      gap:12px;
-      align-items:center;
-      position: relative;
-    }
-    .menu a{
-      color:#fff;padding:8px 10px;border-radius:8px;font-weight:500;transition:all .18s;
-    }
-    .menu a.active,.menu a:hover{background:rgba(30,58,138,.15);box-shadow:0 6px 18px rgba(30,58,138,.12)}
-
-    /* hamburger (mobile) */
-    .hamburger{
-      display:none;
-      background:transparent;border:0;color:#fff;padding:8px;border-radius:8px;
-      cursor:pointer;font-size:20px;
-    }
-    .nav-drawer{
-      position:fixed;inset:0;z-index:1150;display:none;
-      background:rgba(0,0,0,.45);backdrop-filter:blur(4px);
-    }
-    .nav-panel{
-      position:absolute;top:0;right:0;width:min(320px,85%);height:100%;
-      background:linear-gradient(180deg,#07112a,#081a3a);padding:20px;
-      box-shadow:-12px 0 40px rgba(0,0,0,.6);
-      transform:translateX(100%);transition:transform .28s cubic-bezier(.2,.9,.2,1);
-      display:flex;flex-direction:column;gap:18px;
-    }
-    .nav-panel.open{transform:translateX(0)}
-    .nav-panel a{color:#dfe7fb;padding:10px;border-radius:8px}
-    .nav-panel .close-btn{margin-left:auto;background:transparent;border:0;color:#fff;font-size:22px;cursor:pointer}
-
-    /* ========== Dropdown Menu ========== */
-    .dropdown {
-      position: relative;
-      display: inline-block;
-    }
-    
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      top: 100%;
-      right: 0;
-      background: linear-gradient(180deg,#07112a,#081a3a);
-      min-width: 200px;
-      border-radius: var(--radius);
-      box-shadow: 0 8px 16px rgba(0,0,0,0.5);
-      z-index: 1;
-      border: 1px solid rgba(255,255,255,0.1);
-      overflow: hidden;
-    }
-    
-    .dropdown-content a {
-      color: #dfe7fb;
-      padding: 12px 16px;
-      text-decoration: none;
-      display: block;
-      transition: background 0.2s;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
-    
-    .dropdown-content a:last-child {
-      border-bottom: none;
-    }
-    
-    .dropdown-content a:hover {
-      background: rgba(30,58,138,0.3);
-    }
-    
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-    
-    .dropdown-btn {
-      color: #fff;
-      padding: 8px 10px;
-      border-radius: 8px;
-      font-weight: 500;
-      transition: all .18s;
-      cursor: pointer;
-      background: none;
-      border: none;
-      font-family: var(--font-main);
-      font-size: 1rem;
-    }
-    
-    .dropdown-btn:hover {
-      background: rgba(30,58,138,.15);
-      box-shadow: 0 6px 18px rgba(30,58,138,.12);
-    }
-
-    /* ========== INTRO terminal ========== */
-    .intro{
-      position:fixed;inset:0;display:grid;place-items:center;z-index:9999;
-      background:
-        radial-gradient(800px 420px at 50% -10%, rgba(30,58,138,.24), transparent),
-        linear-gradient(to right,#0A0A0A,#0A1F44);
-      padding:20px;
-    }
-    .terminal-wrap{
-      width:min(920px,96vw);
-      max-height:76vh;
-      background:#050505;border-radius:14px;border:1px solid #0f0f0f;
-      padding:18px;box-shadow:0 0 40px rgba(30,58,138,.12),inset 0 0 24px rgba(0,0,0,.6);
-      display:flex;flex-direction:column;gap:8px;
-    }
-    .term-header{display:flex;align-items:center;gap:12px;color:#c6c9cf;font-family:var(--font-mono);font-size:13px}
-    .term-dots{display:flex;gap:6px}
-    .dot{width:10px;height:10px;border-radius:50%}
-    .dot.r{background:#ff5f56}.dot.y{background:#ffbd2e}.dot.g{background:#27c93f}
-
-    .logo-glitch{
-      --size:clamp(30px,5vw,56px);
-      font-family:var(--font-main);
-      font-weight:400; /* کمتر بولد تا عنوان نرم‌تر باشد */
-      text-transform:uppercase;
-      color:#dbe9ff;font-size:var(--size);letter-spacing:2px;margin-bottom:6px;
-      position:relative;display:inline-block;filter:contrast(1.05) saturate(1.05);
-    }
-    .logo-glitch::before,.logo-glitch::after{
-      content:attr(data-text);position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;mix-blend-mode:screen;opacity:.95;
-    }
-    .logo-glitch::before{color:rgba(255,59,59,0.95);transform:translate(3px,-2px);clip-path:inset(0 0 60% 0);text-shadow:0 0 12px rgba(255,59,59,.25);animation:gl1 1.8s infinite linear alternate-reverse}
-    .logo-glitch::after{color:rgba(0,255,149,0.95);transform:translate(-3px,2px);clip-path:inset(60% 0 0 0);text-shadow:0 0 12px rgba(0,255,149,.18);animation:gl2 1.6s infinite linear alternate}
-    @keyframes gl1{0%{clip-path:inset(0 0 85% 0) }25%{clip-path:inset(20% 0 60% 0)}50%{clip-path:inset(40% 0 40% 0)}75%{clip-path:inset(10% 0 70% 0)}100%{clip-path:inset(0 0 85% 0)}}
-    @keyframes gl2{0%{clip-path:inset(60% 0 0 0)}20%{clip-path:inset(50% 0 10% 0)}45%{clip-path:inset(30% 0 30% 0)}70%{clip-path:inset(55% 0 5% 0)}100%{clip-path:inset(60% 0 0 0)}}
-
-    .term-body{font-family:var(--font-mono);color:#00ff99;font-size:14px;white-space:pre-wrap;overflow:auto;line-height:1.6;padding-right:6px;max-height:calc(76vh - 120px)}
-    .enter-tip{margin-top:10px;font-family:var(--font-mono);color:#8fffd5;font-size:12px;opacity:.95}
-    
-    /* شمارش معکوس جدید */
-    .countdown {
-      margin-top: 10px;
-      font-family: var(--font-mono);
-      color: #8fffd5;
-      font-size: 12px;
-      opacity: .95;
-      text-align: left;
-      direction: ltr;
-    }
-
-    .intro.fade-out{animation:fadeOut .6s ease forwards}
-    @keyframes fadeOut{to{opacity:0;visibility:hidden}}
-
-    /* ========== LAYOUT ========== */
-    .container{max-width:1200px;margin:0 auto;padding:80px 20px}
-    .section-title{font-size:clamp(22px,3vw,32px);color:var(--color-primary);margin-bottom:10px;font-weight:600}
-    .section-sub{color:#cfd3dc;margin-bottom:22px}
-    .grid{display:grid;gap:18px}
-    .grid-3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
-    .grid-2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
-
-    .card{background:#0f0f12;border:1px solid rgba(255,255,255,.03);border-radius:var(--radius);padding:18px;transition:transform .2s,box-shadow .2s}
-    .card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
-
-    .btn{display:inline-block;padding:10px 16px;border-radius:10px;background:var(--color-primary);color:#fff;font-weight:700;border:0;cursor:pointer}
-    .btn-outline{background:transparent;border:1px solid var(--color-secondary);color:#fff}
-    .btn:hover{filter:brightness(.95)}
-
-    /* HERO */
-    .hero{background:
-      radial-gradient(1200px 500px at 50% -10%, rgba(30,58,138,.30), transparent),linear-gradient(to right,#0A0A0A,#0A1F44);
-      padding:120px 20px 60px;border-bottom:1px solid rgba(75,75,75,.22);text-align:center}
-    .hero-inner{max-width:980px;margin:0 auto}
-    .hero h1{font-size:clamp(34px,5vw,56px);color:var(--color-primary);margin-bottom:12px;font-weight:700}
-    .hero p{color:#c0c8d6;margin:0 auto 20px;max-width:780px}
-
-    /* ABOUT */
-    .about{display:grid;grid-template-columns:1.2fr .8fr;gap:22px}
-    .about .panel{background:#0e0e11;border:1px solid rgba(255,255,255,.02);padding:18px;border-radius:var(--radius)}
-    .about ul{padding-left:20px;list-style:disc;margin-top:10px}
-
-    /* SERVICES icons */
-    .service-icon{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:rgba(30,58,138,.12);margin-bottom:10px;font-size:18px}
-
-    /* PROJECTS TAGS */
-    .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
-    .tag{font-size:12px;padding:6px 10px;border-radius:999px;background:rgba(31,78,120,.14);border:1px solid rgba(31,78,120,.28);color:#cfe3ff}
-
-    /* TEAM */
-    .avatar{width:72px;height:72px;border-radius:50%;background:linear-gradient(145deg,#1E3A8A,#0A1F44);box-shadow:inset 0 0 12px rgba(255,255,255,.06),0 0 18px rgba(30,58,138,.28);margin-bottom:12px}
-
-    /* CONTACT */
-    form{display:grid;gap:12px}
-    input,textarea{width:100%;padding:12px 14px;border-radius:10px;border:1px solid #222;background:#0f0f0f;color:#fff;outline:none}
-    input:focus,textarea:focus{box-shadow:0 0 0 4px rgba(30,58,138,.12);border-color:#2b3e7a}
-
-    footer{background:var(--color-primary-dark);color:#e6e8ee;padding:24px;text-align:center;border-top:1px solid #14213b}
-
-    /* ========== Responsive tweaks ========== */
-    @media (max-width:1000px){
-      .intro .terminal-wrap{max-height:70vh}
-      .about{grid-template-columns:1fr}
-      .hero{padding:90px 20px 50px}
-    }
-    @media (max-width:720px){
-      :root{--nav-height:56px}
-      .nav{padding:0 12px}
-      .menu{display:none}
-      .hamburger{display:inline-flex}
-      .nav-drawer{display:block}
-      .brand-logo{width:36px;height:36px}
-      .hero{padding:70px 16px 40px}
-      .hero h1{font-size:28px}
-      .terminal-wrap{width:96vw;max-height:58vh;padding:14px;border-radius:12px}
-      .logo-glitch{--size:clamp(22px,6vw,40px)}
-      .term-body{font-size:13px;max-height:calc(58vh - 120px)}
-      .grid-3{grid-template-columns:repeat(auto-fit,minmax(180px,1fr))}
-      .avatar{width:60px;height:60px}
-      .nav-panel{width:85%}
-      .dropdown-content {
-        position: static;
-        display: none;
-        min-width: 100%;
-      }
-      .dropdown:hover .dropdown-content {
-        display: none;
-      }
-    }
-    @media (prefers-reduced-motion:reduce){
-      *{animation:none!important;transition:none!important}
-    }
-  </style>
-</head>
-<body>
-
-  <!-- INTRO -->
-  <div id="intro" class="intro" role="dialog" aria-modal="true" aria-label="Intro terminal">
-    <div class="terminal-wrap" role="document" aria-live="polite">
-      <div class="term-header">
-        <div class="term-dots" aria-hidden="true">
-          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-        </div>
-        <div style="margin-inline-start:10px;font-family:var(--font-mono);font-size:12px;color:#c6c9cf; direction: ltr;">/usr/bin/knight-console — UTF-8</div>
-      </div>
-
-      <div class="logo-glitch" data-text="Silent Knights">Silent Knights</div>
-
-      <div id="term" class="term-body" aria-hidden="false"></div>
-
-      <div style="display:flex;justify-content:flex-end;align-items:center;gap:12px;margin-top:8px;flex-direction: column;">
-        <div class="enter-tip">فشار <strong style="font-family:var(--font-mono)">Enter</strong> برای ادامه</div>
-        <!-- <div id="countdown" class="countdown">ورود خودکار در 3 ثانیه...</div> -->
-      </div>
-    </div>
-  </div>
-
-  <!-- NAV -->
-  <header class="nav" id="nav">
-    <div class="nav-inner">
-      <div class="brand" aria-label="نام سایت">
-        <!-- قرار بده logo.png کنار این فایل یا مسیرت را اصلاح کن -->
-        <img src="logo.png" class="brand-logo" alt="لوگو Silent Knights" />
-        <span>Silent Knights</span>
-      </div>
-
-      <nav class="menu" aria-label="منوی اصلی">
-        <a href="#home" class="active">خانه</a>
-        <a href="#about">درباره</a>
-        <a href="#services">خدمات</a>
-        <a href="#projects">پروژه‌ها</a>
-        <a href="#blog">بلاگ</a>
-        <a href="#team">تیم</a>
-        <a href="#contact">ارتباط</a>
+              /* Enhanced Shadows & Effects - Silent Knights Brand Compliant */
+      --radius: 16px;
+      --radius-small: 8px;
+      --shadow: 0 8px 32px rgba(30, 58, 138, 0.3);
+      --shadow-neon: 0 0 20px rgba(31, 78, 120, 0.4);
+      --shadow-glow: 0 0 40px rgba(30, 58, 138, 0.2);
+      --nav-height: 70px;
         
-        <!-- دکمه جدید امتحان -->
-        <div class="dropdown">
-          <button class="dropdown-btn">امتحان</button>
-          <div class="dropdown-content">
-            <a href="test-exam/Network-4-Hacker-Exam.html">Network 4 Hacker</a>
-            <a href="#">امتحان امنیت وب</a>
-            <a href="#">امتحان رمزنگاری</a>
-            <a href="#">امتحان تست نفوذ</a>
-          </div>
-        </div>
-      </nav>
+        /* Animation Speeds */
+        --transition-fast: 0.2s;
+        --transition-normal: 0.3s;
+        --transition-slow: 0.5s;
+      }
 
-      <button class="hamburger" id="hamburger" aria-label="باز کردن منو" aria-controls="nav-panel" aria-expanded="false">☰</button>
-    </div>
-  </header>
+      /* ========== RESET & BASE ========== */
+      *{box-sizing:border-box;margin:0;padding:0}
+      html{scroll-behavior:smooth}
 
-  <!-- Nav Drawer (mobile) -->
-  <div id="nav-drawer" class="nav-drawer" aria-hidden="true">
-    <div id="nav-panel" class="nav-panel" role="dialog" aria-modal="true" aria-label="منوی ناوبری">
-      <button class="close-btn" id="nav-close" aria-label="بستن منو">✕</button>
-      <nav style="display:flex;flex-direction:column;gap:6px;margin-top:6px">
-        <a href="#home">خانه</a>
-        <a href="#about">درباره</a>
-        <a href="#services">خدمات</a>
-        <a href="#projects">پروژه‌ها</a>
-        <a href="#blog">بلاگ</a>
-        <a href="#team">تیم</a>
-        <a href="#contact">ارتباط</a>
-        <!-- لینک امتحان در منوی موبایل -->
-        <a href="test-exam/Network-4-Hacker-Exam.html">امتحان Network 4 Hacker</a>
-        <a href="#">امتحان امنیت وب</a>
-        <a href="#">امتحان رمزنگاری</a>
-        <a href="#">امتحان تست نفوذ</a>
-      </nav>
-      <div style="margin-top:auto;color:#cbd8ff;font-size:14px">© 2025 Silent Knights</div>
-    </div>
-  </div>
+      html, body {
+        font-family: var(--font-main);
+        font-weight: 400;
+        font-synthesis: none;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-bg-secondary) 100%);
+        color: var(--color-text);
+        line-height: 1.6;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
 
-  <!-- HERO -->
-  <section id="home" class="hero" tabindex="-1" aria-label="صفحه نخست">
-    <div class="hero-inner">
-      <h1>Silent Knights</h1>
-      <p>ما جمعی از هکرهای مستقل افغانستانیم — هدف‌مان رشد شخصی، تمرین حرفه‌ای و تبدیل شدن به بهترین‌های کشور است. کارهای ما آموزشی، اخلاقی و با محوریت دفاع دیجیتال است.</p>
-      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:12px">
-        <a href="#services" class="btn">مشاهده خدمات</a>
-        <a href="#contact" class="btn btn-outline">تماس با ما</a>
-      </div>
-    </div>
-  </section>
+      /* Enhanced Base Styles - Silent Knights Brand Compliant */
+      a {
+        color: var(--color-primary); /* Deep Blue for links per brand guidelines */
+        text-decoration: none;
+        transition: all var(--transition-fast) ease;
+        position: relative;
+      }
+      
+      a:hover {
+        color: var(--color-neon);
+        text-shadow: 0 0 8px var(--color-neon);
+      }
+      
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+      
+      .muted {
+        color: var(--color-text-muted);
+      }
+      
+      /* Cyberpunk Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      
+      ::-webkit-scrollbar-track {
+        background: var(--color-bg-secondary);
+      }
+      
+      ::-webkit-scrollbar-thumb {
+        background: var(--color-primary);
+        border-radius: 4px;
+      }
+      
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--color-neon);
+      }
 
-  <!-- ABOUT -->
-  <section id="about" class="container" aria-labelledby="about-heading">
-    <h2 id="about-heading" class="section-title">درباره Silent Knights</h2>
-    <p class="section-sub">ما جمعی از هکرهای مستقل هستیم که با تمرین و تلاش شخصی برای رسیدن به سطح برتر در کشور کار می‌کنیم. تیم وسیله‌ای است برای رشدِ هر یک از ما.</p>
-    <div class="about" role="region" aria-label="درباره ما">
-      <div class="panel">
-        <h3 style="font-weight:600">ماموریت و چشم‌انداز</h3>
-        <p class="muted">ماموریت: کمک به رشد مهارت‌های فردی و تیمی تا هر یک از اعضا بتواند به عنوان یک هکر متخصص و قابل‌اعتماد در افغانستان شناخته شود. چشم‌انداز: تولید هکرهایی مستقل، حرفه‌ای و اخلاق‌محور که کشورشان را در حوزه سایبری نمایان کنند.</p>
-        <h3 style="font-weight:600;margin-top:12px">ارزش‌ها</h3>
-        <ul>
-          <li>تلاش مستمر برای پیشرفت شخصی</li>
-          <li>یادگیری و به‌اشتراک‌گذاری دانش</li>
-          <li>استقلال و کار بدون حمایت خارجی</li>
-          <li>هک اخلاقی و مسئولانه</li>
-        </ul>
-      </div>
-      <div class="panel">
-        <h3 style="font-weight:600">نکات برجسته</h3>
-        <ul>
-          <li>پوشش عملی در CTFها و پروژه‌های پژوهشی</li>
-          <li>متمرکز بر آموزش و انتشار write-upهای کاربردی</li>
-          <li>تعهد به افشای مسئولانه و رعایت اخلاق در پژوهش</li>
-        </ul>
-      </div>
-    </div>
-  </section>
+      /* ========== NAV ========== */
+      .nav{
+        position:sticky;
+        top:0;
+        z-index:1200;
+        -webkit-backdrop-filter: blur(8px);
+        backdrop-filter: blur(8px);
+        background:linear-gradient(180deg, rgba(10,31,68,0.9), rgba(10,31,68,0.8));
+        border-bottom:1px solid rgba(75,75,75,.25);
+        height:var(--nav-height);
+        display:flex;
+        align-items:center;
+        box-shadow:0 4px 18px rgba(0,0,0,.4);
+        padding:0 16px;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .nav::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, 
+          transparent 0%, 
+          var(--color-secondary) 50%, 
+          transparent 100%);
+        animation: scanline 3s linear infinite;
+      }
+      
+      @keyframes scanline {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+      }
+      
 
-  <!-- SERVICES (UPDATED to requested 5 items) -->
-  <section id="services" class="container" aria-labelledby="services-heading">
-    <h2 id="services-heading" class="section-title">خدمات</h2>
-    <p class="section-sub">خدمات ما به‌طور خاص برای آموزش، تست و تقویت توان دفاعی طراحی شده‌اند.</p>
-    <div class="grid grid-3" role="list">
-      <article class="card" role="listitem">
-        <div class="service-icon" aria-hidden="true">🎓</div>
-        <h3>آموزش و آگاهی</h3>
-        <p class="muted">کارگاه‌های عملی و دوره‌های کوتاه برای تیم‌ها و علاقه‌مندان تا مهارت‌های عملی امنیت را بیاموزند.</p>
-        <p class="muted" style="margin-top:8px;font-size:13px">ویژگی: آموزش عملی همراه با سناریوهای مشابه به واقعیت.</p>
-      </article>
+      
+      .nav-inner{
+        width:100%;
+        max-width:1200px;
+        margin:0 auto;
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:12px;
+      }
+      
+      .brand{
+        display:flex;
+        align-items:center;
+        gap:10px;
+        color:#fff;
+        font-weight:600;
+        position: relative;
+      }
+      
+      .brand::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+        border-radius: 1px;
+        transform: scaleX(0);
+        transition: transform var(--transition-normal) ease;
+      }
+      
+      .brand:hover::after {
+        transform: scaleX(1);
+      }
+      
+      /* logo image (replace with your path) */
+      .brand-logo{
+        width:40px;
+        height:40px;
+        border-radius:50%;
+        object-fit:cover;
+        display:inline-block;
+        box-shadow: inset 0 0 10px rgba(255,255,255,.03), 0 0 14px rgba(30,58,138,0.14);
+        transition: all var(--transition-normal) ease;
+      }
+      
+      .brand:hover .brand-logo {
+        transform: scale(1.05);
+        box-shadow: inset 0 0 10px rgba(255,255,255,.03), 0 0 20px rgba(30,58,138,0.3);
+      }
 
-      <article class="card" role="listitem">
-        <div class="service-icon" aria-hidden="true">🔍</div>
-        <h3>تست نفوذ</h3>
-        <p class="muted">بررسی وب، API، موبایل، شبکه و فضای ابری برای کشف آسیب‌پذیری‌ها — همه تست‌ها با مجوز و اخلاقی انجام می‌شود.</p>
-        <p class="muted" style="margin-top:8px;font-size:13px">ویژگی: گزارش قابل‌فهم برای تیم فنی و اولویت‌بندی اصلاحات.</p>
-      </article>
+      /* menu */
+      .menu{
+        display:flex;
+        gap:12px;
+        align-items:center;
+      }
+      .menu a{
+        color:#fff;padding:8px 10px;border-radius:8px;font-weight:500;transition:all .18s;
+      }
+      .menu a.active,.menu a:hover{background:rgba(30,58,138,.15);box-shadow:0 6px 18px rgba(30,58,138,.12)}
 
-      <article class="card" role="listitem">
-        <div class="service-icon" aria-hidden="true">📋</div>
-        <h3>مشاور امنیتی</h3>
-        <p class="muted">تحلیل وضعیت امنیتی و ارائه راهبرد برای افزایش مقاومت در برابر تهدیدها.</p>
-        <p class="muted" style="margin-top:8px;font-size:13px">ویژگی: راهکارهای عملی سازگار با منابع و ساختار سازمانی شما.</p>
-      </article>
+            /* dropdown styles */
+      .dropdown{
+        position:relative;
+        display:inline-block;
+      }
+      .dropdown-btn{
+        color:#fff;
+        padding:8px 10px;
+        border-radius:8px;
+        font-weight:500;
+        transition:all .18s;
+        background:transparent;
+        border:none;
+        cursor:pointer;
+        font-family:inherit;
+        font-size:inherit;
+        display:flex;
+        align-items:center;
+        gap:6px;
+        white-space:nowrap;
+      }
+      .dropdown-btn:hover{
+        background:rgba(30,58,138,.15);
+        box-shadow:0 6px 18px rgba(30,58,138,.12);
+      }
+      .dropdown-btn::after{
+        content:'▼';
+        font-size:10px;
+        transition:transform .2s;
+        flex-shrink:0;
+      }
+      .dropdown-btn.active::after{
+        transform:rotate(180deg);
+      }
+      .dropdown-content{
+        position:absolute;
+        top:100%;
+        right:0;
+        background:linear-gradient(180deg,#07112a,#081a3a);
+        border:1px solid rgba(75,75,75,.3);
+        border-radius:12px;
+        padding:8px 0;
+        min-width:180px;
+        max-width:250px;
+        box-shadow:0 8px 25px rgba(0,0,0,.4);
+        opacity:0;
+        visibility:hidden;
+        transform:translateY(-10px);
+        transition:all .2s ease;
+        z-index:1000;
+        overflow:hidden;
+      }
+      .dropdown-content.show{
+        opacity:1;
+        visibility:visible;
+        transform:translateY(0);
+      }
+      .dropdown-content a{
+        display:block;
+        padding:10px 16px;
+        color:#dfe7fb;
+        text-decoration:none;
+        transition:background .15s;
+        border-radius:0;
+        margin:0;
+        white-space:nowrap;
+        overflow:hidden;
+        text-overflow:ellipsis;
+      }
+      .dropdown-content a:hover{
+        background:rgba(30,58,138,.2);
+        color:#fff;
+      }
+      .dropdown-content a:first-child{
+        border-radius:8px 8px 0 0;
+      }
+      .dropdown-content a:last-child{
+        border-radius:0 0 8px 8px;
+      }
 
-      <article class="card" role="listitem">
-        <div class="service-icon" aria-hidden="true">🛡️</div>
-        <h3>تیم سرخ (Red Team)</h3>
-        <p class="muted">شبیه‌سازی حملات کنترل‌شده برای سنجش کارایی دفاع و کشف نقاط ضعف در عمل.</p>
-        <p class="muted" style="margin-top:8px;font-size:13px">ویژگی: شبیه‌سازی عملیاتی با سناریوهای واقعی و گزارش بازگشت‌پذیر.</p>
-      </article>
+      /* hamburger (mobile) */
+      .hamburger{
+        display:none;
+        background:transparent;border:0;color:var(--color-text);padding:8px;border-radius:8px;
+        cursor:pointer;font-size:20px;
+      }
+      .nav-drawer{
+        position:fixed;inset:0;z-index:1150;display:none;
+        background:rgba(0,0,0,.45);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);
+      }
+      .nav-panel{
+        position:absolute;top:0;right:0;width:min(320px,85%);height:100%;
+        background:linear-gradient(180deg,#07112a,#081a3a);padding:20px;
+        box-shadow:-12px 0 40px rgba(0,0,0,.6);
+        transform:translateX(100%);transition:transform .28s cubic-bezier(.2,.9,.2,1);
+        display:flex;flex-direction:column;gap:18px;
+      }
+      .nav-panel.open{transform:translateX(0)}
+      .nav-panel a{color:var(--color-text);padding:10px;border-radius:8px}
+      .nav-panel .close-btn{margin-left:auto;background:transparent;border:0;color:var(--color-text);font-size:22px;cursor:pointer}
 
-      <article class="card" role="listitem">
-        <div class="service-icon" aria-hidden="true">🛡️</div>
-        <h3>تیم آبی (Blue Team)</h3>
-        <p class="muted">پایش، تشخیص و پاسخ به تهدیدات؛ تحلیل لاگ و بهبود فرایندهای حفاظتی.</p>
-        <p class="muted" style="margin-top:8px;font-size:13px">ویژگی: تمرکز بر دفاع مستمر و کاهش سریع ریسک‌هایی که شناسایی می‌شوند.</p>
-      </article>
-    </div>
-  </section>
+      /* ========== INTRO terminal ========== */
+      .intro{
+        position:fixed;inset:0;display:grid;place-items:center;z-index:9999;
+        background:
+          radial-gradient(800px 420px at 50% -10%, rgba(30,58,138,.24), transparent),
+          linear-gradient(to right,#0A0A0A,#0A1F44);
+        padding:20px;
+      }
+      .terminal-wrap{
+        width:min(920px,96vw);
+        max-height:76vh;
+        background:#050505;border-radius:14px;border:1px solid #0f0f0f;
+        padding:18px;box-shadow:0 0 40px rgba(30,58,138,.12),inset 0 0 24px rgba(0,0,0,.6);
+        display:flex;flex-direction:column;gap:8px;
+      }
+      .term-header{display:flex;align-items:center;gap:12px;color:#c6c9cf;font-family:var(--font-mono);font-size:13px}
+      .term-dots{display:flex;gap:6px}
+      .dot{width:10px;height:10px;border-radius:50%}
+      .dot.r{background:#ff5f56}.dot.y{background:#ffbd2e}.dot.g{background:#27c93f}
 
-  <!-- PROJECTS (updated to requested four) -->
-  <section id="projects" class="container" aria-labelledby="projects-heading">
-    <h2 id="projects-heading" class="section-title">نمونه‌کارها و پروژه‌ها</h2>
-    <p class="section-sub">پروژه‌های تحقیقاتی و آموزشی ما — همه برای اهداف پژوهشی و تستِ اخلاقی انجام شده‌اند.</p>
-    <div class="grid grid-3">
-      <article class="card">
-        <h3>WiFi Cracker (پژوهش آموزشی)</h3>
-        <p class="muted">ابزاری آموزشی برای بررسی امنیت شبکه‌های بی‌سیم و فهم مکانیزم‌های محافظتی — <strong>فقط</strong> برای آزمایش با مجوز و در محیط‌های آموزشی.</p>
-        <div class="tags"><span class="tag">شبکه</span><span class="tag">آموزشی</span><span class="tag">اخلاقی</span></div>
-      </article>
+      .logo-glitch{
+        --size:clamp(30px,5vw,56px);
+        font-family:var(--font-main);
+        font-weight:400; /* کمتر بولد تا عنوان نرم‌تر باشد */
+        text-transform:uppercase;
+        color:#dbe9ff;font-size:var(--size);letter-spacing:2px;margin-bottom:6px;
+        position:relative;display:inline-block;filter:contrast(1.05) saturate(1.05);
+      }
+      .logo-glitch::before,.logo-glitch::after{
+        content:attr(data-text);position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;mix-blend-mode:screen;opacity:.95;
+      }
+      .logo-glitch::before{color:rgba(255,59,59,0.95);transform:translate(3px,-2px);clip-path:inset(0 0 60% 0);text-shadow:0 0 12px rgba(255,59,59,.25);animation:gl1 1.8s infinite linear alternate-reverse}
+      .logo-glitch::after{color:rgba(0,255,149,0.95);transform:translate(-3px,2px);clip-path:inset(60% 0 0 0);text-shadow:0 0 12px rgba(0,255,149,.18);animation:gl2 1.6s infinite linear alternate}
+      @keyframes gl1{0%{clip-path:inset(0 0 85% 0) }25%{clip-path:inset(20% 0 60% 0)}50%{clip-path:inset(40% 0 40% 0)}75%{clip-path:inset(10% 0 70% 0)}100%{clip-path:inset(0 0 85% 0)}}
+      @keyframes gl2{0%{clip-path:inset(60% 0 0 0)}20%{clip-path:inset(50% 0 10% 0)}45%{clip-path:inset(30% 0 30% 0)}70%{clip-path:inset(55% 0 5% 0)}100%{clip-path:inset(60% 0 0 0)}}
 
-      <article class="card">
-        <h3>Windows RAT (پروفایل تستی)</h3>
-        <p class="muted">فریم‌ورکی کنترل‌شده برای شبیه‌سازی حملات روی ماشین‌های ویندوز به‌منظور آموزش دفاع و تحلیل. استفاده بدون مجوز ممنوع است.</p>
-        <div class="tags"><span class="tag">ویندوز</span><span class="tag">شبیه‌سازی</span><span class="tag">آموزشی</span></div>
-      </article>
+      .term-body{font-family:var(--font-mono);color:#00ff99;font-size:14px;white-space:pre-wrap;overflow:auto;line-height:1.6;padding-right:6px;max-height:calc(76vh - 120px)}
+      .enter-tip{margin-top:10px;font-family:var(--font-mono);color:#8fffd5;font-size:12px;opacity:.95}
 
-      <article class="card">
-        <h3>OSINT with AI</h3>
-        <p class="muted">ترکیب ابزارهای OSINT با مدل‌های هوش مصنوعی جهت جمع‌آوری و تحلیل داده‌های عمومی برای پژوهش‌های امنیتی و شناسایی روندهای تهدید.</p>
-        <div class="tags"><span class="tag">OSINT</span><span class="tag">AI</span><span class="tag">تحلیل</span></div>
-      </article>
+      .intro.fade-out{animation:fadeOut .6s ease forwards}
+      @keyframes fadeOut{to{opacity:0;visibility:hidden}}
 
-      <article class="card">
-        <h3>Write-upهای آموزشی</h3>
-        <p class="muted">مستندسازی پروژه‌ها، PoC و حل چالش‌های CTF با تمرکز بر راه‌حل و یادگیری عملی برای سایر علاقه‌مندان.</p>
-        <div class="tags"><span class="tag">CTF</span><span class="tag">PoC</span><span class="tag">آموزشی</span></div>
-      </article>
-    </div>
+      /* ========== LAYOUT ========== */
+      .container{max-width:1200px;margin:0 auto;padding:80px 20px}
+      .section-title{
+        font-size:clamp(22px,3vw,32px);
+        color:var(--color-primary);
+        margin-bottom:10px;
+        font-weight:600;
+        position: relative;
+        text-shadow: 0 0 20px var(--color-primary);
+      }
+      
+      .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(90deg, 
+          var(--color-primary), 
+          var(--color-secondary), 
+          var(--color-secondary));
+        border-radius: 2px;
+        animation: scanline 3s linear infinite;
+      }
+      .section-sub{color:#cfd3dc;margin-bottom:22px}
+      .grid{display:grid;gap:18px}
+      .grid-3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+      .grid-2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
 
-    <p class="muted" style="margin-top:12px;font-size:13px">توجه: همه پروژه‌های نام‌برده صرفاً پژوهشی/آموزشی هستند و استفاده مخرب از آن‌ها نقض اصول اخلاقی تیم تلقی می‌شود.</p>
-  </section>
+      .card{
+        background:#0f0f12;
+        border:1px solid rgba(255,255,255,.03);
+        border-radius:var(--radius);
+        padding:18px;
+        transition:all var(--transition-normal) ease;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, 
+          var(--color-primary), 
+          var(--color-secondary), 
+          var(--color-secondary));
+        transform: scaleX(0);
+        transition: transform var(--transition-normal) ease;
+      }
+      
+      .card:hover::before {
+        transform: scaleX(1);
+      }
+      
+      .card:hover{
+        transform:translateY(-6px);
+        box-shadow:var(--shadow);
+        border-color: rgba(30, 58, 138, 0.3);
+      }
 
-  <!-- BLOG -->
-  <section id="blog" class="container" aria-labelledby="blog-heading">
-    <h2 id="blog-heading" class="section-title">بلاگ و اخبار</h2>
-    <p class="section-sub">مطالب آموزشی، هشدارهای امنیتی و تجربیات تیم.</p>
-    <div class="grid grid-3">
-      <article class="card">
-        <h3>۱۰ روش جلوگیری از فیشینگ</h3>
-        <p class="muted">اقدامات ساده و عملی برای کاهش ریسک فیشینگ در سازمان‌ها و افراد.</p>
-        <div style="margin-top:8px"><a href="#contact" class="btn btn-outline">مطالعه</a></div>
-      </article>
-      <article class="card">
-        <h3>صفر اعتماد در تیم‌های کوچک</h3>
-        <p class="muted">چگونه با قدم‌های کوچک مدل Zero Trust را در یک تیم تازه‌کار پیاده کنیم.</p>
-        <div style="margin-top:8px"><a href="#contact" class="btn btn-outline">مطالعه</a></div>
-      </article>
-      <article class="card">
-        <h3>درس‌هایی از یک CTF</h3>
-        <p class="muted">تحلیل یک چالش رمزنگاری و نکات عملی برای حل آن.</p>
-        <div style="margin-top:8px"><a href="#contact" class="btn btn-outline">مطالعه</a></div>
-      </article>
-    </div>
-  </section>
+      .btn{
+        display:inline-block;
+        padding:10px 16px;
+        border-radius:10px;
+        background:var(--color-primary);
+        color:#fff;
+        font-weight:700;
+        border:0;
+        cursor:pointer;
+        transition: all var(--transition-normal) ease;
+        position: relative;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+      }
+      
+      .btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, 
+          transparent, 
+          rgba(255, 255, 255, 0.2), 
+          transparent);
+        transition: left var(--transition-normal) ease;
+      }
+      
+      .btn:hover::before {
+        left: 100%;
+      }
+      
+      .btn:hover{
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-neon);
+        filter: brightness(1.1);
+      }
+      
+      .btn-outline{
+        background:transparent;
+        border:1px solid var(--color-secondary);
+        color:#fff;
+        box-shadow: none;
+      }
+      
+      .btn-outline:hover {
+        background: var(--color-secondary);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-neon);
+      }
 
-  <!-- TEAM (real names + motivation) -->
-  <section id="team" class="container" aria-labelledby="team-heading">
-    <h2 id="team-heading" class="section-title">تیم</h2>
-    <p class="section-sub">سه عضو اصلی تیم؛ هر کدام با هدف رشد شخصی و تبدیل شدن به هکری متخصص در کشور.</p>
-    <div class="grid grid-3">
-      <article class="card" aria-label="عضو تیم">
-        <div class="avatar" aria-hidden="true"></div>
-        <!-- <h3>سید مدثر هاشمی</h3> -->
-         <h3>???</h3>
-        <p class="muted">رهبر تیم • شبکه و تست نفوذ</p>
-        <p class="muted" style="margin-top:8px">هدف مدثر: تبدیل شدن به بهترین هکر کشور — او تیم را برای تمرین، آموزش و رسیدن به این هدف بنا کرد.</p>
-      </article>
+      /* HERO */
+      .hero{
+        background:
+          radial-gradient(1200px 500px at 50% -10%, rgba(30,58,138,.30), transparent),
+          linear-gradient(to right,#0A0A0A,#0A1F44);
+        padding:120px 20px 60px;
+        border-bottom:1px solid rgba(75,75,75,.22);
+        text-align:center;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: 
+          repeating-linear-gradient(
+            90deg,
+            transparent,
+            transparent 2px,
+            rgba(30, 58, 138, 0.03) 2px,
+            rgba(30, 58, 138, 0.03) 4px
+          );
+        animation: pattern-move 20s linear infinite;
+        pointer-events: none;
+      }
+      
+      @keyframes pattern-move {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(4px); }
+      }
+      .hero-inner{max-width:980px;margin:0 auto}
+      .hero h1{
+        font-size:clamp(34px,5vw,56px);
+        color:var(--color-primary);
+        margin-bottom:12px;
+        font-weight:700;
+        animation: float 3s ease-in-out infinite;
+        text-shadow: 0 0 30px var(--color-primary);
+      }
+      
+      @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+      }
+      .hero p{color:#c0c8d6;margin:0 auto 20px;max-width:780px}
 
-      <article class="card" aria-label="عضو تیم">
-        <div class="avatar" aria-hidden="true"></div>
-        <!-- <h3>حسام‌الدین حسینی</h3> -->
-        <h3>???</h3>
-        <p class="muted">پژوهشگر • سخت‌افزار و نفوذ عملی</p>
-        <p class="muted" style="margin-top:8px">حسام: تمرکز بر رشد فنی، آزمایش و اشتراک‌گذاری دانش با تیم و جامعه.</p>
-      </article>
+      /* ABOUT */
+      .about{display:grid;grid-template-columns:1.2fr .8fr;gap:22px}
+      .about .panel{background:#0e0e11;border:1px solid rgba(255,255,255,.02);padding:18px;border-radius:var(--radius)}
+      .about ul{padding-left:20px;list-style:disc;margin-top:10px}
 
-      <article class="card" aria-label="عضو تیم">
-        <div class="avatar" aria-hidden="true"></div>
-        <h3>???</h3>
-        <!-- <h3>علی (تحلیلگر)</h3> -->
-        <p class="muted">تحلیلگر • عملیات و دفاع</p>
-        <p class="muted" style="margin-top:8px">علی: کار روی سناریوهای عملی و تحلیل تهدید برای بهبود دفاع و واکنش سریع.</p>
-      </article>
-    </div>
-  </section>
+      /* SERVICES icons */
+      .service-icon{
+        width:44px;
+        height:44px;
+        border-radius:12px;
+        display:grid;
+        place-items:center;
+        background:rgba(30,58,138,.12);
+        margin-bottom:10px;
+        font-size:18px;
+        transition: all var(--transition-normal) ease;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .service-icon::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, 
+          rgba(30, 58, 138, 0.2), 
+          rgba(31, 78, 120, 0.2));
+        opacity: 0;
+        transition: opacity var(--transition-normal) ease;
+      }
+      
+      .card:hover .service-icon {
+        transform: scale(1.1) rotate(5deg);
+        background: rgba(30, 58, 138, 0.2);
+        box-shadow: 0 0 20px rgba(30, 58, 138, 0.3);
+        animation: pulse 2s ease-in-out infinite;
+      }
+      
+      @keyframes pulse {
+        0%, 100% { transform: scale(1.1) rotate(5deg); }
+        50% { transform: scale(1.15) rotate(5deg); }
+      }
+      
+      .card:hover .service-icon::before {
+        opacity: 1;
+      }
 
-  <!-- CONTACT -->
-  <section id="contact" class="container" aria-labelledby="contact-heading">
-    <h2 id="contact-heading" class="section-title">ارتباط با ما</h2>
-    <p class="section-sub">برای همکاری، درخواست مشاوره یا گزارش مسئولانه یک آسیب‌پذیری می‌توانید از طریق فرم زیر یا ایمیل با ما در تماس باشید.</p>
-    <div class="grid grid-2">
-      <div>
-        <h3 style="font-weight:600;margin-bottom:12px">اطلاعات تماس</h3>
-        <p class="muted">ایمیل: <a href="mailto:contact@silentknights.af">contact@silentknights.af</a></p>
-        <p class="muted" style="margin-top:8px">تیم Silent Knights در حال حاضر از طریق ایمیل و شبکه‌های اجتماعی در دسترس است.</p>
-      </div>
-      <form id="contact-form" aria-label="فرم تماس">
-        <input type="text" placeholder="نام شما" aria-label="نام شما" required />
-        <input type="email" placeholder="ایمیل شما" aria-label="ایمیل شما" required />
-        <textarea rows="4" placeholder="پیام شما" aria-label="پیام شما" required></textarea>
-        <button type="submit" class="btn">ارسال پیام</button>
-      </form>
-    </div>
-  </section>
+      /* PROJECTS TAGS */
+      .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+      .tag{
+        font-size:12px;
+        padding:6px 10px;
+        border-radius:999px;
+        background:rgba(31,78,120,.14);
+        border:1px solid rgba(31,78,120,.28);
+        color:#cfe3ff;
+        transition: all var(--transition-fast) ease;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .tag::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, 
+          transparent, 
+          rgba(255, 255, 255, 0.1), 
+          transparent);
+        transition: left var(--transition-normal) ease;
+      }
+      
+      .tag:hover::before {
+        left: 100%;
+      }
+      
+      .tag:hover {
+        transform: translateY(-2px);
+        background: rgba(31,78,120,.25);
+        border-color: rgba(31,78,120,.5);
+        box-shadow: 0 4px 12px rgba(31,78,120,.3);
+      }
 
-  <!-- FOOTER -->
-  <footer>
-    <p>© 2025 — تیم Silent Knights. تمام حقوق محفوظ است.</p>
-    <p style="margin-top:8px;font-size:13px">این وب‌سایت صرفاً برای اهداف آموزشی و معرفی تیم طراحی شده است.</p>
-  </footer>
+      /* TEAM */
+      .avatar{
+        width:72px;
+        height:72px;
+        border-radius:50%;
+        background:linear-gradient(145deg,#1E3A8A,#0A1F44);
+        box-shadow:inset 0 0 12px rgba(255,255,255,.06),0 0 18px rgba(30,58,138,.28);
+        margin-bottom:12px;
+        transition: all var(--transition-normal) ease;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .avatar::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(45deg, 
+          transparent 30%, 
+          rgba(255, 255, 255, 0.1) 50%, 
+          transparent 70%);
+        transform: translateX(-100%);
+        transition: transform var(--transition-normal) ease;
+      }
+      
+      .card:hover .avatar::before {
+        transform: translateX(100%);
+      }
+      
+      .card:hover .avatar {
+        transform: scale(1.05);
+        box-shadow: inset 0 0 12px rgba(255,255,255,.06), 0 0 25px rgba(30,58,138,.4);
+      }
 
+      /* CONTACT */
+      form{display:grid;gap:12px}
+      input,textarea{width:100%;padding:12px 14px;border-radius:10px;border:1px solid #222;background:#0f0f0f;color:#fff;outline:none}
+      input:focus,textarea:focus{box-shadow:0 0 0 4px rgba(30,58,138,.12);border-color:#2b3e7a}
 
-  <script>
-    // Intro typing & skip
-    (function(){
-      const lines = [
-  '> در حال راه‌اندازی SilentKnights...',
-  // '> بارگذاری ماژول‌ها: [training] [research] [redteam] [blueteam] — موفق',
-  '> دسترسی صادر شد [200]',
-  'به SilentKnights خوش آمدید — وب سایت مستقلِ امنیتِ سایبریِ افغانستان',
-  ''
-];
+      footer{background:var(--color-primary-dark);color:#e6e8ee;padding:24px;text-align:center;border-top:1px solid #14213b}
 
-      const term = document.getElementById('term');
-      const intro = document.getElementById('intro');
-      let li = 0, ci = 0, skipped = false;
-
-      function type(){
-        if(skipped) return;
-        if(li < lines.length){
-          const line = lines[li];
-          if(ci < line.length){
-            term.textContent += line.charAt(ci++);
-            setTimeout(type, 18 + Math.random()*20);
-          } else {
-            term.textContent += '\n';
-            li++;ci=0;setTimeout(type, 400);
-          }
-          term.scrollTop = term.scrollHeight;
-        } else {
-          setTimeout(closeIntro, 700);
+      /* ========== RESPONSIVE DESIGN ========== */
+      
+      /* Large tablets and small desktops */
+      @media (max-width: 1200px) {
+        .container { padding: 60px 16px; }
+        .nav-inner { max-width: 100%; }
+        .hero-inner { max-width: 900px; }
+      }
+      
+      /* Tablets */
+      @media (max-width: 1000px) {
+        :root { --nav-height: 60px; }
+        
+        .intro .terminal-wrap { max-height: 70vh; }
+        .about { grid-template-columns: 1fr; gap: 16px; }
+        .hero { padding: 100px 20px 50px; }
+        .hero h1 { font-size: clamp(32px, 4vw, 48px); }
+        .hero p { font-size: 16px; }
+        
+        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        
+        .section-title { font-size: clamp(20px, 2.5vw, 28px); }
+        .section-sub { font-size: 15px; }
+        
+        .card { padding: 16px; }
+        .service-icon { width: 40px; height: 40px; font-size: 16px; }
+      }
+      
+      /* Large mobile devices */
+      @media (max-width: 768px) {
+        :root { --nav-height: 56px; }
+        
+        .nav { padding: 0 12px; }
+        .menu { display: none; }
+        .hamburger { display: inline-flex; }
+        .nav-drawer { display: block; }
+        
+        .brand-logo { width: 36px; height: 36px; }
+        .brand span { font-size: 14px; }
+        
+        .hero { padding: 80px 16px 40px; }
+        .hero h1 { font-size: 28px; }
+        .hero p { font-size: 15px; line-height: 1.5; }
+        
+        .container { padding: 50px 16px; }
+        .section-title { font-size: 22px; }
+        .section-sub { font-size: 14px; }
+        
+        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+        .grid-2 { grid-template-columns: 1fr; gap: 16px; }
+        
+        .card { padding: 14px; }
+        .btn { padding: 12px 20px; font-size: 14px; }
+        
+        .about { gap: 16px; }
+        .about .panel { padding: 16px; }
+        
+        .avatar { width: 64px; height: 64px; }
+        
+        .nav-panel { width: 85%; }
+        
+        /* Terminal adjustments */
+        .terminal-wrap { width: 96vw; max-height: 60vh; padding: 16px; border-radius: 12px; }
+        .logo-glitch { --size: clamp(20px, 5vw, 36px); }
+        .term-body { font-size: 13px; max-height: calc(60vh - 120px); }
+        .term-header { font-size: 12px; }
+      }
+      
+      /* Small mobile devices */
+      @media (max-width: 480px) {
+        :root { --nav-height: 52px; }
+        
+        .nav { padding: 0 8px; }
+        .brand { gap: 8px; }
+        .brand-logo { width: 32px; height: 32px; }
+        .brand span { font-size: 13px; }
+        
+        .hero { padding: 70px 12px 30px; }
+        .hero h1 { font-size: 24px; }
+        .hero p { font-size: 14px; }
+        
+        .container { padding: 40px 12px; }
+        .section-title { font-size: 20px; }
+        .section-sub { font-size: 13px; }
+        
+        .grid-3 { grid-template-columns: 1fr; gap: 14px; }
+        .grid-2 { grid-template-columns: 1fr; gap: 14px; }
+        
+        .card { padding: 12px; }
+        .btn { padding: 10px 16px; font-size: 13px; }
+        
+        .about { gap: 14px; }
+        .about .panel { padding: 14px; }
+        
+        .avatar { width: 56px; height: 56px; }
+        
+        .nav-panel { width: 90%; padding: 16px; }
+        
+        /* Terminal adjustments for small screens */
+        .terminal-wrap { width: 98vw; max-height: 55vh; padding: 12px; }
+        .logo-glitch { --size: clamp(18px, 4vw, 32px); }
+        .term-body { font-size: 12px; max-height: calc(55vh - 100px); }
+        .term-header { font-size: 11px; }
+        .enter-tip { font-size: 11px; }
+        
+        /* Form adjustments */
+        input, textarea { padding: 10px 12px; font-size: 14px; }
+        
+        /* Tags adjustments */
+        .tags { gap: 6px; }
+        .tag { font-size: 11px; padding: 4px 8px; }
+        
+        /* Dropdown adjustments for small screens */
+        .dropdown-content { 
+          min-width: 160px; 
+          max-width: 200px; 
+          right: -10px; 
+        }
+        .dropdown-content a { 
+          padding: 12px 14px; 
+          font-size: 14px; 
         }
       }
-      function closeIntro(){
-        if(skipped) return; skipped=true;
-        intro.classList.add('fade-out');
-        setTimeout(()=>{ try{ intro.remove(); document.getElementById('home').focus(); }catch(e){} },650);
+      
+      /* Extra small devices */
+      @media (max-width: 360px) {
+        .hero h1 { font-size: 22px; }
+        .hero p { font-size: 13px; }
+        
+        .section-title { font-size: 18px; }
+        .section-sub { font-size: 12px; }
+        
+        .card { padding: 10px; }
+        .btn { padding: 8px 14px; font-size: 12px; }
+        
+        .nav-panel { width: 95%; padding: 12px; }
       }
-      document.addEventListener('keydown', (e)=>{ if(e.key==='Enter') closeIntro(); if(e.key==='Escape') closeIntro(); });
-      intro.addEventListener('click', closeIntro);
-      type();
-      setTimeout(closeIntro, 7500);
-    })();
+      
+      /* Landscape orientation adjustments */
+      @media (max-height: 500px) and (orientation: landscape) {
+        .hero { padding: 60px 20px 30px; }
+        .hero h1 { font-size: 24px; margin-bottom: 8px; }
+        .hero p { margin-bottom: 12px; }
+        
+        .intro .terminal-wrap { max-height: 80vh; }
+        .term-body { max-height: calc(80vh - 120px); }
+      }
+      
+      /* High DPI displays */
+      @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+        .brand-logo { 
+          image-rendering: -webkit-optimize-contrast; 
+          image-rendering: -moz-crisp-edges;
+          image-rendering: crisp-edges; 
+        }
+      }
+      
+      /* Touch device optimizations */
+      @media (hover: none) and (pointer: coarse) {
+        .menu a, .dropdown-btn, .btn { 
+          min-height: 44px; 
+          display: flex; 
+          align-items: center; 
+          justify-content: center; 
+        }
+        
+        .dropdown-content a { 
+          min-height: 48px; 
+          display: flex; 
+          align-items: center; 
+        }
+        
+        .hamburger { 
+          min-width: 44px; 
+          min-height: 44px; 
+          display: flex; 
+          align-items: center; 
+          justify-content: center; 
+        }
+      }
+      
+      /* Accessibility improvements */
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { 
+          animation-duration: 0.01ms !important; 
+          animation-iteration-count: 1 !important; 
+          transition-duration: 0.01ms !important; 
+        }
+      }
+      
+      /* Print styles */
+      @media print {
+        .nav, .intro, .hamburger, .nav-drawer { display: none !important; }
+        .hero { padding: 20px 0; }
+        .container { padding: 20px 0; }
+        .card { box-shadow: none; border: 1px solid #ccc; }
+        body { background: white; color: black; }
+      }
+    </style>
+  </head>
+  <body>
 
-    // Active menu highlight on scroll (RTL aware)
-    (function(){
-      const links = Array.from(document.querySelectorAll('nav.menu a'));
-      const allLinks = links.concat(Array.from(document.querySelectorAll('#nav-panel nav a')));
-      const sections = allLinks.map(a => document.querySelector(a.getAttribute('href')));
-      function onScroll(){
-        const offset = window.scrollY + (parseInt(getComputedStyle(document.documentElement).fontSize) * 6) + 30;
-        let idx = 0;
-        sections.forEach((sec,i)=>{ if(sec && sec.offsetTop <= offset) idx = i; });
-        links.forEach(l=>l.classList.remove('active'));
-        if(links[idx]) links[idx].classList.add('active');
-      }
-      document.addEventListener('scroll', onScroll, {passive:true});
-      onScroll();
-    })();
+    <!-- INTRO -->
+    <div id="intro" class="intro" role="dialog" aria-modal="true" aria-label="Intro terminal">
+      <div class="terminal-wrap" role="document" aria-live="polite">
+        <div class="term-header">
+          <div class="term-dots" aria-hidden="true">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          </div>
+          <div style="margin-inline-start:10px;font-family:var(--font-mono);font-size:12px;color:#c6c9cf; direction: ltr;">/usr/bin/knight-console — UTF-8</div>
+        </div>
 
-    // Mobile nav toggle
-    (function(){
-      const hamburger = document.getElementById('hamburger');
-      const drawer = document.getElementById('nav-drawer');
-      const panel = document.getElementById('nav-panel');
-      const closeBtn = document.getElementById('nav-close');
+        <div class="logo-glitch" data-text="Silent Knights">Silent Knights</div>
 
-      function openNav(){
-        drawer.style.display = 'block';
-        panel.classList.add('open');
-        drawer.setAttribute('aria-hidden','false');
-        hamburger.setAttribute('aria-expanded','true');
-        // focus first link
-        const first = panel.querySelector('a');
-        if(first) first.focus();
-        document.body.style.overflow = 'hidden';
-      }
-      function closeNav(){
-        panel.classList.remove('open');
-        drawer.setAttribute('aria-hidden','true');
-        hamburger.setAttribute('aria-expanded','false');
-        document.body.style.overflow = '';
-        setTimeout(()=>{ drawer.style.display = 'none'; hamburger.focus(); }, 280);
-      }
-      hamburger.addEventListener('click', openNav);
-      closeBtn.addEventListener('click', closeNav);
-      drawer.addEventListener('click', (e)=>{ if(e.target === drawer) closeNav(); });
-      // close on link click
-      panel.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeNav));
-      // escape to close
-      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && drawer.style.display==='block') closeNav(); });
-    })();
-  </script>
-</body>
-</html>
+        <div id="term" class="term-body" aria-hidden="false"></div>
+
+        <div style="display:flex;justify-content:flex-end;align-items:center;gap:12px;margin-top:8px;">
+          <div class="enter-tip">فشار <strong style="font-family:var(--font-mono)">Enter</strong> برای ادامه</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NAV -->
+    <header class="nav" id="nav">
+      <div class="nav-inner">
+        <div class="brand" aria-label="نام سایت">
+          <!-- قرار بده logo.png کنار این فایل یا مسیرت را اصلاح کن -->
+          <img src="logo.png" class="brand-logo" alt="لوگو Silent Knights" />
+          <span>Silent Knights</span>
+        </div>
+
+        <nav class="menu" aria-label="منوی اصلی">
+          <a href="#home" class="active">خانه</a>
+          <a href="#about">درباره</a>
+          <a href="#services">خدمات</a>
+          <a href="#projects">پروژه‌ها</a>
+          <a href="#blog">بلاگ</a>
+          <a href="#team">تیم</a>
+          <a href="#contact">ارتباط</a>
+          
+          <div class="dropdown">
+            <button class="dropdown-btn" id="exam-dropdown" aria-expanded="false" aria-haspopup="true">
+              امتحان
+            </button>
+            <div class="dropdown-content" id="exam-dropdown-content">
+              <a href="#exam-basic">امتحان پایه</a>
+              <a href="#exam-intermediate">امتحان متوسط</a>
+              <a href="#exam-advanced">امتحان پیشرفته</a>
+              <a href="#exam-results">نتایج امتحانات</a>
+            </div>
+          </div>
+        </nav>
+
+        <button class="hamburger" id="hamburger" aria-label="باز کردن منو" aria-controls="nav-panel" aria-expanded="false">☰</button>
+      </div>
+    </header>
+
+    <!-- Nav Drawer (mobile) -->
+    <div id="nav-drawer" class="nav-drawer" aria-hidden="true">
+      <div id="nav-panel" class="nav-panel" role="dialog" aria-modal="true" aria-label="منوی ناوبری">
+        <button class="close-btn" id="nav-close" aria-label="بستن منو">✕</button>
+        <nav style="display:flex;flex-direction:column;gap:6px;margin-top:6px">
+          <a href="#home">خانه</a>
+          <a href="#about">درباره</a>
+          <a href="#services">خدمات</a>
+          <a href="#projects">پروژه‌ها</a>
+          <a href="#blog">بلاگ</a>
+          <a href="#team">تیم</a>
+          <a href="#contact">ارتباط</a>
+          
+          <div class="dropdown" style="position:static;">
+            <button class="dropdown-btn" id="exam-dropdown-mobile" aria-expanded="false" aria-haspopup="true" style="width:100%;justify-content:flex-start;">
+              امتحان
+            </button>
+            <div class="dropdown-content" id="exam-dropdown-content-mobile" style="position:static;opacity:1;visibility:visible;transform:none;box-shadow:none;border:none;background:transparent;padding:0;margin-top:8px;">
+              <a href="#exam-basic" style="padding:8px 16px;margin:2px 0;border-radius:6px;">امتحان پایه</a>
+              <a href="#exam-intermediate" style="padding:8px 16px;margin:2px 0;border-radius:6px;">امتحان متوسط</a>
+              <a href="#exam-advanced" style="padding:8px 16px;margin:2px 0;border-radius:6px;">امتحان پیشرفته</a>
+              <a href="#exam-results" style="padding:8px 16px;margin:2px 0;border-radius:6px;">نتایج امتحانات</a>
+            </div>
+          </div>
+        </nav>
+        <div style="margin-top:auto;color:#cbd8ff;font-size:14px">© 2025 Silent Knights</div>
+      </div>
+    </div>
+
+    <!-- HERO -->
+    <section id="home" class="hero" tabindex="-1" aria-label="صفحه نخست">
+      <div class="hero-inner">
+        <h1>Silent Knights</h1>
+        <p>ما جمعی از هکرهای مستقل افغانستانیم — هدف‌مان رشد شخصی، تمرین حرفه‌ای و تبدیل شدن به بهترین‌های کشور است. کارهای ما آموزشی، اخلاقی و با محوریت دفاع دیجیتال است.</p>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:12px">
+          <a href="#services" class="btn">مشاهده خدمات</a>
+          <a href="#contact" class="btn btn-outline">تماس با ما</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="container" aria-labelledby="about-heading">
+      <h2 id="about-heading" class="section-title">درباره Silent Knights</h2>
+      <p class="section-sub">ما جمعی از هکرهای مستقل هستیم که با تمرین و تلاش شخصی برای رسیدن به سطح برتر در کشور کار می‌کنیم. تیم وسیله‌ای است برای رشدِ هر یک از ما.</p>
+      <div class="about" role="region" aria-label="درباره ما">
+        <div class="panel">
+          <h3 style="font-weight:600">ماموریت و چشم‌انداز</h3>
+          <p class="muted">ماموریت: کمک به رشد مهارت‌های فردی و تیمی تا هر یک از اعضا بتواند به عنوان یک هکر متخصص و قابل‌اعتماد در افغانستان شناخته شود. چشم‌انداز: تولید هکرهایی مستقل، حرفه‌ای و اخلاق‌محور که کشورشان را در حوزه سایبری نمایان کنند.</p>
+          <h3 style="font-weight:600;margin-top:12px">ارزش‌ها</h3>
+          <ul>
+            <li>تلاش مستمر برای پیشرفت شخصی</li>
+            <li>یادگیری و به‌اشتراک‌گذاری دانش</li>
+            <li>استقلال و کار بدون حمایت خارجی</li>
+            <li>هک اخلاقی و مسئولانه</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3 style="font-weight:600">نکات برجسته</h3>
+          <ul>
+            <li>پوشش عملی در CTFها و پروژه‌های پژوهشی</li>
+            <li>متمرکز بر آموزش و انتشار write-upهای کاربردی</li>
+            <li>تعهد به افشای مسئولانه و رعایت اخلاق در پژوهش</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES (UPDATED to requested 5 items) -->
+    <section id="services" class="container" aria-labelledby="services-heading">
+      <h2 id="services-heading" class="section-title">خدمات</h2>
+      <p class="section-sub">خدمات ما به‌طور خاص برای آموزش، تست و تقویت توان دفاعی طراحی شده‌اند.</p>
+      <div class="grid grid-3" role="list">
+        <article class="card" role="listitem">
+          <div class="service-icon" aria-hidden="true">🎓</div>
+          <h3>آموزش و آگاهی</h3>
+          <p class="muted">کارگاه‌های عملی و دوره‌های کوتاه برای تیم‌ها و علاقه‌مندان تا مهارت‌های عملی امنیت را بیاموزند.</p>
+          <p class="muted" style="margin-top:8px;font-size:13px">ویژگی: آموزش عملی همراه با سناریوهای مشابه به واقعیت.</p>
+        </article>
+
+        <article class="card" role="listitem">
+          <div class="service-icon" aria-hidden="true">🔍</div>
+          <h3>تست نفوذ</h3>
+          <p class="muted">بررسی وب، API، موبایل، شبکه و فضای ابری برای کشف آسیب‌پذیری‌ها — همه تست‌ها با مجوز و اخلاقی انجام می‌شود.</p>
+          <p class="muted" style="margin-top:8px;font-size:13px">ویژگی: گزارش قابل‌فهم برای تیم فنی و اولویت‌بندی اصلاحات.</p>
+        </article>
+
+        <article class="card" role="listitem">
+          <div class="service-icon" aria-hidden="true">📋</div>
+          <h3>مشاور امنیتی</h3>
+          <p class="muted">تحلیل وضعیت امنیتی و ارائه راهبرد برای افزایش مقاومت در برابر تهدیدها.</p>
+          <p class="muted" style="margin-top:8px;font-size:13px">ویژگی: راهکارهای عملی سازگار با منابع و ساختار سازمانی شما.</p>
+        </article>
+
+        <article class="card" role="listitem">
+          <div class="service-icon" aria-hidden="true">🛡️</div>
+          <h3>تیم سرخ (Red Team)</h3>
+          <p class="muted">شبیه‌سازی حملات کنترل‌شده برای سنجش کارایی دفاع و کشف نقاط ضعف در عمل.</p>
+          <p class="muted" style="margin-top:8px;font-size:13px">ویژگی: شبیه‌سازی عملیاتی با سناریوهای واقعی و گزارش بازگشت‌پذیر.</p>
+        </article>
+
+        <article class="card" role="listitem">
+          <div class="service-icon" aria-hidden="true">🛡️</div>
+          <h3>تیم آبی (Blue Team)</h3>
+          <p class="muted">پایش، تشخیص و پاسخ به تهدیدات؛ تحلیل لاگ و بهبود فرایندهای حفاظتی.</p>
+          <p class="muted" style="margin-top:8px;font-size:13px">ویژگی: تمرکز بر دفاع مستمر و کاهش سریع ریسک‌هایی که شناسایی می‌شوند.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- PROJECTS (updated to requested four) -->
+    <section id="projects" class="container" aria-labelledby="projects-heading">
+      <h2 id="projects-heading" class="section-title">نمونه‌کارها و پروژه‌ها</h2>
+      <p class="section-sub">پروژه‌های تحقیقاتی و آموزشی ما — همه برای اهداف پژوهشی و تستِ اخلاقی انجام شده‌اند.</p>
+      <div class="grid grid-3">
+        <article class="card">
+          <h3>WiFi Cracker (پژوهش آموزشی)</h3>
+          <p class="muted">ابزاری آموزشی برای بررسی امنیت شبکه‌های بی‌سیم و فهم مکانیزم‌های محافظتی — <strong>فقط</strong> برای آزمایش با مجوز و در محیط‌های آموزشی.</p>
+          <div class="tags"><span class="tag">شبکه</span><span class="tag">آموزشی</span><span class="tag">اخلاقی</span></div>
+        </article>
+
+        <article class="card">
+          <h3>Windows RAT (پروفایل تستی)</h3>
+          <p class="muted">فریم‌ورکی کنترل‌شده برای شبیه‌سازی حملات روی ماشین‌های ویندوز به‌منظور آموزش دفاع و تحلیل. استفاده بدون مجوز ممنوع است.</p>
+          <div class="tags"><span class="tag">ویندوز</span><span class="tag">شبیه‌سازی</span><span class="tag">آموزشی</span></div>
+        </article>
+
+        <article class="card">
+          <h3>OSINT with AI</h3>
+          <p class="muted">ترکیب ابزارهای OSINT با مدل‌های هوش مصنوعی جهت جمع‌آوری و تحلیل داده‌های عمومی برای پژوهش‌های امنیتی و شناسایی روندهای تهدید.</p>
+          <div class="tags"><span class="tag">OSINT</span><span class="tag">AI</span><span class="tag">تحلیل</span></div>
+        </article>
+
+        <article class="card">
+          <h3>Write-upهای آموزشی</h3>
+          <p class="muted">مستندسازی پروژه‌ها، PoC و حل چالش‌های CTF با تمرکز بر راه‌حل و یادگیری عملی برای سایر علاقه‌مندان.</p>
+          <div class="tags"><span class="tag">CTF</span><span class="tag">PoC</span><span class="tag">آموزشی</span></div>
+        </article>
+      </div>
+
+      <p class="muted" style="margin-top:12px;font-size:13px">توجه: همه پروژه‌های نام‌برده صرفاً پژوهشی/آموزشی هستند و استفاده مخرب از آن‌ها نقض اصول اخلاقی تیم تلقی می‌شود.</p>
+    </section>
+
+    <!-- BLOG -->
+    <section id="blog" class="container" aria-labelledby="blog-heading">
+      <h2 id="blog-heading" class="section-title">بلاگ و اخبار</h2>
+      <p class="section-sub">مطالب آموزشی، هشدارهای امنیتی و تجربیات تیم.</p>
+      <div class="grid grid-3">
+        <article class="card">
+          <h3>۱۰ روش جلوگیری از فیشینگ</h3>
+          <p class="muted">اقدامات ساده و عملی برای کاهش ریسک فیشینگ در سازمان‌ها و افراد.</p>
+          <div style="margin-top:8px"><a href="#contact" class="btn btn-outline">مطالعه</a></div>
+        </article>
+        <article class="card">
+          <h3>صفر اعتماد در تیم‌های کوچک</h3>
+          <p class="muted">چگونه با قدم‌های کوچک مدل Zero Trust را در یک تیم تازه‌کار پیاده کنیم.</p>
+          <div style="margin-top:8px"><a href="#contact" class="btn btn-outline">مطالعه</a></div>
+        </article>
+        <article class="card">
+          <h3>درس‌هایی از یک CTF</h3>
+          <p class="muted">تحلیل یک چالش رمزنگاری و نکات عملی برای حل آن.</p>
+          <div style="margin-top:8px"><a href="#contact" class="btn btn-outline">مطالعه</a></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- TEAM (real names + motivation) -->
+    <section id="team" class="container" aria-labelledby="team-heading">
+      <h2 id="team-heading" class="section-title">تیم</h2>
+      <p class="section-sub">سه عضو اصلی تیم؛ هر کدام با هدف رشد شخصی و تبدیل شدن به هکری متخصص در کشور.</p>
+      <div class="grid grid-3">
+        <article class="card" aria-label="عضو تیم">
+          <div class="avatar" aria-hidden="true"></div>
+          <!-- <h3>سید مدثر هاشمی</h3> -->
+          <h3>???</h3>
+          <p class="muted">رهبر تیم • شبکه و تست نفوذ</p>
+          <p class="muted" style="margin-top:8px">هدف مدثر: تبدیل شدن به بهترین هکر کشور — او تیم را برای تمرین، آموزش و رسیدن به این هدف بنا کرد.</p>
+        </article>
+
+        <article class="card" aria-label="عضو تیم">
+          <div class="avatar" aria-hidden="true"></div>
+          <!-- <h3>حسام‌الدین حسینی</h3> -->
+          <h3>???</h3>
+          <p class="muted">پژوهشگر • سخت‌افزار و نفوذ عملی</p>
+          <p class="muted" style="margin-top:8px">حسام: تمرکز بر رشد فنی، آزمایش و اشتراک‌گذاری دانش با تیم و جامعه.</p>
+        </article>
+
+        <article class="card" aria-label="عضو تیم">
+          <div class="avatar" aria-hidden="true"></div>
+          <h3>???</h3>
+          <!-- <h3>علی (تحلیلگر)</h3> -->
+          <p class="muted">تحلیلگر • عملیات و دفاع</p>
+          <p class="muted" style="margin-top:8px">علی: کار روی سناریوها، واکنش به رخدادها و کمک به تقویت مهارت‌های تیم.</p>
+        </article>
+      </div>
+
+      <div style="margin-top:16px" class="card">
+        <h3 style="font-weight:600">بیانیهٔ تیم</h3>
+        <p class="muted">ما مستقل کار می‌کنیم، بدون اسپانسر یا حمایت رسمی؛ هدف‌مان رشد شخصی و ساختن الگویی است برای هکرهای آیندهٔ افغانستان. همه فعالیت‌های ما اخلاقی، آموزشی و با رعایت قانون و مجوز انجام می‌شود.</p>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="container" aria-labelledby="contact-heading">
+      <h2 id="contact-heading" class="section-title">تماس</h2>
+      <p class="section-sub">اگر می‌خواهید همکاری کنید، آموزش ببینید یا دربارهٔ یک تست صحبت کنید، پیام بفرستید.</p>
+      <div class="grid grid-2">
+        <div class="card">
+          <form id="contact-form" onsubmit="event.preventDefault(); alert('ممنون — پیام شما دریافت شد. ما در اسرع وقت پاسخ می‌دهیم.');">
+            <label><span class="muted">نام</span><input type="text" required placeholder="نام شما" /></label>
+            <label><span class="muted">ایمیل</span><input type="email" required placeholder="you@example.com" /></label>
+            <label><span class="muted">پیام</span><textarea rows="5" required placeholder="درباره نیازتان بنویسید..."></textarea></label>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button class="btn" type="submit">ارسال</button>
+              <button class="btn btn-outline" type="button" onclick="document.getElementById('contact-form').reset();">پاک کردن</button>
+            </div>
+          </form>
+        </div>
+        <div class="card">
+          <h3 style="font-weight:600">کانال‌ها</h3>
+          <p class="muted">ایمیل: contact@silentknights.example<br>GitHub • LinkedIn • X • Telegram</p>
+          <h3 style="font-weight:600;margin-top:12px">ثبت‌نام دوره‌ها</h3>
+          <p class="muted">برای ثبت‌نام در کارگاه‌ها عنوان دوره و سطح در پیام بنویسید — ظرفیت محدود است.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © 2025 Silent Knights — تمامی حقوق محفوظ است
+    </footer>
+
+    <script>
+      // Intro typing & skip
+      (function(){
+        const lines = [
+    '> در حال راه‌اندازی SilentKnights...',
+    // '> بارگذاری ماژول‌ها: [training] [research] [redteam] [blueteam] — موفق',
+    '> دسترسی صادر شد [200]',
+    'به SilentKnights خوش آمدید — وب سایت مستقلِ امنیتِ سایبریِ افغانستان',
+    ''
+  ];
+
+        const term = document.getElementById('term');
+        const intro = document.getElementById('intro');
+        let li = 0, ci = 0, skipped = false;
+
+        function type(){
+          if(skipped) return;
+          if(li < lines.length){
+            const line = lines[li];
+            if(ci < line.length){
+              term.textContent += line.charAt(ci++);
+              setTimeout(type, 18 + Math.random()*20);
+            } else {
+              term.textContent += '\n';
+              li++;ci=0;setTimeout(type, 400);
+            }
+            term.scrollTop = term.scrollHeight;
+          } else {
+            setTimeout(closeIntro, 700);
+          }
+        }
+        function closeIntro(){
+          if(skipped) return; skipped=true;
+          intro.classList.add('fade-out');
+          setTimeout(()=>{ try{ intro.remove(); document.getElementById('home').focus(); }catch(e){} },650);
+        }
+        document.addEventListener('keydown', (e)=>{ if(e.key==='Enter') closeIntro(); if(e.key==='Escape') closeIntro(); });
+        intro.addEventListener('click', closeIntro);
+        type();
+        setTimeout(closeIntro, 7500);
+      })();
+
+      // Active menu highlight on scroll (RTL aware)
+      (function(){
+        const links = Array.from(document.querySelectorAll('nav.menu a'));
+        const allLinks = links.concat(Array.from(document.querySelectorAll('#nav-panel nav a')));
+        const sections = allLinks.map(a => document.querySelector(a.getAttribute('href')));
+        function onScroll(){
+          const offset = window.scrollY + (parseInt(getComputedStyle(document.documentElement).fontSize) * 6) + 30;
+          let idx = 0;
+          sections.forEach((sec,i)=>{ if(sec && sec.offsetTop <= offset) idx = i; });
+          links.forEach(l=>l.classList.remove('active'));
+          if(links[idx]) links[idx].classList.add('active');
+        }
+        document.addEventListener('scroll', onScroll, {passive:true});
+        onScroll();
+      })();
+
+      // Mobile nav toggle
+      (function(){
+        const hamburger = document.getElementById('hamburger');
+        const drawer = document.getElementById('nav-drawer');
+        const panel = document.getElementById('nav-panel');
+        const closeBtn = document.getElementById('nav-close');
+
+        function openNav(){
+          drawer.style.display = 'block';
+          panel.classList.add('open');
+          drawer.setAttribute('aria-hidden','false');
+          hamburger.setAttribute('aria-expanded','true');
+          // focus first link
+          const first = panel.querySelector('a');
+          if(first) first.focus();
+          document.body.style.overflow = 'hidden';
+        }
+        function closeNav(){
+          panel.classList.remove('open');
+          drawer.setAttribute('aria-hidden','true');
+          hamburger.setAttribute('aria-expanded','false');
+          document.body.style.overflow = '';
+          setTimeout(()=>{ drawer.style.display = 'none'; hamburger.focus(); }, 280);
+        }
+        hamburger.addEventListener('click', openNav);
+        closeBtn.addEventListener('click', closeNav);
+        drawer.addEventListener('click', (e)=>{ if(e.target === drawer) closeNav(); });
+        // close on link click
+        panel.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeNav));
+        // escape to close
+        document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && drawer.style.display==='block') closeNav(); });
+      })();
+
+      // Dropdown functionality
+      (function(){
+        const dropdownBtn = document.getElementById('exam-dropdown');
+        const dropdownContent = document.getElementById('exam-dropdown-content');
+        const dropdownBtnMobile = document.getElementById('exam-dropdown-mobile');
+        const dropdownContentMobile = document.getElementById('exam-dropdown-content-mobile');
+
+        function toggleDropdown(btn, content) {
+          const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+          btn.setAttribute('aria-expanded', !isExpanded);
+          btn.classList.toggle('active');
+          content.classList.toggle('show');
+        }
+
+        // Desktop dropdown
+        if(dropdownBtn && dropdownContent) {
+          dropdownBtn.addEventListener('click', () => toggleDropdown(dropdownBtn, dropdownContent));
+          
+          // Close dropdown when clicking outside
+          document.addEventListener('click', (e) => {
+            if (!dropdownBtn.contains(e.target) && !dropdownContent.contains(e.target)) {
+              dropdownBtn.setAttribute('aria-expanded', 'false');
+              dropdownBtn.classList.remove('active');
+              dropdownContent.classList.remove('show');
+            }
+          });
+        }
+
+        // Mobile dropdown
+        if(dropdownBtnMobile && dropdownContentMobile) {
+          dropdownBtnMobile.addEventListener('click', () => toggleDropdown(dropdownBtnMobile, dropdownContentMobile));
+        }
+      })();
+    </script>
+  </body>
+  </html>
