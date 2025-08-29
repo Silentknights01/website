@@ -101,8 +101,8 @@
 
       /* ========== NAV ========== */
       .nav{
-        position:sticky;
-        top:0;
+        position:static;
+        top:auto;
         z-index:1200;
         -webkit-backdrop-filter: blur(8px);
         backdrop-filter: blur(8px);
@@ -114,7 +114,7 @@
         box-shadow:0 4px 18px rgba(0,0,0,.4);
         padding:0 16px;
         position: relative;
-        overflow: hidden;
+        overflow: visible;
       }
       
       .nav::before {
@@ -144,7 +144,8 @@
         margin:0 auto;
         display:flex;
         align-items:center;
-        justify-content:space-between;
+        justify-content:flex-start;
+        direction:ltr;
         gap:12px;
       }
       
@@ -155,6 +156,7 @@
         color:#fff;
         font-weight:600;
         position: relative;
+        direction:ltr;
       }
       
       .brand::after {
@@ -195,6 +197,9 @@
         display:flex;
         gap:12px;
         align-items:center;
+        margin-inline-start:auto;
+        direction:ltr;
+        flex-direction: row-reverse;
       }
       .menu a{
         color:#fff;padding:8px 10px;border-radius:8px;font-weight:500;transition:all .18s;
@@ -250,7 +255,7 @@
         visibility:hidden;
         transform:translateY(-10px);
         transition:all .2s ease;
-        z-index:1000;
+        z-index:2000;
         overflow:hidden;
       }
       .dropdown-content.show{
@@ -286,6 +291,7 @@
         display:none;
         background:transparent;border:0;color:var(--color-text);padding:8px;border-radius:8px;
         cursor:pointer;font-size:20px;
+        margin-inline-start:auto;
       }
       .nav-drawer{
         position:fixed;inset:0;z-index:1150;display:none;
