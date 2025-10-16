@@ -3,37 +3,39 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Silent Knights — Cyber Security Team</title>
-  <meta name="theme-color" content="#0A1F44" />
+  <title>Silent Knights — تیم امنیت سایبری</title>
+  <meta name="description" content="Silent Knights - تیم مستقل امنیت سایبری افغانستان. خدمات تست نفوذ، امنیت شبکه، مشاوره امنیتی و آموزش سایبری." />
+  <meta name="theme-color" content="#15151F" />
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Fira+Code:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Berlin+Sans+FB:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     /* ========== VARIABLES ========== */
     :root{
-      --font-main: "Poppins", "Berlin Sans FB", system-ui, -apple-system, sans-serif;
+      --font-main: "Berlin Sans FB", "Poppins", system-ui, -apple-system, sans-serif;
       --font-mono: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
 
-      /* Silent Knights Brand Colors */
-      --color-primary: #1E3A8A;        /* Deep Blue - Main color for logo, buttons, links, titles */
-      --color-primary-dark: #0A1F44;   /* Dark Navy - Background, header, dark sections */
-      --color-secondary: #1F4E78;      /* Blue Steel - Secondary for highlights, hover, special text */
-      --color-accent: #1E3A8A;         /* Deep Blue - Accent elements */
-      --color-neon: #1F4E78;           /* Blue Steel - Hover effects */
-      --color-bg: #0A0A0A;             /* Jet Black - Main background */
-      --color-bg-secondary: #0A1F44;   /* Dark Navy - Secondary background */
-      --color-bg-card: #0A1F44;        /* Dark Navy - Card backgrounds */
-      --color-gray: #4B4B4B;           /* Graphite Gray - Explanatory text, sidebar, secondary icons */
-      --color-light: #F1F1F1;          /* Light White - Text on dark background */
-      --color-text: #F1F1F1;           /* Light White - Main text */
-      --color-text-muted: #4B4B4B;     /* Graphite Gray - Muted text */
+      /* Silent Knights Brand Colors - Updated based on PDF */
+      --color-primary: #E31E27;        /* Red - Main color for logo, buttons, links, titles */
+      --color-primary-dark: #15151F;   /* Dark background */
+      --color-secondary: #999A93;      /* Gray - Secondary for highlights, hover, special text */
+      --color-accent: #E31E27;         /* Red - Accent elements */
+      --color-neon: #F8F8F8;           /* Light White - Hover effects */
+      --color-bg: #030d33;             /* Dark background */
+      --color-bg-secondary: #0A0A0F;   /* Slightly lighter dark background */
+      --color-bg-card: #1A1A24;        /* Card backgrounds */
+      --color-gray: #999A93;           /* Gray - Explanatory text, sidebar, secondary icons */
+      --color-light: #F8F8F8;          /* Light White - Text on dark background */
+      --color-text: #F8F8F8;           /* Light White - Main text */
+      --color-text-muted: #999A93;     /* Gray - Muted text */
 
-            /* Enhanced Shadows & Effects - Silent Knights Brand Compliant */
-    --radius: 16px;
-    --radius-small: 8px;
-    --shadow: 0 8px 32px rgba(30, 58, 138, 0.3);
-    --shadow-neon: 0 0 20px rgba(31, 78, 120, 0.4);
-    --shadow-glow: 0 0 40px rgba(30, 58, 138, 0.2);
-    --nav-height: 70px;
+      /* Enhanced Shadows & Effects - Updated for new brand */
+      --radius: 16px;
+      --radius-small: 8px;
+      --shadow: 0 8px 32px rgba(227, 30, 39, 0.3);
+      --shadow-neon: 0 0 20px rgba(227, 30, 39, 0.4);
+      --shadow-glow: 0 0 40px rgba(227, 30, 39, 0.2);
+      --nav-height: 70px;
       
       /* Animation Speeds */
       --transition-fast: 0.2s;
@@ -58,9 +60,9 @@
       overflow-x: hidden;
     }
 
-    /* Enhanced Base Styles - Silent Knights Brand Compliant */
+    /* Enhanced Base Styles - Updated for new brand */
     a {
-      color: var(--color-primary); /* Deep Blue for links per brand guidelines */
+      color: var(--color-primary);
       text-decoration: none;
       transition: all var(--transition-fast) ease;
       position: relative;
@@ -68,7 +70,7 @@
     
     a:hover {
       color: var(--color-neon);
-      text-shadow: 0 0 8px var(--color-neon);
+      text-shadow: 0 0 8px var(--color-primary);
     }
     
     img {
@@ -101,18 +103,20 @@
 
     /* ========== NAV ========== */
     .nav{
-      position:static;
-      top:auto;
-      z-index:1200;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1200;
       -webkit-backdrop-filter: blur(8px);
       backdrop-filter: blur(8px);
-      background:linear-gradient(180deg, rgba(10,31,68,0.9), rgba(10,31,68,0.8));
-      border-bottom:1px solid rgba(75,75,75,.25);
-      height:var(--nav-height);
-      display:flex;
-      align-items:center;
-      box-shadow:0 4px 18px rgba(0,0,0,.4);
-      padding:0 16px;
+      background: linear-gradient(180deg, rgba(21,21,31,0.95), rgba(21,21,31,0.9));
+      border-bottom: 1px solid rgba(153,154,147,.25);
+      height: var(--nav-height);
+      display: flex;
+      align-items: center;
+      box-shadow: 0 4px 18px rgba(0,0,0,.4);
+      padding: 0 16px;
       position: relative;
       overflow: visible;
     }
@@ -126,7 +130,7 @@
       height: 1px;
       background: linear-gradient(90deg, 
         transparent 0%, 
-        var(--color-secondary) 50%, 
+        var(--color-primary) 50%, 
         transparent 100%);
       animation: scanline 3s linear infinite;
     }
@@ -136,27 +140,25 @@
       100% { transform: translateX(100%); }
     }
     
-
-    
     .nav-inner{
-      width:100%;
-      max-width:1200px;
-      margin:0 auto;
-      display:flex;
-      align-items:center;
-      justify-content:flex-start;
-      direction:ltr;
-      gap:12px;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      direction: ltr;
+      gap: 12px;
     }
     
     .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      color:#fff;
-      font-weight:600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+      font-weight: 600;
       position: relative;
-      direction:ltr;
+      direction: ltr;
     }
     
     .brand::after {
@@ -176,189 +178,314 @@
       transform: scaleX(1);
     }
     
-    /* logo image (replace with your path) */
     .brand-logo{
-      width:40px;
-      height:40px;
-      border-radius:50%;
-      object-fit:cover;
-      display:inline-block;
-      box-shadow: inset 0 0 10px rgba(255,255,255,.03), 0 0 14px rgba(30,58,138,0.14);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: inline-block;
+      box-shadow: inset 0 0 10px rgba(255,255,255,.03), 0 0 14px rgba(227,30,39,0.14);
       transition: all var(--transition-normal) ease;
     }
     
     .brand:hover .brand-logo {
       transform: scale(1.05);
-      box-shadow: inset 0 0 10px rgba(255,255,255,.03), 0 0 20px rgba(30,58,138,0.3);
+      box-shadow: inset 0 0 10px rgba(255,255,255,.03), 0 0 20px rgba(227,30,39,0.3);
     }
 
     /* menu */
     .menu{
-      display:flex;
-      gap:12px;
-      align-items:center;
-      margin-inline-start:auto;
-      direction:ltr;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-inline-start: auto;
+      direction: ltr;
       flex-direction: row-reverse;
     }
     .menu a{
-      color:#fff;padding:8px 10px;border-radius:8px;font-weight:500;transition:all .18s;
+      color: #fff;
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-weight: 500;
+      transition: all .18s;
     }
-    .menu a.active,.menu a:hover{background:rgba(30,58,138,.15);box-shadow:0 6px 18px rgba(30,58,138,.12)}
+    .menu a.active, .menu a:hover{
+      background: rgba(227,30,39,.15);
+      box-shadow: 0 6px 18px rgba(227,30,39,.12);
+    }
 
-          /* dropdown styles */
+    /* dropdown styles */
     .dropdown{
-      position:relative;
-      display:inline-block;
+      position: relative;
+      display: inline-block;
     }
     .dropdown-btn{
-      color:#fff;
-      padding:8px 10px;
-      border-radius:8px;
-      font-weight:500;
-      transition:all .18s;
-      background:transparent;
-      border:none;
-      cursor:pointer;
-      font-family:inherit;
-      font-size:inherit;
-      display:flex;
-      align-items:center;
-      gap:6px;
-      white-space:nowrap;
+      color: #fff;
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-weight: 500;
+      transition: all .18s;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: inherit;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
     }
     .dropdown-btn:hover{
-      background:rgba(30,58,138,.15);
-      box-shadow:0 6px 18px rgba(30,58,138,.12);
+      background: rgba(227,30,39,.15);
+      box-shadow: 0 6px 18px rgba(227,30,39,.12);
     }
     .dropdown-btn::after{
-      content:'▼';
-      font-size:10px;
-      transition:transform .2s;
-      flex-shrink:0;
+      content: '▼';
+      font-size: 10px;
+      transition: transform .2s;
+      flex-shrink: 0;
     }
     .dropdown-btn.active::after{
-      transform:rotate(180deg);
+      transform: rotate(180deg);
     }
     .dropdown-content{
-      position:absolute;
-      top:100%;
-      right:0;
-      background:linear-gradient(180deg,#07112a,#081a3a);
-      border:1px solid rgba(75,75,75,.3);
-      border-radius:12px;
-      padding:8px 0;
-      min-width:180px;
-      max-width:250px;
-      box-shadow:0 8px 25px rgba(0,0,0,.4);
-      opacity:0;
-      visibility:hidden;
-      transform:translateY(-10px);
-      transition:all .2s ease;
-      z-index:2000;
-      overflow:hidden;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: linear-gradient(180deg,#0F0F17,#151520);
+      border: 1px solid rgba(153,154,147,.3);
+      border-radius: 12px;
+      padding: 8px 0;
+      min-width: 180px;
+      max-width: 250px;
+      box-shadow: 0 8px 25px rgba(0,0,0,.4);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all .2s ease;
+      z-index: 2000;
+      overflow: hidden;
     }
     .dropdown-content.show{
-      opacity:1;
-      visibility:visible;
-      transform:translateY(0);
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
     }
     .dropdown-content a{
-      display:block;
-      padding:10px 16px;
-      color:#dfe7fb;
-      text-decoration:none;
-      transition:background .15s;
-      border-radius:0;
-      margin:0;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
+      display: block;
+      padding: 10px 16px;
+      color: #dfe7fb;
+      text-decoration: none;
+      transition: background .15s;
+      border-radius: 0;
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .dropdown-content a:hover{
-      background:rgba(30,58,138,.2);
-      color:#fff;
+      background: rgba(227,30,39,.2);
+      color: #fff;
     }
     .dropdown-content a:first-child{
-      border-radius:8px 8px 0 0;
+      border-radius: 8px 8px 0 0;
     }
     .dropdown-content a:last-child{
-      border-radius:0 0 8px 8px;
+      border-radius: 0 0 8px 8px;
     }
 
     /* hamburger (mobile) */
     .hamburger{
-      display:none;
-      background:transparent;border:0;color:var(--color-text);padding:8px;border-radius:8px;
-      cursor:pointer;font-size:20px;
-      margin-inline-start:auto;
+      display: none;
+      background: transparent;
+      border: 0;
+      color: var(--color-text);
+      padding: 8px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 20px;
+      margin-inline-start: auto;
     }
     .nav-drawer{
-      position:fixed;inset:0;z-index:1150;display:none;
-      background:rgba(0,0,0,.45);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);
+      position: fixed;
+      inset: 0;
+      z-index: 1150;
+      display: none;
+      background: rgba(0,0,0,.45);
+      -webkit-backdrop-filter: blur(4px);
+      backdrop-filter: blur(4px);
     }
     .nav-panel{
-      position:absolute;top:0;right:0;width:min(320px,85%);height:100%;
-      background:linear-gradient(180deg,#07112a,#081a3a);padding:20px;
-      box-shadow:-12px 0 40px rgba(0,0,0,.6);
-      transform:translateX(100%);transition:transform .28s cubic-bezier(.2,.9,.2,1);
-      display:flex;flex-direction:column;gap:18px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: min(320px,85%);
+      height: 100%;
+      background: linear-gradient(180deg,#0F0F17,#151520);
+      padding: 20px;
+      box-shadow: -12px 0 40px rgba(0,0,0,.6);
+      transform: translateX(100%);
+      transition: transform .28s cubic-bezier(.2,.9,.2,1);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
     }
-    .nav-panel.open{transform:translateX(0)}
-    .nav-panel a{color:var(--color-text);padding:10px;border-radius:8px}
-    .nav-panel .close-btn{margin-left:auto;background:transparent;border:0;color:var(--color-text);font-size:22px;cursor:pointer}
+    .nav-panel.open{
+      transform: translateX(0);
+    }
+    .nav-panel a{
+      color: var(--color-text);
+      padding: 10px;
+      border-radius: 8px;
+    }
+    .nav-panel .close-btn{
+      margin-left: auto;
+      background: transparent;
+      border: 0;
+      color: var(--color-text);
+      font-size: 22px;
+      cursor: pointer;
+    }
 
     /* ========== INTRO terminal ========== */
     .intro{
-      position:fixed;inset:0;display:grid;place-items:center;z-index:9999;
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      z-index: 9999;
       background:
-        radial-gradient(800px 420px at 50% -10%, rgba(30,58,138,.24), transparent),
-        linear-gradient(to right,#0A0A0A,#0A1F44);
-      padding:20px;
+        radial-gradient(800px 420px at 50% -10%, rgba(227,30,39,.24), transparent),
+        linear-gradient(to right,#15151F,#0A0A0F);
+      padding: 20px;
     }
     .terminal-wrap{
-      width:min(920px,96vw);
-      max-height:76vh;
-      background:#050505;border-radius:14px;border:1px solid #0f0f0f;
-      padding:18px;box-shadow:0 0 40px rgba(30,58,138,.12),inset 0 0 24px rgba(0,0,0,.6);
-      display:flex;flex-direction:column;gap:8px;
+      width: min(920px,96vw);
+      max-height: 76vh;
+      background: #050505;
+      border-radius: 14px;
+      border: 1px solid #0f0f0f;
+      padding: 18px;
+      box-shadow: 0 0 40px rgba(227,30,39,.12), inset 0 0 24px rgba(0,0,0,.6);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
-    .term-header{display:flex;align-items:center;gap:12px;color:#c6c9cf;font-family:var(--font-mono);font-size:13px}
-    .term-dots{display:flex;gap:6px}
-    .dot{width:10px;height:10px;border-radius:50%}
-    .dot.r{background:#ff5f56}.dot.y{background:#ffbd2e}.dot.g{background:#27c93f}
+    .term-header{
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #c6c9cf;
+      font-family: var(--font-mono);
+      font-size: 13px;
+    }
+    .term-dots{
+      display: flex;
+      gap: 6px;
+    }
+    .dot{
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .dot.r{ background: #ff5f56; }
+    .dot.y{ background: #ffbd2e; }
+    .dot.g{ background: #27c93f; }
 
     .logo-glitch{
-      --size:clamp(30px,5vw,56px);
-      font-family:var(--font-main);
-      font-weight:400; /* کمتر بولد تا عنوان نرم‌تر باشد */
-      text-transform:uppercase;
-      color:#dbe9ff;font-size:var(--size);letter-spacing:2px;margin-bottom:6px;
-      position:relative;display:inline-block;filter:contrast(1.05) saturate(1.05);
+      --size: clamp(30px,5vw,56px);
+      font-family: var(--font-main);
+      font-weight: 400;
+      text-transform: uppercase;
+      color: #dbe9ff;
+      font-size: var(--size);
+      letter-spacing: 2px;
+      margin-bottom: 6px;
+      position: relative;
+      display: inline-block;
+      filter: contrast(1.05) saturate(1.05);
     }
-    .logo-glitch::before,.logo-glitch::after{
-      content:attr(data-text);position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;mix-blend-mode:screen;opacity:.95;
+    .logo-glitch::before, .logo-glitch::after{
+      content: attr(data-text);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      mix-blend-mode: screen;
+      opacity: .95;
     }
-    .logo-glitch::before{color:rgba(255,59,59,0.95);transform:translate(3px,-2px);clip-path:inset(0 0 60% 0);text-shadow:0 0 12px rgba(255,59,59,.25);animation:gl1 1.8s infinite linear alternate-reverse}
-    .logo-glitch::after{color:rgba(0,255,149,0.95);transform:translate(-3px,2px);clip-path:inset(60% 0 0 0);text-shadow:0 0 12px rgba(0,255,149,.18);animation:gl2 1.6s infinite linear alternate}
-    @keyframes gl1{0%{clip-path:inset(0 0 85% 0) }25%{clip-path:inset(20% 0 60% 0)}50%{clip-path:inset(40% 0 40% 0)}75%{clip-path:inset(10% 0 70% 0)}100%{clip-path:inset(0 0 85% 0)}}
-    @keyframes gl2{0%{clip-path:inset(60% 0 0 0)}20%{clip-path:inset(50% 0 10% 0)}45%{clip-path:inset(30% 0 30% 0)}70%{clip-path:inset(55% 0 5% 0)}100%{clip-path:inset(60% 0 0 0)}}
+    .logo-glitch::before{
+      color: rgba(255,59,59,0.95);
+      transform: translate(3px,-2px);
+      clip-path: inset(0 0 60% 0);
+      text-shadow: 0 0 12px rgba(255,59,59,.25);
+      animation: gl1 1.8s infinite linear alternate-reverse;
+    }
+    .logo-glitch::after{
+      color: rgba(0,255,149,0.95);
+      transform: translate(-3px,2px);
+      clip-path: inset(60% 0 0 0);
+      text-shadow: 0 0 12px rgba(0,255,149,.18);
+      animation: gl2 1.6s infinite linear alternate;
+    }
+    @keyframes gl1{
+      0%{ clip-path: inset(0 0 85% 0) }
+      25%{ clip-path: inset(20% 0 60% 0) }
+      50%{ clip-path: inset(40% 0 40% 0) }
+      75%{ clip-path: inset(10% 0 70% 0) }
+      100%{ clip-path: inset(0 0 85% 0) }
+    }
+    @keyframes gl2{
+      0%{ clip-path: inset(60% 0 0 0) }
+      20%{ clip-path: inset(50% 0 10% 0) }
+      45%{ clip-path: inset(30% 0 30% 0) }
+      70%{ clip-path: inset(55% 0 5% 0) }
+      100%{ clip-path: inset(60% 0 0 0) }
+    }
 
-    .term-body{font-family:var(--font-mono);color:#00ff99;font-size:14px;white-space:pre-wrap;overflow:auto;line-height:1.6;padding-right:6px;max-height:calc(76vh - 120px)}
-    .enter-tip{margin-top:10px;font-family:var(--font-mono);color:#8fffd5;font-size:12px;opacity:.95}
+    .term-body{
+      font-family: var(--font-mono);
+      color: #00ff99;
+      font-size: 14px;
+      white-space: pre-wrap;
+      overflow: auto;
+      line-height: 1.6;
+      padding-right: 6px;
+      max-height: calc(76vh - 120px);
+    }
+    .enter-tip{
+      margin-top: 10px;
+      font-family: var(--font-mono);
+      color: #8fffd5;
+      font-size: 12px;
+      opacity: .95;
+    }
 
-    .intro.fade-out{animation:fadeOut .6s ease forwards}
-    @keyframes fadeOut{to{opacity:0;visibility:hidden}}
+    .intro.fade-out{
+      animation: fadeOut .6s ease forwards;
+    }
+    @keyframes fadeOut{
+      to{
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
 
     /* ========== LAYOUT ========== */
-    .container{max-width:1200px;margin:0 auto;padding:80px 20px}
+    .container{
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 20px;
+    }
     .section-title{
-      font-size:clamp(22px,3vw,32px);
-      color:var(--color-primary);
-      margin-bottom:10px;
-      font-weight:600;
+      font-size: clamp(22px,3vw,32px);
+      color: var(--color-primary);
+      margin-bottom: 10px;
+      font-weight: 600;
       position: relative;
-      text-shadow: 0 0 20px var(--color-primary);
+      text-shadow: 0 0 20px rgba(227,30,39,0.5);
     }
     
     .section-title::after {
@@ -375,17 +502,27 @@
       border-radius: 2px;
       animation: scanline 3s linear infinite;
     }
-    .section-sub{color:#cfd3dc;margin-bottom:22px}
-    .grid{display:grid;gap:18px}
-    .grid-3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
-    .grid-2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+    .section-sub{
+      color: #cfd3dc;
+      margin-bottom: 22px;
+    }
+    .grid{
+      display: grid;
+      gap: 18px;
+    }
+    .grid-3{
+      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+    }
+    .grid-2{
+      grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+    }
 
     .card{
-      background:#0f0f12;
-      border:1px solid rgba(255,255,255,.03);
-      border-radius:var(--radius);
-      padding:18px;
-      transition:all var(--transition-normal) ease;
+      background: var(--color-bg-card);
+      border: 1px solid rgba(255,255,255,.03);
+      border-radius: var(--radius);
+      padding: 18px;
+      transition: all var(--transition-normal) ease;
       position: relative;
       overflow: hidden;
     }
@@ -410,20 +547,20 @@
     }
     
     .card:hover{
-      transform:translateY(-6px);
-      box-shadow:var(--shadow);
-      border-color: rgba(30, 58, 138, 0.3);
+      transform: translateY(-6px);
+      box-shadow: var(--shadow);
+      border-color: rgba(227, 30, 39, 0.3);
     }
 
     .btn{
-      display:inline-block;
-      padding:10px 16px;
-      border-radius:10px;
-      background:var(--color-primary);
-      color:#fff;
-      font-weight:700;
-      border:0;
-      cursor:pointer;
+      display: inline-block;
+      padding: 10px 16px;
+      border-radius: 10px;
+      background: var(--color-primary);
+      color: #fff;
+      font-weight: 700;
+      border: 0;
+      cursor: pointer;
       transition: all var(--transition-normal) ease;
       position: relative;
       overflow: hidden;
@@ -455,9 +592,9 @@
     }
     
     .btn-outline{
-      background:transparent;
-      border:1px solid var(--color-secondary);
-      color:#fff;
+      background: transparent;
+      border: 1px solid var(--color-secondary);
+      color: #fff;
       box-shadow: none;
     }
     
@@ -470,13 +607,14 @@
     /* HERO */
     .hero{
       background:
-        radial-gradient(1200px 500px at 50% -10%, rgba(30,58,138,.30), transparent),
-        linear-gradient(to right,#0A0A0A,#0A1F44);
-      padding:120px 20px 60px;
-      border-bottom:1px solid rgba(75,75,75,.22);
-      text-align:center;
+        radial-gradient(1200px 500px at 50% -10%, rgba(227,30,39,.30), transparent),
+        linear-gradient(to right,#15151F,#0A0A0F);
+      padding: 120px 20px 60px;
+      border-bottom: 1px solid rgba(153,154,147,.22);
+      text-align: center;
       position: relative;
       overflow: hidden;
+      margin-top: var(--nav-height);
     }
     
     .hero::before {
@@ -491,8 +629,8 @@
           90deg,
           transparent,
           transparent 2px,
-          rgba(30, 58, 138, 0.03) 2px,
-          rgba(30, 58, 138, 0.03) 4px
+          rgba(227, 30, 39, 0.03) 2px,
+          rgba(227, 30, 39, 0.03) 4px
         );
       animation: pattern-move 20s linear infinite;
       pointer-events: none;
@@ -502,37 +640,57 @@
       0% { transform: translateX(0); }
       100% { transform: translateX(4px); }
     }
-    .hero-inner{max-width:980px;margin:0 auto}
+    .hero-inner{
+      max-width: 980px;
+      margin: 0 auto;
+    }
     .hero h1{
-      font-size:clamp(34px,5vw,56px);
-      color:var(--color-primary);
-      margin-bottom:12px;
-      font-weight:700;
+      font-size: clamp(34px,5vw,56px);
+      color: var(--color-primary);
+      margin-bottom: 12px;
+      font-weight: 700;
       animation: float 3s ease-in-out infinite;
-      text-shadow: 0 0 30px var(--color-primary);
+      text-shadow: 0 0 30px rgba(227,30,39,0.5);
     }
     
     @keyframes float {
       0%, 100% { transform: translateY(0px); }
       50% { transform: translateY(-10px); }
     }
-    .hero p{color:#c0c8d6;margin:0 auto 20px;max-width:780px}
+    .hero p{
+      color: #c0c8d6;
+      margin: 0 auto 20px;
+      max-width: 780px;
+    }
 
     /* ABOUT */
-    .about{display:grid;grid-template-columns:1.2fr .8fr;gap:22px}
-    .about .panel{background:#0e0e11;border:1px solid rgba(255,255,255,.02);padding:18px;border-radius:var(--radius)}
-    .about ul{padding-left:20px;list-style:disc;margin-top:10px}
+    .about{
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 22px;
+    }
+    .about .panel{
+      background: #0e0e11;
+      border: 1px solid rgba(255,255,255,.02);
+      padding: 18px;
+      border-radius: var(--radius);
+    }
+    .about ul{
+      padding-left: 20px;
+      list-style: disc;
+      margin-top: 10px;
+    }
 
     /* SERVICES icons */
     .service-icon{
-      width:44px;
-      height:44px;
-      border-radius:12px;
-      display:grid;
-      place-items:center;
-      background:rgba(30,58,138,.12);
-      margin-bottom:10px;
-      font-size:18px;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: rgba(227,30,39,.12);
+      margin-bottom: 10px;
+      font-size: 18px;
       transition: all var(--transition-normal) ease;
       position: relative;
       overflow: hidden;
@@ -546,16 +704,16 @@
       right: 0;
       bottom: 0;
       background: linear-gradient(135deg, 
-        rgba(30, 58, 138, 0.2), 
-        rgba(31, 78, 120, 0.2));
+        rgba(227, 30, 39, 0.2), 
+        rgba(153, 154, 147, 0.2));
       opacity: 0;
       transition: opacity var(--transition-normal) ease;
     }
     
     .card:hover .service-icon {
       transform: scale(1.1) rotate(5deg);
-      background: rgba(30, 58, 138, 0.2);
-      box-shadow: 0 0 20px rgba(30, 58, 138, 0.3);
+      background: rgba(227, 30, 39, 0.2);
+      box-shadow: 0 0 20px rgba(227, 30, 39, 0.3);
       animation: pulse 2s ease-in-out infinite;
     }
     
@@ -569,14 +727,19 @@
     }
 
     /* PROJECTS TAGS */
-    .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+    .tags{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+    }
     .tag{
-      font-size:12px;
-      padding:6px 10px;
-      border-radius:999px;
-      background:rgba(31,78,120,.14);
-      border:1px solid rgba(31,78,120,.28);
-      color:#cfe3ff;
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(153,154,147,.14);
+      border: 1px solid rgba(153,154,147,.28);
+      color: #cfe3ff;
       transition: all var(--transition-fast) ease;
       position: relative;
       overflow: hidden;
@@ -602,19 +765,19 @@
     
     .tag:hover {
       transform: translateY(-2px);
-      background: rgba(31,78,120,.25);
-      border-color: rgba(31,78,120,.5);
-      box-shadow: 0 4px 12px rgba(31,78,120,.3);
+      background: rgba(153,154,147,.25);
+      border-color: rgba(153,154,147,.5);
+      box-shadow: 0 4px 12px rgba(153,154,147,.3);
     }
 
     /* TEAM */
     .avatar{
-      width:72px;
-      height:72px;
-      border-radius:50%;
-      background:linear-gradient(145deg,#1E3A8A,#0A1F44);
-      box-shadow:inset 0 0 12px rgba(255,255,255,.06),0 0 18px rgba(30,58,138,.28);
-      margin-bottom:12px;
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(145deg,#E31E27,#15151F);
+      box-shadow: inset 0 0 12px rgba(255,255,255,.06),0 0 18px rgba(227,30,39,.28);
+      margin-bottom: 12px;
       transition: all var(--transition-normal) ease;
       position: relative;
       overflow: hidden;
@@ -641,15 +804,36 @@
     
     .card:hover .avatar {
       transform: scale(1.05);
-      box-shadow: inset 0 0 12px rgba(255,255,255,.06), 0 0 25px rgba(30,58,138,.4);
+      box-shadow: inset 0 0 12px rgba(255,255,255,.06), 0 0 25px rgba(227,30,39,.4);
     }
 
     /* CONTACT */
-    form{display:grid;gap:12px}
-    input,textarea{width:100%;padding:12px 14px;border-radius:10px;border:1px solid #222;background:#0f0f0f;color:#fff;outline:none}
-    input:focus,textarea:focus{box-shadow:0 0 0 4px rgba(30,58,138,.12);border-color:#2b3e7a}
+    form{
+      display: grid;
+      gap: 12px;
+    }
+    input, textarea{
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid #222;
+      background: #0f0f0f;
+      color: #fff;
+      outline: none;
+      font-family: inherit;
+    }
+    input:focus, textarea:focus{
+      box-shadow: 0 0 0 4px rgba(227,30,39,.12);
+      border-color: #7a2b2b;
+    }
 
-    footer{background:var(--color-primary-dark);color:#e6e8ee;padding:24px;text-align:center;border-top:1px solid #14213b}
+    footer{
+      background: var(--color-primary-dark);
+      color: #e6e8ee;
+      padding: 24px;
+      text-align: center;
+      border-top: 1px solid #3b1414;
+    }
 
     /* ========== RESPONSIVE DESIGN ========== */
     
@@ -985,8 +1169,8 @@
       <article class="card" role="listitem">
         <div class="service-icon" aria-hidden="true">🎓</div>
         <h3>آموزش و آگاهی</h3>
-        <p class="muted">کارگاه‌های عملی و دوره‌های کوتاه برای تیم‌ها و علاقه‌مندان تا مهارت‌های عملی امنیت را بیاموزند.</p>
-        <p class="muted" style="margin-top:8px;font-size:13px">ویژگی: آموزش عملی همراه با سناریوهای مشابه به واقعیت.</p>
+        <p class="muted">دوره‌های ابتدایی و تخصصی برای علاقه‌مندان هک و امنیت با مجرب ترین اساتید در بخش های متفاوت.</p>
+        <p class="muted" style="margin-top:8px;font-size:13px">ویژگی: آموزش عملی همراه با بروز ترین میتود و ابزار های پر استفاده.</p>
       </article>
 
       <article class="card" role="listitem">
@@ -1025,9 +1209,11 @@
     <p class="section-sub">پروژه‌های تحقیقاتی و آموزشی ما — همه برای اهداف پژوهشی و تستِ اخلاقی انجام شده‌اند.</p>
     <div class="grid grid-3">
       <article class="card">
-        <h3>WiFi Cracker (پژوهش آموزشی)</h3>
-        <p class="muted">ابزاری آموزشی برای بررسی امنیت شبکه‌های بی‌سیم و فهم مکانیزم‌های محافظتی — <strong>فقط</strong> برای آزمایش با مجوز و در محیط‌های آموزشی.</p>
-        <div class="tags"><span class="tag">شبکه</span><span class="tag">آموزشی</span><span class="tag">اخلاقی</span></div>
+        <a target="_blank" href="Wifi_Cracker-main/WI-FI_Password_Stelaer.html">
+        <h3>Wi-Fi Password Stelaer "ابتدایی"</h3>
+        <p class="muted">ابزاری آموزشی برای دریافت معلومات وای فای (پسورد) فقط  جنبه آموزشی دارد </p>
+        <div class="tags"><span class="tag">وای فای</span><span class="tag">آموزشی</span><span class="tag">اخلاقی</span></div>
+      </a>
       </article>
 
       <article class="card">
@@ -1076,40 +1262,162 @@
   </section>
 
   <!-- TEAM (real names + motivation) -->
-  <section id="team" class="container" aria-labelledby="team-heading">
-    <h2 id="team-heading" class="section-title">تیم</h2>
-    <p class="section-sub">سه عضو اصلی تیم؛ هر کدام با هدف رشد شخصی و تبدیل شدن به هکری متخصص در کشور.</p>
-    <div class="grid grid-3">
-      <article class="card" aria-label="عضو تیم">
-        <div class="avatar" aria-hidden="true"></div>
-        <!-- <h3>سید مدثر هاشمی</h3> -->
-        <h3>???</h3>
-        <p class="muted">رهبر تیم • شبکه و تست نفوذ</p>
-        <p class="muted" style="margin-top:8px">هدف مدثر: تبدیل شدن به بهترین هکر کشور — او تیم را برای تمرین، آموزش و رسیدن به این هدف بنا کرد.</p>
-      </article>
+ <!-- EMPLOYEES -->
+<section id="employees" class="container" aria-labelledby="employees-heading">
+  <h2 id="employees-heading" class="section-title">کارمندان</h2>
+  <p class="section-sub">تیم ما متشکل از هیت رهبری با تجربه و اعضای متخصص است که با همکاری یکدیگر به اهداف تیم دست می‌یابیم.</p>
+  
+  <!-- Leadership Team -->
+  <h3 style="font-weight:600; margin-top: 24px; color: var(--color-primary);">هیت رهبری</h3>
+  <p class="section-sub" style="margin-bottom: 20px;">رهبران با تجربه که جهت‌گیری استراتژیک تیم را تعیین می‌کنند.</p>
+  
+  <div class="grid grid-2" role="list">
+    <article class="card" role="listitem">
+      <div class="avatar" aria-hidden="true"></div>
+      <h3>سید مدثر هاشمی</h3>
+      <p class="muted">مدیر ارشد فناوری • بنیانگذار</p>
+      <p class="muted" style="margin-top:8px">مدثر با بیش از 8 سال تجربه در حوزه امنیت سایبری، مسئولیت راهبری فنی تیم و تعیین استراتژی‌های امنیتی را بر عهده دارد.</p>
+      <div class="tags" style="margin-top: 10px;">
+        <span class="tag">رهبری</span>
+        <span class="tag">استراتژی</span>
+        <span class="tag">شبکه</span>
+      </div>
+    </article>
 
-      <article class="card" aria-label="عضو تیم">
-        <div class="avatar" aria-hidden="true"></div>
-        <!-- <h3>حسام‌الدین حسینی</h3> -->
-        <h3>???</h3>
-        <p class="muted">پژوهشگر • سخت‌افزار و نفوذ عملی</p>
-        <p class="muted" style="margin-top:8px">حسام: تمرکز بر رشد فنی، آزمایش و اشتراک‌گذاری دانش با تیم و جامعه.</p>
-      </article>
+    <article class="card" role="listitem">
+      <div class="avatar" aria-hidden="true"></div>
+      <h3>حسام‌الدین حسینی</h3>
+      <p class="muted">مدیر عملیات • هم‌بنیان‌گذار</p>
+      <p class="muted" style="margin-top:8px">حسام مسئولیت مدیریت پروژه‌ها، هماهنگی تیم و اطمینان از اجرای بهینه عملیات را بر عهده دارد.</p>
+      <div class="tags" style="margin-top: 10px;">
+        <span class="tag">مدیریت</span>
+        <span class="tag">هماهنگی</span>
+        <span class="tag">سخت‌افزار</span>
+      </div>
+    </article>
+  </div>
 
-      <article class="card" aria-label="عضو تیم">
-        <div class="avatar" aria-hidden="true"></div>
-        <h3>???</h3>
-        <!-- <h3>علی (تحلیلگر)</h3> -->
-        <p class="muted">تحلیلگر • عملیات و دفاع</p>
-        <p class="muted" style="margin-top:8px">علی: کار روی سناریوها، واکنش به رخدادها و کمک به تقویت مهارت‌های تیم.</p>
-      </article>
-    </div>
+  <!-- Team Members -->
+  <h3 style="font-weight:600; margin-top: 40px; color: var(--color-primary);">اعضا</h3>
+  <p class="section-sub" style="margin-bottom: 20px;">متخصصان متعهد که با مهارت‌های متنوع خود قدرت تیم را تشکیل می‌دهند.</p>
+  
+  <div class="grid grid-3" role="list">
+    <article class="card" role="listitem">
+      <div class="avatar" aria-hidden="true"></div>
+      <h3>محمد جواد</h3>
+      <p class="muted">متخصص تست نفوذ وب</p>
+      <p class="muted" style="margin-top:8px">تخصص در شناسایی و بهره‌برداری از آسیب‌پذیری‌های برنامه‌های تحت وب.</p>
+      <div class="tags" style="margin-top: 10px;">
+        <span class="tag">وب</span>
+        <span class="tag">تست نفوذ</span>
+      </div>
+    </article>
 
-    <div style="margin-top:16px" class="card">
-      <h3 style="font-weight:600">بیانیهٔ تیم</h3>
-      <p class="muted">ما مستقل کار می‌کنیم، بدون اسپانسر یا حمایت رسمی؛ هدف‌مان رشد شخصی و ساختن الگویی است برای هکرهای آیندهٔ افغانستان. همه فعالیت‌های ما اخلاقی، آموزشی و با رعایت قانون و مجوز انجام می‌شود.</p>
-    </div>
-  </section>
+    <article class="card" role="listitem">
+      <div class="avatar" aria-hidden="true"></div>
+      <h3>علی رضا</h3>
+      <p class="muted">تحلیلگر بدافزار</p>
+      <p class="muted" style="margin-top:8px">متخصص در تجزیه و تحلیل کدهای مخرب و شناسایی تهدیدات سایبری.</p>
+      <div class="tags" style="margin-top: 10px;">
+        <span class="tag">بدافزار</span>
+        <span class="tag">تحلیل</span>
+      </div>
+    </article>
+
+    <article class="card" role="listitem">
+      <div class="avatar" aria-hidden="true"></div>
+      <h3>فاطمه احمدی</h3>
+      <p class="muted">متخصص امنیت شبکه</p>
+      <p class="muted" style="margin-top:8px">تمرکز بر ایمن‌سازی زیرساخت‌های شبکه و شناسایی نقاط ضعف.</p>
+      <div class="tags" style="margin-top: 10px;">
+        <span class="tag">شبکه</span>
+        <span class="tag">امنیت</span>
+      </div>
+    </article>
+
+    <article class="card" role="listitem">
+      <div class="avatar" aria-hidden="true"></div>
+      <h3>حمید کریمی</h3>
+      <p class="muted">مهندس نرم‌افزار امن</p>
+      <p class="muted" style="margin-top:8px">توسعه ابزارهای امنیتی و پیاده‌سازی بهترین روش‌های کدنویسی امن.</p>
+      <div class="tags" style="margin-top: 10px;">
+        <span class="tag">توسعه</span>
+        <span class="tag">ابزار</span>
+      </div>
+    </article>
+
+    <article class="card" role="listitem">
+      <div class="avatar" aria-hidden="true"></div>
+      <h3>زهرا محمدی</h3>
+      <p class="muted">متخصص پاسخ به حوادث</p>
+      <p class="muted" style="margin-top:8px">مدیریت و هماهنگی پاسخ به حوادث امنیتی و بازیابی پس از حمله.</p>
+      <div class="tags" style="margin-top: 10px;">
+        <span class="tag">پاسخ</span>
+        <span class="tag">حوادث</span>
+      </div>
+    </article>
+
+    <article class="card" role="listitem">
+      <div class="avatar" aria-hidden="true"></div>
+      <h3>مهدی حسینی</h3>
+      <p class="muted">تحلیلگر تهدیدات</p>
+      <p class="muted" style="margin-top:8px">شناسایی و تحلیل تهدیدات سایبری و ارائه راهکارهای مقابله.</p>
+      <div class="tags" style="margin-top: 10px;">
+        <span class="tag">تهدیدات</span>
+        <span class="tag">تحلیل</span>
+      </div>
+    </article>
+
+    <article class="card" role="listitem">
+      <div class="avatar" aria-hidden="true"></div>
+      <h3>نرجس اکبری</h3>
+      <p class="muted">متخصص رمزنگاری</p>
+      <p class="muted" style="margin-top:8px">طراحی و پیاده‌سازی الگوریتم‌های رمزنگاری و ارزیابی امنیت آنها.</p>
+      <div class="tags" style="margin-top: 10px;">
+        <span class="tag">رمزنگاری</span>
+        <span class="tag">الگوریتم</span>
+      </div>
+    </article>
+
+    <article class="card" role="listitem">
+      <div class="avatar" aria-hidden="true"></div>
+      <h3>رضا محمودی</h3>
+      <p class="muted">مهندس امنیت سامانه‌ها</p>
+      <p class="muted" style="margin-top:8px">امن‌سازی سیستم‌های عامل و سرورها در برابر تهدیدات.</p>
+      <div class="tags" style="margin-top: 10px;">
+        <span class="tag">سیستم</span>
+        <span class="tag">سرور</span>
+      </div>
+    </article>
+
+    <article class="card" role="listitem">
+      <div class="avatar" aria-hidden="true"></div>
+      <h3>سمیه قریشی</h3>
+      <p class="muted">متخصص حریم خصوصی</p>
+      <p class="muted" style="margin-top:8px">حفظ و ارتقای حریم خصوصی داده‌ها در سیستم‌های اطلاعاتی.</p>
+      <div class="tags" style="margin-top: 10px;">
+        <span class="tag">حریم خصوصی</span>
+        <span class="tag">داده</span>
+      </div>
+    </article>
+
+    <article class="card" role="listitem">
+      <div class="avatar" aria-hidden="true"></div>
+      <h3>امیرحسین یوسفی</h3>
+      <p class="muted">تحلیلگر امنیت ابری</p>
+      <p class="muted" style="margin-top:8px">ارزیابی امنیت محیط‌های ابری و ارائه راهکارهای حفاظتی.</p>
+      <div class="tags" style="margin-top: 10px;">
+        <span class="tag">ابر</span>
+        <span class="tag">ارزیابی</span>
+      </div>
+    </article>
+  </div>
+
+  <div style="margin-top:16px" class="card">
+    <h3 style="font-weight:600">بیانیهٔ تیم</h3>
+    <p class="muted">ما مستقل کار می‌کنیم، بدون اسپانسر یا حمایت رسمی؛ هدف‌مان رشد شخصی و ساختن الگویی است برای هکرهای آیندهٔ افغانستان. همه فعالیت‌های ما اخلاقی، آموزشی و با رعایت قانون و مجوز انجام می‌شود.</p>
+  </div>
+</section>
 
   <!-- CONTACT -->
   <section id="contact" class="container" aria-labelledby="contact-heading">
@@ -1145,7 +1453,7 @@
     (function(){
       const lines = [
   '> در حال راه‌اندازی SilentKnights...',
-  // '> بارگذاری ماژول‌ها: [training] [research] [redteam] [blueteam] — موفق',
+  '> بارگذاری ماژول‌ها: [training] [research] [redteam] [blueteam] — موفق',
   '> دسترسی صادر شد [200]',
   'به SilentKnights خوش آمدید — وب سایت مستقلِ امنیتِ سایبریِ افغانستان',
   ''
@@ -1264,9 +1572,85 @@
         dropdownBtnMobile.addEventListener('click', () => toggleDropdown(dropdownBtnMobile, dropdownContentMobile));
       }
     })();
+
+    // Form handling with validation
+    (function(){
+      const contactForm = document.getElementById('contact-form');
+      if(contactForm) {
+        contactForm.addEventListener('submit', function(e){
+          e.preventDefault();
+          
+          // Simple validation
+          const inputs = this.querySelectorAll('input[required], textarea[required]');
+          let isValid = true;
+          
+          inputs.forEach(input => {
+            if(!input.value.trim()) {
+              isValid = false;
+              input.style.borderColor = '#E31E27';
+            } else {
+              input.style.borderColor = '';
+            }
+          });
+          
+          if(isValid) {
+            // Show success message
+            alert('ممنون — پیام شما دریافت شد. ما در اسرع وقت پاسخ می‌دهیم.');
+            this.reset();
+          } else {
+            alert('لطفاً تمام فیلدهای ضروری را پر کنید.');
+          }
+        });
+      }
+    })();
+
+    // Smooth scrolling for anchor links
+    (function(){
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          
+          const targetId = this.getAttribute('href');
+          if(targetId === '#') return;
+          
+          const targetElement = document.querySelector(targetId);
+          if(targetElement) {
+            const navHeight = document.querySelector('.nav').offsetHeight;
+            const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navHeight;
+            
+            window.scrollTo({
+              top: targetPosition,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+    })();
+
+    // Add loading animation for cards
+    (function(){
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, observerOptions);
+      
+      // Observe cards for animation
+      document.querySelectorAll('.card').forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(card);
+      });
+    })();
   </script>
 </body>
 </html>
-
-
-
