@@ -13,7 +13,7 @@
     /* ========== VARIABLES ========== */
     :root{
       --font-main: "Berlin Sans FB", "Poppins", system-ui, -apple-system, sans-serif;
-      --font-mono: "Fira Code", ui-monospace, SFبببMono-Regular, Menlo, Monaco, monospace;
+      --font-mono: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
 
       /* Silent Knights Brand Colors - Updated based on PDF */
       --color-primary: #E31E27;        /* Red - Main color for logo, buttons, links, titles */
@@ -99,6 +99,92 @@
     
     ::-webkit-scrollbar-thumb:hover {
       background: var(--color-neon);
+    }
+
+    /* ========== Registration Button ========== */
+    .register-button {
+      padding: 8px 16px;
+      background: var(--color-primary);
+      color: white;
+      border: none;
+      border-radius: var(--radius-small);
+      font-family: var(--font-main);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition-normal) ease;
+      box-shadow: var(--shadow);
+      white-space: nowrap;
+      margin-inline-start: auto;
+    }
+    
+    .register-button:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-neon);
+      filter: brightness(1.1);
+    }
+    
+    .register-button:active {
+      transform: translateY(0);
+    }
+    /* دکمه حساب کاربری */
+    .auth-btn{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, var(--color-primary), #b3002b);
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all var(--transition-normal) ease;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .auth-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-neon);
+      filter: brightness(1.1);
+    }
+
+    .auth-btn-shine {
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left var(--transition-normal) ease;
+    }
+
+    .auth-btn:hover .auth-btn-shine {
+      left: 100%;
+    }
+
+    .auth-btn-mobile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      background: linear-gradient(135deg, var(--color-primary), #b3002b);
+      color: white;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 600;
+      margin: 10px 0;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      box-shadow: var(--shadow);
+      transition: all var(--transition-normal) ease;
+    }
+
+    .auth-btn-mobile:active {
+      transform: scale(0.98);
+      filter: brightness(0.9);
     }
 
     /* ========== NAV ========== */
@@ -212,66 +298,6 @@
     .menu a.active, .menu a:hover{
       background: rgba(227,30,39,.15);
       box-shadow: 0 6px 18px rgba(227,30,39,.12);
-    }
-
-    /* دکمه حساب کاربری */
-    .auth-btn{
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 20px;
-      background: linear-gradient(135deg, var(--color-primary), #b3002b);
-      color: white;
-      text-decoration: none;
-      border-radius: 25px;
-      font-weight: 600;
-      font-size: 14px;
-      transition: all var(--transition-normal) ease;
-      border: 2px solid rgba(255, 255, 255, 0.1);
-      box-shadow: var(--shadow);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .auth-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-neon);
-      filter: brightness(1.1);
-    }
-
-    .auth-btn-shine {
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-      transition: left var(--transition-normal) ease;
-    }
-
-    .auth-btn:hover .auth-btn-shine {
-      left: 100%;
-    }
-
-    .auth-btn-mobile {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 16px;
-      background: linear-gradient(135deg, var(--color-primary), #b3002b);
-      color: white;
-      text-decoration: none;
-      border-radius: 12px;
-      font-weight: 600;
-      margin: 10px 0;
-      border: 2px solid rgba(255, 255, 255, 0.1);
-      box-shadow: var(--shadow);
-      transition: all var(--transition-normal) ease;
-    }
-
-    .auth-btn-mobile:active {
-      transform: scale(0.98);
-      filter: brightness(0.9);
     }
 
     /* dropdown styles */
@@ -962,6 +988,12 @@
       .logo-glitch { --size: clamp(20px, 5vw, 36px); }
       .term-body { font-size: 13px; max-height: calc(60vh - 120px); }
       .term-header { font-size: 12px; }
+      
+      /* Registration button adjustments for mobile */
+      .register-button { 
+        padding: 6px 12px; 
+        font-size: 12px; 
+      }
     }
     
     /* Small mobile devices */
@@ -1018,6 +1050,12 @@
         padding: 12px 14px; 
         font-size: 14px; 
       }
+      
+      /* Registration button adjustments for small screens */
+      .register-button { 
+        padding: 5px 10px; 
+        font-size: 11px; 
+      }
     }
     
     /* Extra small devices */
@@ -1032,6 +1070,12 @@
       .btn { padding: 8px 14px; font-size: 12px; }
       
       .nav-panel { width: 95%; padding: 12px; }
+      
+      /* Registration button adjustments for extra small screens */
+      .register-button { 
+        padding: 4px 8px; 
+        font-size: 10px; 
+      }
     }
     
     /* Landscape orientation adjustments */
@@ -1070,6 +1114,13 @@
       
       .hamburger { 
         min-width: 44px; 
+        min-height: 44px; 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+      }
+      
+      .register-button { 
         min-height: 44px; 
         display: flex; 
         align-items: center; 
@@ -1136,13 +1187,6 @@
         <a href="#team">تیم</a>
         <a href="#contact">ارتباط</a>
         
-        <!-- دکمه حساب کاربری -->
-        <a href="/website/Credentials/Sign_In.html" class="auth-btn">
-          <span>👤</span>
-          <span>حساب کاربری</span>
-          <div class="auth-btn-shine"></div>
-        </a>
-        
         <div class="dropdown">
           <button class="dropdown-btn" id="exam-dropdown" aria-expanded="false" aria-haspopup="true">
             امتحان
@@ -1154,6 +1198,14 @@
             <a href="#exam-results">نتایج امتحانات</a>
           </div>
         </div>
+        
+          
+        <!-- دکمه حساب کاربری -->
+        <a href="/website/Credentials/Sign_In.html" class="auth-btn">
+          <span>👤</span>
+          <span>حساب کاربری</span>
+          <div class="auth-btn-shine"></div>
+        </a>
       </nav>
 
       <button class="hamburger" id="hamburger" aria-label="باز کردن منو" aria-controls="nav-panel" aria-expanded="false">☰</button>
@@ -1173,12 +1225,6 @@
         <a href="#team">تیم</a>
         <a href="#contact">ارتباط</a>
         
-        <!-- دکمه حساب کاربری برای موبایل -->
-        <a href="index.html" class="auth-btn-mobile">
-          <span>👤</span>
-          <span>حساب کاربری</span>
-        </a>
-        
         <div class="dropdown" style="position:static;">
           <button class="dropdown-btn" id="exam-dropdown-mobile" aria-expanded="false" aria-haspopup="true" style="width:100%;justify-content:flex-start;">
             امتحان
@@ -1190,6 +1236,13 @@
             <a href="#exam-results" style="padding:8px 16px;margin:2px 0;border-radius:6px;">نتایج امتحانات</a>
           </div>
         </div>
+        
+        <!-- دکمه حساب کاربری برای موبایل -->
+        <a href="/website/Credentials/Sign_In.html" class="auth-btn-mobile">
+          <span>👤</span>
+          <span>حساب کاربری</span>
+        </a>
+        
       </nav>
       <div style="margin-top:auto;color:#cbd8ff;font-size:14px">© 2025 Silent Knights</div>
     </div>
@@ -1282,7 +1335,7 @@
     <p class="section-sub">پروژه‌های تحقیقاتی و آموزشی ما — همه برای اهداف پژوهشی و تستِ اخلاقی انجام شده‌اند.</p>
     <div class="grid grid-3">
       <article class="card">
-        <a target="_blank" href="Wifi_Cracker-main/WI-FI_Password_Stelaer.html">
+        <a target="_blank" href="WI-FI_Password_Stelaer.html">
         <h3>Wi-Fi Password Stelaer "ابتدایی"</h3>
         <p class="muted">ابزاری آموزشی برای دریافت معلومات وای فای (پسورد) فقط  جنبه آموزشی دارد </p>
         <div class="tags"><span class="tag">وای فای</span><span class="tag">آموزشی</span><span class="tag">اخلاقی</span></div>
@@ -1371,125 +1424,15 @@
   </div>
 
   <!-- Team Members -->
-  <h3 style="font-weight:600; margin-top: 40px; color: var(--color-primary);">اعضا</h3>
-  <p class="section-sub" style="margin-bottom: 20px;">متخصصان متعهد که با مهارت‌های متنوع خود قدرت تیم را تشکیل می‌دهند.</p>
-  
-  <div class="grid grid-3" role="list">
-    <article class="card" role="listitem">
-      <div class="avatar" aria-hidden="true"></div>
-      <h3>محمد جواد</h3>
-      <p class="muted">متخصص تست نفوذ وب</p>
-      <p class="muted" style="margin-top:8px">تخصص در شناسایی و بهره‌برداری از آسیب‌پذیری‌های برنامه‌های تحت وب.</p>
-      <div class="tags" style="margin-top: 10px;">
-        <span class="tag">وب</span>
-        <span class="tag">تست نفوذ</span>
-      </div>
-    </article>
-
-    <article class="card" role="listitem">
-      <div class="avatar" aria-hidden="true"></div>
-      <h3>علی رضا</h3>
-      <p class="muted">تحلیلگر بدافزار</p>
-      <p class="muted" style="margin-top:8px">متخصص در تجزیه و تحلیل کدهای مخرب و شناسایی تهدیدات سایبری.</p>
-      <div class="tags" style="margin-top: 10px;">
-        <span class="tag">بدافزار</span>
-        <span class="tag">تحلیل</span>
-      </div>
-    </article>
-
-    <article class="card" role="listitem">
-      <div class="avatar" aria-hidden="true"></div>
-      <h3>فاطمه احمدی</h3>
-      <p class="muted">متخصص امنیت شبکه</p>
-      <p class="muted" style="margin-top:8px">تمرکز بر ایمن‌سازی زیرساخت‌های شبکه و شناسایی نقاط ضعف.</p>
-      <div class="tags" style="margin-top: 10px;">
-        <span class="tag">شبکه</span>
-        <span class="tag">امنیت</span>
-      </div>
-    </article>
-
-    <article class="card" role="listitem">
-      <div class="avatar" aria-hidden="true"></div>
-      <h3>حمید کریمی</h3>
-      <p class="muted">مهندس نرم‌افزار امن</p>
-      <p class="muted" style="margin-top:8px">توسعه ابزارهای امنیتی و پیاده‌سازی بهترین روش‌های کدنویسی امن.</p>
-      <div class="tags" style="margin-top: 10px;">
-        <span class="tag">توسعه</span>
-        <span class="tag">ابزار</span>
-      </div>
-    </article>
-
-    <article class="card" role="listitem">
-      <div class="avatar" aria-hidden="true"></div>
-      <h3>زهرا محمدی</h3>
-      <p class="muted">متخصص پاسخ به حوادث</p>
-      <p class="muted" style="margin-top:8px">مدیریت و هماهنگی پاسخ به حوادث امنیتی و بازیابی پس از حمله.</p>
-      <div class="tags" style="margin-top: 10px;">
-        <span class="tag">پاسخ</span>
-        <span class="tag">حوادث</span>
-      </div>
-    </article>
-
-    <article class="card" role="listitem">
-      <div class="avatar" aria-hidden="true"></div>
-      <h3>مهدی حسینی</h3>
-      <p class="muted">تحلیلگر تهدیدات</p>
-      <p class="muted" style="margin-top:8px">شناسایی و تحلیل تهدیدات سایبری و ارائه راهکارهای مقابله.</p>
-      <div class="tags" style="margin-top: 10px;">
-        <span class="tag">تهدیدات</span>
-        <span class="tag">تحلیل</span>
-      </div>
-    </article>
-
-    <article class="card" role="listitem">
-      <div class="avatar" aria-hidden="true"></div>
-      <h3>نرجس اکبری</h3>
-      <p class="muted">متخصص رمزنگاری</p>
-      <p class="muted" style="margin-top:8px">طراحی و پیاده‌سازی الگوریتم‌های رمزنگاری و ارزیابی امنیت آنها.</p>
-      <div class="tags" style="margin-top: 10px;">
-        <span class="tag">رمزنگاری</span>
-        <span class="tag">الگوریتم</span>
-      </div>
-    </article>
-
-    <article class="card" role="listitem">
-      <div class="avatar" aria-hidden="true"></div>
-      <h3>رضا محمودی</h3>
-      <p class="muted">مهندس امنیت سامانه‌ها</p>
-      <p class="muted" style="margin-top:8px">امن‌سازی سیستم‌های عامل و سرورها در برابر تهدیدات.</p>
-      <div class="tags" style="margin-top: 10px;">
-        <span class="tag">سیستم</span>
-        <span class="tag">سرور</span>
-      </div>
-    </article>
-
-    <article class="card" role="listitem">
-      <div class="avatar" aria-hidden="true"></div>
-      <h3>سمیه قریشی</h3>
-      <p class="muted">متخصص حریم خصوصی</p>
-      <p class="muted" style="margin-top:8px">حفظ و ارتقای حریم خصوصی داده‌ها در سیستم‌های اطلاعاتی.</p>
-      <div class="tags" style="margin-top: 10px;">
-        <span class="tag">حریم خصوصی</span>
-        <span class="tag">داده</span>
-      </div>
-    </article>
-
-    <article class="card" role="listitem">
-      <div class="avatar" aria-hidden="true"></div>
-      <h3>امیرحسین یوسفی</h3>
-      <p class="muted">تحلیلگر امنیت ابری</p>
-      <p class="muted" style="margin-top:8px">ارزیابی امنیت محیط‌های ابری و ارائه راهکارهای حفاظتی.</p>
-      <div class="tags" style="margin-top: 10px;">
-        <span class="tag">ابر</span>
-        <span class="tag">ارزیابی</span>
-      </div>
-    </article>
-  </div>
-
-  <div style="margin-top:16px" class="card">
-    <h3 style="font-weight:600">بیانیهٔ تیم</h3>
-    <p class="muted">ما مستقل کار می‌کنیم، بدون اسپانسر یا حمایت رسمی؛ هدف‌مان رشد شخصی و ساختن الگویی است برای هکرهای آیندهٔ افغانستان. همه فعالیت‌های ما اخلاقی، آموزشی و با رعایت قانون و مجوز انجام می‌شود.</p>
-  </div>
+ <!-- این کد را در بخش تیم صفحه اصلی قرار دهید -->
+<div style="text-align: center; margin-top: 30px;">
+  <a href="team.html" class="btn" style="display: inline-flex; align-items: center; gap: 8px;">
+    <span>مشاهده تمام اعضای تیم</span>
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+      <path d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z"/>
+    </svg>
+  </a>
+</div>
 </section>
 
   <!-- CONTACT -->
@@ -1727,9 +1670,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
