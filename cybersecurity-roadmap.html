@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silent Knights - Cyber Security Roadmap</title>
+    <style>
+        :root {
+            --primary-bg: #0a0a0f;
+            --secondary-bg: #15151f;
+            --accent-blue: #00f0ff;
+            --accent-green: #7affc9;
+            --text-primary: #e6eef8;
+            --text-secondary: #a0c5e8;
+            --card-bg: rgba(30, 30, 40, 0.95);
+            --card-border: rgba(255, 255, 255, 0.15);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--primary-bg) 0%, var(--secondary-bg) 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 20px;
+            direction: rtl;
+            overflow-x: hidden;
+        }
+
+        .roadmap-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: headerSlide 1.2s ease-out;
+        }
+
+        .main-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 30px;
+        }
+
+        .content-table {
+            background: rgba(30, 30, 40, 0.7);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 30px auto;
+            max-width: 800px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .content-table h3 {
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.4rem;
+        }
+
+        .table-content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .table-section {
+            flex: 1;
+            min-width: 280px;
+            padding: 15px;
+        }
+
+        .section-title {
+            color: var(--accent-green);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid;
+            border-image: linear-gradient(90deg, var(--accent-green), transparent) 1;
+        }
+
+        .table-section ul {
+            list-style-type: none;
+        }
+
+        .table-section li {
+            padding: 10px 15px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            background: rgba(40, 40, 50, 0.5);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .table-section li:hover {
+            color: var(--accent-blue);
+            transform: translateX(5px);
+            background: rgba(50, 50, 60, 0.7);
+            border-left: 3px solid var(--accent-blue);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            min-height: 1400px;
+        }
+
+        /* خط اصلی تایم لاین */
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, 
+                #ff4b4b 0%, 
+                #ff6b3b 20%, 
+                #ff9b2b 40%, 
+                #9b2bff 60%, 
+                #2b7bff 80%, 
+                #00f0ff 100%);
+            transform: translateX(-50%);
+            border-radius: 2px;
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.4);
+            opacity: 0;
+            animation: lineGrow 1.5s ease-out 0.5s forwards;
+        }
+
+        /* نقاط روی خط */
+        .timeline-point {
+            position: absolute;
+            left: 50%;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--point-color-1), var(--point-color-2));
+            border-radius: 50%;
+            transform: translateX(-50%) scale(0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: white;
+            font-size: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            z-index: 10;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+        }
+
+        .timeline-point.animate {
+            animation: pointPopIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        .timeline-point:hover {
+            transform: translateX(-50%) scale(1.2);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7), 0 0 30px var(--point-color-1);
+        }
+
+        /* کارت های محتوا */
+        .timeline-card {
+            position: absolute;
+            width: 350px;
+            background: linear-gradient(135deg, var(--card-bg), rgba(20, 20, 30, 0.98));
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(15px);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0;
+            z-index: 5;
+        }
+
+        .timeline-card.card-right {
+            transform: translateX(100px) rotate(5deg);
+        }
+
+        .timeline-card.card-left {
+            transform: translateX(-100px) rotate(-5deg);
+        }
+
+        .timeline-card.animate {
+            animation: cardSlideIn 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        .timeline-card:hover {
+            transform: translateY(-10px) scale(1.02) !important;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .timeline-card h3 {
+            color: var(--text-primary);
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.4s ease 0.2s;
+        }
+
+        .timeline-card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 1rem;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.4s ease 0.3s;
+        }
+
+        .timeline-card.animate h3,
+        .timeline-card.animate p {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* موقعیت دهی نقاط و کارت ها */
+        .point-01 { top: 8%; --point-color-1: #ff4b4b; --point-color-2: #ff1e6a; animation-delay: 0.8s; }
+        .point-02 { top: 23%; --point-color-1: #ff2b2b; --point-color-2: #ff6b3b; animation-delay: 1s; }
+        .point-03 { top: 38%; --point-color-1: #ff6b3b; --point-color-2: #ff9b2b; animation-delay: 1.2s; }
+        .point-04 { top: 53%; --point-color-1: #9b2bff; --point-color-2: #ff2bd9; animation-delay: 1.4s; }
+        .point-05 { top: 68%; --point-color-1: #2b7bff; --point-color-2: #2bd9ff; animation-delay: 1.6s; }
+        .point-06 { top: 83%; --point-color-1: #00f0ff; --point-color-2: #7affc9; animation-delay: 1.8s; }
+
+        /* کارت های سمت راست */
+        .card-right {
+            right: calc(50% + 50px);
+            border-right: 5px solid var(--card-border-color);
+        }
+
+        /* کارت های سمت چپ */
+        .card-left {
+            left: calc(50% + 50px);
+            border-left: 5px solid var(--card-border-color);
+        }
+
+        /* رنگ های border برای کارت ها و موقعیت دقیق */
+        .card-01 { top: 5%; --card-border-color: rgba(255, 80, 80, 0.9); animation-delay: 0.9s; }
+        .card-02 { top: 20%; --card-border-color: rgba(255, 107, 59, 0.9); animation-delay: 1.1s; }
+        .card-03 { top: 35%; --card-border-color: rgba(255, 155, 43, 0.9); animation-delay: 1.3s; }
+        .card-04 { top: 50%; --card-border-color: rgba(170, 80, 255, 0.9); animation-delay: 1.5s; }
+        .card-05 { top: 65%; --card-border-color: rgba(80, 170, 255, 0.9); animation-delay: 1.7s; }
+        .card-06 { top: 80%; --card-border-color: rgba(80, 255, 200, 0.9); animation-delay: 1.9s; }
+
+        /* بخش‌بندی Basic و Advanced */
+        .section-divider {
+            position: absolute;
+            left: 50%;
+            width: 300px;
+            text-align: center;
+            padding: 12px 20px;
+            background: linear-gradient(90deg, rgba(255, 75, 75, 0.2), rgba(0, 240, 255, 0.2));
+            border-radius: 30px;
+            transform: translateX(-50%);
+            z-index: 15;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .basic-divider {
+            top: 45%;
+            background: linear-gradient(90deg, rgba(255, 75, 75, 0.3), rgba(255, 155, 43, 0.3));
+        }
+
+        .advanced-divider {
+            top: 75%;
+            background: linear-gradient(90deg, rgba(170, 80, 255, 0.3), rgba(80, 255, 200, 0.3));
+        }
+
+        /* انیمیشن های اصلی */
+        @keyframes headerSlide {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes lineGrow {
+            from {
+                opacity: 0;
+                height: 0;
+            }
+            to {
+                opacity: 1;
+                height: 100%;
+            }
+        }
+
+        @keyframes pointPopIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-50%) scale(0) rotate(-180deg);
+            }
+            70% {
+                opacity: 1;
+                transform: translateX(-50%) scale(1.2) rotate(10deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(-50%) scale(1) rotate(0deg);
+            }
+        }
+
+        @keyframes cardSlideIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0) rotate(0deg);
+            }
+        }
+
+        @keyframes pointGlow {
+            0%, 100% { 
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+            }
+            50% { 
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), 0 0 30px var(--point-color-1);
+            }
+        }
+
+        /* افکت نور برای کارت ها */
+        .timeline-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, 
+                var(--card-border-color),
+                transparent 30%,
+                transparent 70%,
+                var(--card-border-color));
+            border-radius: 22px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .timeline-card:hover::before {
+            opacity: 0.4;
+        }
+
+        /* پالس برای نقاط هنگام لود */
+        .timeline-point.animate {
+            animation: pointPopIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
+                       pointGlow 2s ease-in-out 1s infinite;
+        }
+
+        /* Progress bar انیمیشن */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff4b4b, #00f0ff);
+            width: 0%;
+            z-index: 1000;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+        }
+
+        /* رسپانسیو */
+        @media (max-width: 992px) {
+            .timeline {
+                min-height: 1500px;
+            }
+            
+            .timeline-card {
+                width: 320px;
+            }
+            
+            .card-right {
+                right: calc(50% + 40px);
+            }
+            
+            .card-left {
+                left: calc(50% + 40px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .timeline-line {
+                left: 40px;
+            }
+
+            .timeline-point {
+                left: 40px;
+                width: 60px;
+                height: 60px;
+                font-size: 18px;
+            }
+
+            .timeline-card {
+                width: calc(100% - 100px);
+                left: 100px !important;
+                right: auto !important;
+                border-left: 5px solid var(--card-border-color) !important;
+                border-right: none !important;
+            }
+
+            .card-right, .card-left {
+                right: auto;
+                left: 100px;
+                transform: translateX(0) rotate(0deg);
+            }
+            
+            .section-divider {
+                width: 250px;
+                font-size: 1rem;
+                left: 50%;
+            }
+            
+            .table-section {
+                min-width: 100%;
+            }
+            
+            .timeline {
+                min-height: 1600px;
+            }
+            
+            .point-01 { top: 7%; }
+            .point-02 { top: 22%; }
+            .point-03 { top: 37%; }
+            .point-04 { top: 52%; }
+            .point-05 { top: 67%; }
+            .point-06 { top: 82%; }
+            
+            .card-01 { top: 4%; }
+            .card-02 { top: 19%; }
+            .card-03 { top: 34%; }
+            .card-04 { top: 49%; }
+            .card-05 { top: 64%; }
+            .card-06 { top: 79%; }
+            
+            .basic-divider { top: 44%; }
+            .advanced-divider { top: 74%; }
+        }
+
+        @media (max-width: 576px) {
+            .timeline-card {
+                width: calc(100% - 80px);
+                left: 80px !important;
+                padding: 20px;
+            }
+
+            .timeline-point {
+                width: 50px;
+                height: 50px;
+                font-size: 16px;
+                left: 30px;
+            }
+
+            .timeline-line {
+                left: 30px;
+            }
+            
+            .card-right, .card-left {
+                left: 80px;
+            }
+
+            .section-divider {
+                width: 200px;
+                font-size: 0.9rem;
+                padding: 10px 15px;
+            }
+            
+            .content-table {
+                padding: 15px;
+            }
+            
+            .table-section {
+                padding: 10px;
+            }
+            
+            .table-section li {
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+            
+            .timeline {
+                min-height: 1700px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .roadmap-container {
+                padding: 10px;
+            }
+            
+            .timeline-card {
+                width: calc(100% - 60px);
+                left: 60px !important;
+                padding: 15px;
+            }
+            
+            .timeline-point {
+                left: 25px;
+                width: 45px;
+                height: 45px;
+            }
+            
+            .timeline-line {
+                left: 25px;
+            }
+            
+            .card-right, .card-left {
+                left: 60px;
+            }
+            
+            .section-divider {
+                width: 180px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <div class="roadmap-container">
+        <div class="header">
+            <h1 class="main-title">Silent Knights Cyber Security RoadMap</h1>
+            <div class="subtitle">مسیر یادگیری امنیت سایبری از پایه تا پیشرفته</div>
+            
+            <div class="content-table">
+                <h3>فهرست مراحل یادگیری</h3>
+                <div class="table-content">
+                    <div class="table-section">
+                        <div class="section-title" style="border-image: linear-gradient(90deg, #ff4b4b, transparent) 1;">مراحل Basic</div>
+                        <ul>
+                            <li onclick="scrollToCard('card-01')">Zero Hacker - پایه و اساس</li>
+                            <li onclick="scrollToCard('card-02')">Network For Hacker - شبکه</li>
+                            <li onclick="scrollToCard('card-03')">Linux For Hacker - لینوکس</li>
+                            <li onclick="scrollToCard('card-04')">Python For Hacker - پایتون</li>
+                        </ul>
+                    </div>
+                    <div class="table-section">
+                        <div class="section-title" style="border-image: linear-gradient(90deg, #9b2bff, transparent) 1;">مراحل Advanced</div>
+                        <ul>
+                            <li onclick="scrollToCard('card-05')">CEHv13 - هکر اخلاقی</li>
+                            <li onclick="scrollToCard('card-06')">PWK (Pen-200) - تست نفوذ</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline">
+            <!-- خط اصلی -->
+            <div class="timeline-line"></div>
+            
+            <!-- بخش‌بندی Basic و Advanced -->
+            <div class="section-divider basic-divider">Basic Skills - مهارت‌های پایه</div>
+            <div class="section-divider advanced-divider">Advanced Certifications - مدارک پیشرفته</div>
+
+            <!-- نقاط تایم لاین -->
+            <div class="timeline-point point-01">00</div>
+            <div class="timeline-point point-02">01</div>
+            <div class="timeline-point point-03">02</div>
+            <div class="timeline-point point-04">03</div>
+            <div class="timeline-point point-05">04</div>
+            <div class="timeline-point point-06">05</div>
+
+            <!-- کارت های محتوا -->
+            <div class="timeline-card card-right card-01" id="card-01">
+                <h3>Zero Hacker</h3>
+                <p>توسعه ذهنیت امنیت سایبری پایه - درک دیدگاه هکر، مدل‌سازی تهدیدات و تفکر امنیت-محور که پایه و اساس تمام دانش امنیت سایبری را تشکیل می‌دهد.</p>
+            </div>
+
+            <div class="timeline-card card-left card-02" id="card-02">
+                <h3>Network For Hacker</h3>
+                <p>تسلط بر پروتکل‌های شبکه، معماری و مکانیزم‌های امنیتی. یادگیری تحلیل ترافیک شبکه، شناسایی آسیب‌پذیری‌ها و درک چگونگی جریان داده در سیستم‌ها از دیدگاه امنیتی.</p>
+            </div>
+
+            <div class="timeline-card card-right card-03" id="card-03">
+                <h3>Linux For Hacker</h3>
+                <p>تبحر در خط فرمان لینوکس، مدیریت سیستم و ابزارهای امنیتی. یادگیری استفاده از محیط‌های لینوکس برای تست نفوذ، پزشکی قانونی و عملیات امنیتی.</p>
+            </div>
+
+            <div class="timeline-card card-left card-04" id="card-04">
+                <h3>Python For Hacker</h3>
+                <p>توسعه مهارت‌های اسکریپت‌نویسی برای اتوماسیون وظایف امنیتی، ایجاد ابزارهای سفارشی و تحلیل داده‌های امنیتی. یادگیری نوشتن اسکریپت‌ها برای اسکن آسیب‌پذیری، بهره‌برداری و مکانیزم‌های دفاعی.</p>
+            </div>
+
+            <div class="timeline-card card-right card-05" id="card-05">
+                <h3>CEHv13</h3>
+                <p>هکر اخلاقی معتبر نسخه ۱۳ - تسلط بر ابزارها، تکنیک‌ها و روش‌های مورد استفاده هکرهای مخرب، اما با نیت اخلاقی. یادگیری تست نفوذ، ارزیابی آسیب‌پذیری و حسابرسی امنیتی.</p>
+            </div>
+
+            <div class="timeline-card card-left card-06" id="card-06">
+                <h3>PWK (Pen-200)</h3>
+                <p>تست نفوذ امنیت تهاجمی با کالی لینوکس - دوره عملی تست نفوذ با تمرکز بر سناریوهای دنیای واقعی، تکنیک‌های بهره‌برداری پیشرفته و گزارش‌دهی حرفه‌ای.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // انیمیشن اسکرول پیشرفته
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.timeline-card');
+            const points = document.querySelectorAll('.timeline-point');
+            const progressBar = document.getElementById('progressBar');
+            
+            // انیمیشن اولیه هنگام لود صفحه
+            setTimeout(() => {
+                cards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.classList.add('animate');
+                    }, card.style.animationDelay || index * 200 + 800);
+                });
+
+                points.forEach((point, index) => {
+                    setTimeout(() => {
+                        point.classList.add('animate');
+                    }, point.style.animationDelay || index * 200 + 600);
+                });
+            }, 500);
+
+            // انیمیشن اسکرول با Intersection Observer
+            const observerOptions = {
+                threshold: 0.3,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const scrollObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                        
+                        // افکت ویژه برای نقاط
+                        if (entry.target.classList.contains('timeline-point')) {
+                            entry.target.style.animation = `pointPopIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, pointGlow 2s ease-in-out 0.5s infinite`;
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            // Progress bar انیمیشن
+            window.addEventListener('scroll', () => {
+                const windowHeight = window.innerHeight;
+                const documentHeight = document.documentElement.scrollHeight - windowHeight;
+                const scrollTop = window.pageYOffset;
+                const progress = (scrollTop / documentHeight) * 100;
+                progressBar.style.width = `${progress}%`;
+            });
+
+            // مشاهده همه المان‌ها
+            cards.forEach(card => {
+                scrollObserver.observe(card);
+            });
+
+            points.forEach(point => {
+                scrollObserver.observe(point);
+            });
+
+            // افکت hover پیشرفته برای نقاط
+            points.forEach(point => {
+                point.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateX(-50%) scale(1.3)';
+                    this.style.zIndex = '20';
+                    
+                    // ایجاد افکت موج
+                    const ripple = document.createElement('div');
+                    ripple.style.cssText = `
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        width: 100%;
+                        height: 100%;
+                        border: 2px solid ${getComputedStyle(this).getPropertyValue('--point-color-1')};
+                        border-radius: 50%;
+                        transform: translate(-50%, -50%) scale(0);
+                        animation: rippleEffect 0.6s ease-out;
+                        z-index: -1;
+                    `;
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+                
+                point.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateX(-50%) scale(1)';
+                    this.style.zIndex = '10';
+                });
+            });
+
+            // افکت ripple برای نقاط
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes rippleEffect {
+                    0% {
+                        transform: translate(-50%, -50%) scale(0);
+                        opacity: 1;
+                    }
+                    100% {
+                        transform: translate(-50%, -50%) scale(1.5);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+
+        // لودینگ اسموث برای کل صفحه
+        window.addEventListener('load', function() {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.8s ease';
+            
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+        
+        // تابع برای اسکرول به کارت مورد نظر
+        function scrollToCard(cardId) {
+            const card = document.getElementById(cardId);
+            if (card) {
+                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                // افکت ویژه برای کارت انتخاب شده
+                card.style.zIndex = '20';
+                card.style.boxShadow = '0 0 30px rgba(0, 240, 255, 0.7)';
+                setTimeout(() => {
+                    card.style.zIndex = '5';
+                    card.style.boxShadow = '0 15px 40px rgba(0, 0, 0, 0.4)';
+                }, 1500);
+            }
+        }
+    </script>
+</body>
+</html>
