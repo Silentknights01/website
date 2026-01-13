@@ -1,0 +1,1701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows 11 Exam - Silent Knights</title>
+    <style>
+        /* ========== VARIABLES ========== */
+        :root{
+            --font-main: "Berlin Sans FB", "Poppins", system-ui, -apple-system, sans-serif;
+            --font-mono: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+
+            /* Silent Knights Brand Colors */
+            --color-primary: #E31E27;
+            --color-primary-dark: #15151F;
+            --color-secondary: #999A93;
+            --color-accent: #E31E27;
+            --color-neon: #F8F8F8;
+            --color-bg: #030d33;
+            --color-bg-secondary: #0A0A0F;
+            --color-bg-card: #1A1A24;
+            --color-gray: #999A93;
+            --color-light: #F8F8F8;
+            --color-text: #F8F8F8;
+            --color-text-muted: #999A93;
+
+            /* Enhanced Shadows & Effects */
+            --radius: 16px;
+            --radius-small: 8px;
+            --shadow: 0 8px 32px rgba(227, 30, 39, 0.3);
+            --shadow-neon: 0 0 20px rgba(227, 30, 39, 0.4);
+            --shadow-glow: 0 0 40px rgba(227, 30, 39, 0.2);
+            --nav-height: 70px;
+            
+            /* Animation Speeds */
+            --transition-fast: 0.2s;
+            --transition-normal: 0.3s;
+            --transition-slow: 0.5s;
+        }
+
+        /* ========== RESET & BASE ========== */
+        *{box-sizing:border-box;margin:0;padding:0}
+        html{scroll-behavior:smooth}
+
+        html, body {
+            font-family: var(--font-main);
+            font-weight: 400;
+            font-synthesis: none;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-bg-secondary) 100%);
+            color: var(--color-text);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(153,154,147,.25);
+            position: relative;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                var(--color-primary) 50%, 
+                transparent 100%);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            color: var(--color-primary);
+            text-shadow: 0 0 20px rgba(227, 30, 39, 0.5);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-bottom: 20px;
+            color: var(--color-text-muted);
+        }
+        
+        .timer-container {
+            background: var(--color-bg-card);
+            padding: 15px;
+            border-radius: var(--radius);
+            margin: 20px auto;
+            max-width: 300px;
+            border: 1px solid rgba(227, 30, 39, 0.3);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timer-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                var(--color-primary), 
+                var(--color-secondary));
+            animation: scanline 3s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        #timer {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--color-primary);
+            text-shadow: 0 0 10px rgba(227, 30, 39, 0.5);
+            font-family: var(--font-mono);
+        }
+        
+        .instructions {
+            background: var(--color-bg-card);
+            padding: 25px;
+            border-radius: var(--radius);
+            margin: 20px 0;
+            border-left: 4px solid var(--color-primary);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .instructions::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, 
+                transparent 30%, 
+                rgba(227, 30, 39, 0.05) 50%, 
+                transparent 70%);
+            pointer-events: none;
+        }
+        
+        .instructions h2 {
+            margin-bottom: 15px;
+            color: var(--color-primary);
+        }
+        
+        .instructions ul {
+            margin-left: 20px;
+            line-height: 1.6;
+            color: var(--color-text);
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .instructions li::before {
+            content: '▶';
+            color: var(--color-primary);
+            position: absolute;
+            left: -15px;
+            font-size: 0.8em;
+        }
+        
+        .question-container {
+            background: var(--color-bg-card);
+            padding: 25px;
+            border-radius: var(--radius);
+            margin: 20px 0;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255,255,255,.03);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .question-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                var(--color-primary), 
+                var(--color-secondary));
+            transform: scaleX(0);
+            transition: transform var(--transition-normal) ease;
+        }
+
+        .question-container:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .question {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .question-number {
+            font-weight: bold;
+            color: var(--color-primary);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            text-shadow: 0 0 10px rgba(227, 30, 39, 0.3);
+        }
+        
+        .question-text {
+            margin-bottom: 15px;
+            line-height: 1.5;
+            color: var(--color-text);
+            font-size: 1.1rem;
+        }
+        
+        .options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+        
+        @media (min-width: 768px) {
+            .options {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        .option {
+            background: rgba(30, 30, 40, 0.8);
+            padding: 15px;
+            border-radius: var(--radius-small);
+            cursor: pointer;
+            transition: all var(--transition-normal) ease;
+            border: 1px solid rgba(153, 154, 147, 0.2);
+            color: var(--color-text);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(227, 30, 39, 0.1), 
+                transparent);
+            transition: left var(--transition-normal) ease;
+        }
+
+        .option:hover::before {
+            left: 100%;
+        }
+        
+        .option:hover {
+            background: rgba(227, 30, 39, 0.15);
+            transform: translateY(-2px);
+            border-color: var(--color-primary);
+            box-shadow: var(--shadow);
+        }
+        
+        .option.selected {
+            background: rgba(227, 30, 39, 0.25);
+            border-color: var(--color-primary);
+            color: var(--color-neon);
+            box-shadow: var(--shadow-neon);
+        }
+
+        /* استایل برای سوالات چندگزینه‌ای با چند جواب صحیح */
+        .option.multiple-correct {
+            border-left: 4px solid #4CAF50;
+        }
+        
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, var(--color-primary) 0%, #c21820 100%);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            font-family: var(--font-main);
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-normal) ease;
+            box-shadow: var(--shadow);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.2), 
+                transparent);
+            transition: left var(--transition-normal) ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-neon);
+            filter: brightness(1.1);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(3, 13, 51, 0.95);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, var(--color-bg-card) 0%, var(--color-primary-dark) 100%);
+            padding: 40px;
+            border-radius: var(--radius);
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            text-align: center;
+            box-shadow: var(--shadow-glow);
+            border: 1px solid rgba(227, 30, 39, 0.3);
+            color: var(--color-text);
+            position: relative;
+        }
+
+        .modal-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                var(--color-primary), 
+                var(--color-secondary));
+        }
+        
+        .modal h2 {
+            color: var(--color-primary);
+            margin-bottom: 20px;
+            font-size: 2rem;
+            text-shadow: 0 0 20px rgba(227, 30, 39, 0.5);
+        }
+        
+        .modal p {
+            margin-bottom: 25px;
+            line-height: 1.6;
+            color: var(--color-text-muted);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+        }
+        
+        /* استایل‌های جدید برای نمایش نتایج */
+        .results-container {
+            text-align: left;
+            margin-top: 20px;
+        }
+        
+        .result-item {
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: var(--radius-small);
+            background: rgba(30, 30, 40, 0.7);
+            border-left: 5px solid var(--color-primary);
+            transition: all var(--transition-normal) ease;
+        }
+
+        .result-item:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow);
+        }
+        
+        .result-item.correct {
+            border-left-color: #4CAF50;
+        }
+        
+        .result-item.incorrect {
+            border-left-color: #F44336;
+        }
+        
+        .result-question {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--color-text);
+            font-size: 1.1rem;
+        }
+        
+        .result-answer {
+            margin: 5px 0;
+            padding: 12px;
+            border-radius: var(--radius-small);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+        }
+        
+        .user-answer {
+            background: rgba(244, 67, 54, 0.2);
+            border: 1px solid #F44336;
+            color: #ff8a80;
+        }
+        
+        .correct-answer {
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid #4CAF50;
+            color: #a5d6a7;
+        }
+        
+        .score-display {
+            font-size: 1.5rem;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: var(--radius);
+            background: var(--color-bg-card);
+            border: 1px solid rgba(227, 30, 39, 0.3);
+            color: var(--color-primary);
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(227, 30, 39, 0.3);
+        }
+        
+        .review-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .review-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-weight: bold;
+            transition: all var(--transition-normal) ease;
+            font-family: var(--font-main);
+        }
+        
+        #review-answers {
+            background: linear-gradient(135deg, var(--color-primary) 0%, #c21820 100%);
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        #review-answers:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-neon);
+        }
+        
+        #close-results {
+            background: transparent;
+            color: var(--color-text);
+            border: 1px solid var(--color-secondary);
+        }
+
+        #close-results:hover {
+            background: var(--color-secondary);
+            transform: translateY(-2px);
+        }
+        
+        /* استایل‌های جدید برای فرم کاربر */
+        .user-form {
+            background: var(--color-bg-card);
+            padding: 30px;
+            border-radius: var(--radius);
+            margin: 20px 0;
+            border-left: 4px solid var(--color-primary);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .user-form::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, 
+                transparent 30%, 
+                rgba(227, 30, 39, 0.05) 50%, 
+                transparent 70%);
+            pointer-events: none;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border-radius: var(--radius-small);
+            border: 1px solid rgba(153, 154, 147, 0.3);
+            background: rgba(30, 30, 40, 0.8);
+            color: var(--color-text);
+            font-size: 1rem;
+            font-family: var(--font-main);
+            transition: all var(--transition-normal) ease;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(227, 30, 39, 0.2);
+            background: rgba(30, 30, 40, 0.9);
+        }
+        
+        .user-info {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: var(--color-bg-card);
+            border-radius: var(--radius);
+            border-left: 4px solid var(--color-primary);
+            box-shadow: var(--shadow);
+        }
+        
+        .sending-email {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: var(--color-bg-card);
+            border-radius: var(--radius);
+            border-left: 4px solid var(--color-primary);
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .silent-knights-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: var(--color-bg-card);
+            border-radius: var(--radius);
+            border: 1px solid rgba(227, 30, 39, 0.3);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .silent-knights-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                var(--color-primary), 
+                var(--color-secondary));
+            animation: scanline 3s linear infinite;
+        }
+
+        .silent-knights-header h2 {
+            color: var(--color-primary);
+            font-size: 2rem;
+            margin-bottom: 5px;
+            text-shadow: 0 0 20px rgba(227, 30, 39, 0.5);
+        }
+
+        .silent-knights-header p {
+            color: var(--color-text-muted);
+            font-style: italic;
+        }
+
+        /* Animation for correct/incorrect answers during review */
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 5px rgba(76, 175, 80, 0.5); }
+            50% { box-shadow: 0 0 20px rgba(76, 175, 80, 0.8); }
+            100% { box-shadow: 0 0 5px rgba(76, 175, 80, 0.5); }
+        }
+
+        .option.correct-answer-review {
+            animation: pulse-glow 2s ease-in-out infinite;
+            border-color: #4CAF50;
+        }
+
+        .option.incorrect-answer-review {
+            border-color: #F44336;
+            background: rgba(244, 67, 54, 0.1);
+        }
+
+        /* Cyberpunk Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--color-bg-secondary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-primary);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-neon);
+        }
+
+        /* Language Toggle Button */
+        .language-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--color-bg-card);
+            border: 1px solid var(--color-primary);
+            color: var(--color-primary);
+            padding: 10px 15px;
+            border-radius: var(--radius-small);
+            cursor: pointer;
+            font-family: var(--font-main);
+            font-weight: 600;
+            transition: all var(--transition-normal) ease;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+
+        .language-toggle:hover {
+            background: var(--color-primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* RTL Support for Dari */
+        body[dir="rtl"] {
+            text-align: right;
+        }
+
+        body[dir="rtl"] .instructions {
+            border-left: none;
+            border-right: 4px solid var(--color-primary);
+        }
+
+        body[dir="rtl"] .instructions ul {
+            margin-left: 0;
+            margin-right: 20px;
+        }
+
+        body[dir="rtl"] .instructions li::before {
+            left: auto;
+            right: -15px;
+        }
+
+        body[dir="rtl"] .user-form {
+            border-left: none;
+            border-right: 4px solid var(--color-primary);
+        }
+
+        body[dir="rtl"] .user-info {
+            border-left: none;
+            border-right: 4px solid var(--color-primary);
+        }
+
+        body[dir="rtl"] .sending-email {
+            border-left: none;
+            border-right: 4px solid var(--color-primary);
+        }
+
+        body[dir="rtl"] .result-item {
+            border-left: none;
+            border-right: 5px solid var(--color-primary);
+        }
+
+        body[dir="rtl"] .result-item.correct {
+            border-right-color: #4CAF50;
+        }
+
+        body[dir="rtl"] .result-item.incorrect {
+            border-right-color: #F44336;
+        }
+
+        body[dir="rtl"] .form-group {
+            text-align: right;
+        }
+
+        body[dir="rtl"] .results-container {
+            text-align: right;
+        }
+
+        /* استایل برای چک‌باکس‌ها در سوالات چندگزینه‌ای */
+        .checkbox-option {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .checkbox-option input[type="checkbox"] {
+            margin-top: 3px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .checkbox-option label {
+            flex: 1;
+            cursor: pointer;
+            margin: 0;
+        }
+
+        .multiple-choice-note {
+            font-size: 0.9rem;
+            color: var(--color-primary);
+            font-style: italic;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: rgba(227, 30, 39, 0.1);
+            border-radius: var(--radius-small);
+        }
+    </style>
+</head>
+<body dir="ltr">
+    <button class="language-toggle" id="language-toggle">دری / Dari</button>
+
+    <div class="container">
+        <div class="silent-knights-header">
+            <h2>Silent Knights</h2>
+            <p id="header-subtitle">Cyber Security Team</p>
+        </div>
+        
+        <header>
+            <h1 id="exam-title">Windows 11 Exam</h1>
+            <div class="subtitle" id="exam-subtitle">Test your Windows 11 knowledge with this 20-question exam</div>
+            <div class="timer-container">
+                <div id="timer">20:00</div>
+            </div>
+        </header>
+        
+        <div class="user-info" id="user-info" style="display: none;">
+            <h3 id="user-info-title">Exam Taker Information</h3>
+            <p id="user-name-label">Name: <span id="user-name-display"></span></p>
+            <p id="user-email-label">Email: <span id="user-email-display"></span></p>
+        </div>
+        
+        <div class="user-form" id="user-form">
+            <h2 id="form-title">Please Enter Your Information</h2>
+            <div class="form-group">
+                <label for="first-name" id="first-name-label">First Name</label>
+                <input type="text" id="first-name" placeholder="Enter your first name" required>
+            </div>
+            <div class="form-group">
+                <label for="last-name" id="last-name-label">Last Name</label>
+                <input type="text" id="last-name" placeholder="Enter your last name" required>
+            </div>
+            <div class="form-group">
+                <label for="email" id="email-label">Email Address</label>
+                <input type="email" id="email" placeholder="Enter your email address" required>
+            </div>
+            <button class="btn" id="user-submit">Continue to Exam</button>
+        </div>
+        
+        <div class="instructions" style="display: none;" id="instructions">
+            <h2 id="instructions-title">Exam Instructions</h2>
+            <ul id="instructions-list">
+                <li>You have 20 minutes to complete this exam</li>
+                <li>This exam contains 20 multiple-choice questions</li>
+                <li>Each question may have 1 to 3 correct answers</li>
+                <li>Each question is worth 2.5 points</li>
+                <li>Select all correct answers for each question</li>
+                <li>You can change your answers at any time before submitting</li>
+                <li>The timer will start when you click "Start Exam"</li>
+                <li>When finished, click the "Submit Exam" button</li>
+            </ul>
+        </div>
+        
+        <div class="question-container" style="display: none;" id="question-container">
+            <!-- Questions will be dynamically inserted here -->
+        </div>
+        
+        <div class="btn-container" style="display: none;" id="submit-btn-container">
+            <button class="btn" id="submit-btn">Submit Exam</button>
+        </div>
+        
+        <div class="sending-email" id="sending-email">
+            <h3 id="sending-title">Sending exam results to instructor...</h3>
+            <p id="sending-message">Please wait while we process your results.</p>
+        </div>
+        
+        <footer>
+            <p id="footer-text">Silent Knights &copy; 2023 | Windows 11 Exam | Cyber Security Team</p>
+        </footer>
+    </div>
+    
+    <div class="modal" id="start-modal">
+        <div class="modal-content">
+            <h2 id="start-modal-title">Ready to Begin?</h2>
+            <p id="start-modal-text">You will have 20 minutes to complete 20 multiple-choice questions. Each question may have 1 to 3 correct answers. The timer will start as soon as you click "Start Exam".</p>
+            <button class="btn" id="start-exam">Start Exam</button>
+        </div>
+    </div>
+    
+    <div class="modal" id="finished-modal">
+        <div class="modal-content">
+            <h2 id="finished-modal-title">Exam Submitted!</h2>
+            <p id="finished-modal-text">Your answers have been submitted successfully. Your results will be available soon.</p>
+        </div>
+    </div>
+    
+    <!-- مودال جدید برای نمایش نتایج دقیق -->
+    <div class="modal" id="results-modal">
+        <div class="modal-content">
+            <h2 id="results-modal-title">Exam Results</h2>
+            <div class="score-display">
+                <span id="score-text">You scored</span> <span id="score-value">0</span> <span id="out-of-text">out of</span> <span id="total-questions">50</span> <span id="points-text">points</span>
+            </div>
+            <div class="results-container" id="results-container">
+                <!-- نتایج هر سوال اینجا نمایش داده می‌شود -->
+            </div>
+            <div class="review-buttons">
+                <button class="review-btn" id="review-answers">Review Answers</button>
+                <button class="review-btn" id="close-results">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Language texts
+        const translations = {
+            en: {
+                headerSubtitle: "Cyber Security Team",
+                examTitle: "Windows 11 Exam",
+                examSubtitle: "Test your Windows 11 knowledge with this 20-question exam",
+                userInfoTitle: "Exam Taker Information",
+                userNameLabel: "Name:",
+                userEmailLabel: "Email:",
+                formTitle: "Please Enter Your Information",
+                firstNameLabel: "First Name",
+                lastNameLabel: "Last Name",
+                emailLabel: "Email Address",
+                userSubmit: "Continue to Exam",
+                instructionsTitle: "Exam Instructions",
+                instructions: [
+                    "You have 20 minutes to complete this exam",
+                    "This exam contains 20 multiple-choice questions",
+                    "Each question may have 1 to 3 correct answers",
+                    "Each question is worth 2.5 points",
+                    "Select all correct answers for each question",
+                    "You can change your answers at any time before submitting",
+                    "The timer will start when you click \"Start Exam\"",
+                    "When finished, click the \"Submit Exam\" button"
+                ],
+                submitBtn: "Submit Exam",
+                sendingTitle: "Sending exam results to instructor...",
+                sendingMessage: "Please wait while we process your results.",
+                footerText: "Silent Knights &copy; 2023 | Windows 11 Exam | Cyber Security Team",
+                startModalTitle: "Ready to Begin?",
+                startModalText: "You will have 20 minutes to complete 20 multiple-choice questions. Each question may have 1 to 3 correct answers. The timer will start as soon as you click \"Start Exam\".",
+                startExam: "Start Exam",
+                finishedModalTitle: "Exam Submitted!",
+                finishedModalText: "Your answers have been submitted successfully. Your results will be available soon.",
+                resultsModalTitle: "Exam Results",
+                scoreText: "You scored",
+                outOfText: "out of",
+                pointsText: "points",
+                reviewAnswers: "Review Answers",
+                closeResults: "Close",
+                yourAnswer: "Your answer:",
+                correctAnswer: "Correct answer:",
+                multipleChoiceNote: "Note: This question may have multiple correct answers. Select all that apply."
+            },
+            fa: { // Dari Persian
+                headerSubtitle: "تیم امنیت سایبری",
+                examTitle: "امتحان ویندوز ۱۱",
+                examSubtitle: "دانش ویندوز ۱۱ خود را با این امتحان ۲۰ سوالی محک بزنید",
+                userInfoTitle: "معلومات شرکت کننده",
+                userNameLabel: "نام:",
+                userEmailLabel: "ایمیل:",
+                formTitle: "لطفاً معلومات خود را وارد کنید",
+                firstNameLabel: "نام",
+                lastNameLabel: "تخلص",
+                emailLabel: "آدرس ایمیل",
+                userSubmit: "ادامه به امتحان",
+                instructionsTitle: "راهنمایی های امتحان",
+                instructions: [
+                    "شما 20 دقیقه وقت دارید تا این امتحان را تکمیل کنید",
+                    "این امتحان شامل 20 سوال چندگزینه‌ای است",
+                    " سوالات ممکن است 1 الی 3 جواب صحیح داشته باشند",
+                    "هر سوال 2.5 نمره دارد",
+                    "تمام جواب‌های صحیح را برای هر سوال انتخاب کنید",
+                    "می‌توانید جواب‌ها را قبل از ارسال تغییر دهید",
+                    "تایمر وقتی فعال می‌شود که روی \"شروع امتحان\" کلیک کنید",
+                    "وقتی تمام شد، روی دکمه \"ارسال امتحان\" کلیک کنید"
+                ],
+                submitBtn: "ارسال امتحان",
+                sendingTitle: "در حال ارسال نتایج به مربی...",
+                sendingMessage: "لطفاً منتظر بمانید تا نتایج شما پردازش شود.",
+                footerText: " قهرمانان خاموش &copy; 2025 | امتحان ویندوز ۱۱ | تیم امنیت سایبری",
+                startModalTitle: "آماده اید شروع کنید؟",
+                startModalText: "شما 20 دقیقه وقت دارید تا به 20 سوال چندگزینه‌ای جواب دهید.  سوالات ممکن است 1 الی 3 جواب صحیح داشته باشد. تایمر به محض کلیک روی \"شروع امتحان\" فعال می‌شود.",
+                startExam: "شروع امتحان",
+                finishedModalTitle: "امتحان ارسال شد!",
+                finishedModalText: "جواب‌های شما با موفقیت ارسال شد. نتایج به زودی در دسترس خواهد بود.",
+                resultsModalTitle: "نتایج امتحان",
+                scoreText: "امتیاز شما",
+                outOfText: "از",
+                pointsText: "نمره",
+                reviewAnswers: "مرور جواب‌ها",
+                closeResults: "بستن",
+                yourAnswer: "جواب شما:",
+                correctAnswer: "جواب صحیح:",
+                multipleChoiceNote: "توجه: این سوالات ممکن است چندین جواب صحیح داشته باشد. تمام گزینه‌های صحیح را انتخاب کنید."
+            }
+        };
+
+        let currentLanguage = 'en';
+
+        // Questions data for Windows 11 Exam
+        const questions = [
+            {
+                question: "کمپیوتر چیست؟",
+                options: [
+                    "کمپیوتر یک ماشین الکترونیکی بوده که قابل پروگرام میباشد.",
+                    "کمیپوتر از کلمه Compute گرفته شده که به معنی حساب کردن است.",
+                    "کمپیوتر ماشین میخانیکی است.",
+                    "کمپیوتر ماشین برقی است که اطلاعات را از کاربر گرفته، تجزیه و تحلیل میکند و نتیجه اش را به زود ترین فرصت برای ما نشان میدهد."
+                ],
+                correct: [0, 1, 3],
+                type: "multiple"
+            },
+            {
+                question: "سیستم عامل چیست؟",
+                options: [
+                    "سیستم عامل نرم افزار سیستمی است که برای مدیریت منابع کمپیوتر را بر عهده دارد.",
+                    "سیستم عامل یک بحش از سخت افزار کمپیوتر است",
+                    "سیستم عامل رابط بین سخت افزار و نرم افزار است",
+                    "هیچکدام"
+                ],
+                correct: [0, 2],
+                type: "multiple"
+            },
+            {
+                question: "تفاوت بین GPT و MBR در چیست؟",
+                options: [
+                    "MBR: حداکثر تا 2TB حافظه و 4 درایف میباشد.",
+                    "GPT: حداکثر تا 2TB حافظه و 4 درایف میباشد.",
+                    "MBR: حداکثر تا 3TB حافظه و 2 درایف میباشد.",
+                    "GPT: حداکثر تا9.44ZB حافظه و 128 درایف میباشد."
+                ],
+                correct: [0, 3],
+                type: "multiple"
+            },
+            {
+                question: "شارتکت Windows Settings چیست؟",
+                options: [
+                    "Ctrl + L",
+                    "Ctrl + I",
+                    "Win + L",
+                    "Win + I"
+                ],
+                correct: [3],
+                type: "single"
+            },
+            {
+                question: "شارتکت Full Screen چیست؟",
+                options: [
+                    "Ctrl + F",
+                    "هیچکدام",
+                    "F10",
+                    "F12"
+                ],
+                correct: [1],
+                type: "single"
+            },
+            {
+                question: "شارتکت Task Manager چیست؟",
+                options: [
+                    "Ctrl + Shift + E",
+                    "Ctrl + E",
+                    "Ctrl + Shift + Esc",
+                    "Ctrl + ESC"
+                ],
+                correct: [2],
+                type: "single"
+            },
+            {
+                question: "شارتکت Properties چیست؟",
+                options: [
+                    "Ctrl + P",
+                    "Alt + P",
+                    "Alt + Enter",
+                    "هیچکدام"
+                ],
+                correct: [2],
+                type: "single"
+            },
+            {
+                question: "CPU چیست؟",
+                options: [
+                    "پروسسر است، که کار اش پروسس کردن دیتا (اطلاعات) یا تحلیل کردن دیتا میباشد",
+                    "مغر کمپیوتر",
+                    "Central Processing Unit",
+                    "هیچکدام"
+                ],
+                correct: [0, 1, 2],
+                type: "multiple"
+            },
+            {
+                question: "Bootable بوتیبل به چی معنی است؟",
+                options: [
+                    "بالا آمدن سیستم عامل",
+                    "نصب کردن یک سیستم عامل",
+                    "آماده شدن حافظه برای نصب یک سیستم عامل جدید",
+                    "هیچکدام"
+                ],
+                correct: [2],
+                type: "single"
+            },
+            {
+                question: "کدام یکی از واحدات ذیل بزرگتر است؟",
+                options: [
+                    "MB",
+                    "GB",
+                    "TB",
+                    "Byte"
+                ],
+                correct: [2],
+                type: "single"
+            },
+            {
+                question: "کوچکترین واحد کمپیوتر چیست؟",
+                options: [
+                    "Bit",
+                    "byte",
+                    "KB",
+                    "MB"
+                ],
+                correct: [0],
+                type: "single"
+            },
+            {
+                question: "شارتکت Lock Screen چیست؟",
+                options: [
+                    "Win + I",
+                    "Win + L",
+                    "Ctrl + L",
+                    "Ctrl + I"
+                ],
+                correct: [1],
+                type: "single"
+            },
+            {
+                question: "برای سیستم های ضعیف کدام نخسه باید نصب شود؟",
+                options: [
+                    "X86",
+                    "X64",
+                    "32 Bit",
+                    "64 Bit"
+                ],
+                correct: [0, 2],
+                type: "multiple"
+            },
+            {
+                question: "شارتکت ساختن فولدر چیست؟",
+                options: [
+                    "Ctrl + Shift + N",
+                    "Shift + Ctrl + N",
+                    "Ctrl + N",
+                    "هیچکدام"
+                ],
+                correct: [0, 1],
+                type: "multiple"
+            },
+            {
+                question: "درایف چیست؟",
+                options: [
+                    "درایف تقسیم بندی منطقی کمپیوتر است",
+                    "تقسیم یا پارتیشن بندی",
+                    "یک نرم افزار یا برنامه است",
+                    "هیچکدام"
+                ],
+                correct: [0, 1],
+                type: "multiple"
+            },
+            {
+                question: "4.8GB مساوی است به:",
+                options: [
+                    "4,915.0 MB",
+                    "4,915.2 MB",
+                    "4,915.2 KB",
+                    "هیچکدام"
+                ],
+                correct: [1],
+                type: "single"
+            },
+            {
+                question: "کدام از سیستم عامل های ذیل متن باز است؟",
+                options: [
+                    "IOS",
+                    "Andriod",
+                    "Windows",
+                    "Linux"
+                ],
+                correct: [1, 3],
+                type: "multiple"
+            },
+            {
+                question: "کدام یکی از حافظه های ذیل دارای سرعت بالا ولی طول عمر پایین است؟",
+                options: [
+                    "HDD",
+                    "SSD",
+                    "RAM",
+                    "هیچکدام"
+                ],
+                correct: [1],
+                type: "single"
+            },
+            {
+                question: "برای نمایش فایل ها و فولدر، در CMD باید از کدام دستور استفاده کنیم؟",
+                options: [
+                    "ls",
+                    "dir",
+                    "cd",
+                    "mkdir"
+                ],
+                correct: [1],
+                type: "single"
+            },
+            {
+                question: "برای رفتن به مسیر دیسکتاپ از کدام دستور زیر باید استفاده کنیم؟",
+                options: [
+                    "cd ..",
+                    "cd Desktop",
+                    "cd desktop",
+                    "dir"
+                ],
+                correct: [1, 2],
+                type: "multiple"
+            }
+        ];
+
+        // DOM elements
+        const questionContainer = document.querySelector('.question-container');
+        const timerElement = document.getElementById('timer');
+        const startModal = document.getElementById('start-modal');
+        const finishedModal = document.getElementById('finished-modal');
+        const resultsModal = document.getElementById('results-modal');
+        const startExamBtn = document.getElementById('start-exam');
+        const submitBtn = document.getElementById('submit-btn');
+        const resultsContainer = document.getElementById('results-container');
+        const scoreValue = document.getElementById('score-value');
+        const totalQuestions = document.getElementById('total-questions');
+        const reviewAnswersBtn = document.getElementById('review-answers');
+        const closeResultsBtn = document.getElementById('close-results');
+        const userForm = document.getElementById('user-form');
+        const userSubmitBtn = document.getElementById('user-submit');
+        const firstNameInput = document.getElementById('first-name');
+        const lastNameInput = document.getElementById('last-name');
+        const emailInput = document.getElementById('email');
+        const instructions = document.getElementById('instructions');
+        const submitBtnContainer = document.getElementById('submit-btn-container');
+        const userInfo = document.getElementById('user-info');
+        const userNameDisplay = document.getElementById('user-name-display');
+        const userEmailDisplay = document.getElementById('user-email-display');
+        const sendingEmail = document.getElementById('sending-email');
+        const languageToggle = document.getElementById('language-toggle');
+        
+        // User data
+        let userData = {
+            firstName: '',
+            lastName: '',
+            email: ''
+        };
+        
+        // Timer variables
+        let timeLeft = 20 * 60; // 20 minutes in seconds
+        let timerInterval;
+        let userAnswers = new Array(questions.length).fill(null).map(() => []);
+        
+        // Initialize the exam
+        function initExam() {
+            // Display all questions
+            questions.forEach((q, index) => {
+                const questionEl = document.createElement('div');
+                questionEl.className = 'question';
+                
+                let optionsHTML = '';
+                if (q.type === "multiple") {
+                    optionsHTML = `
+                        <div class="multiple-choice-note">${currentLanguage === 'en' ? translations.en.multipleChoiceNote : translations.fa.multipleChoiceNote}</div>
+                        <div class="options">
+                            ${q.options.map((option, i) => `
+                                <div class="option checkbox-option" data-question="${index}" data-option="${i}">
+                                    <input type="checkbox" id="q${index}_o${i}">
+                                    <label for="q${index}_o${i}">${option}</label>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                } else {
+                    optionsHTML = `
+                        <div class="options">
+                            ${q.options.map((option, i) => `
+                                <div class="option" data-question="${index}" data-option="${i}">${option}</div>
+                            `).join('')}
+                        </div>
+                    `;
+                }
+                
+                questionEl.innerHTML = `
+                    <div class="question-number">${currentLanguage === 'en' ? 'Question' : 'سوال'} ${index + 1}</div>
+                    <div class="question-text">${q.question}</div>
+                    ${optionsHTML}
+                `;
+                questionContainer.appendChild(questionEl);
+            });
+            
+            // Add event listeners to options
+            document.querySelectorAll('.option').forEach(option => {
+                if (option.classList.contains('checkbox-option')) {
+                    // For multiple choice questions with checkboxes
+                    const checkbox = option.querySelector('input[type="checkbox"]');
+                    checkbox.addEventListener('change', function() {
+                        const questionIndex = parseInt(option.dataset.question);
+                        const optionIndex = parseInt(option.dataset.option);
+                        
+                        if (this.checked) {
+                            if (!userAnswers[questionIndex].includes(optionIndex)) {
+                                userAnswers[questionIndex].push(optionIndex);
+                            }
+                        } else {
+                            userAnswers[questionIndex] = userAnswers[questionIndex].filter(i => i !== optionIndex);
+                        }
+                        
+                        // Update visual selection
+                        if (this.checked) {
+                            option.classList.add('selected');
+                        } else {
+                            option.classList.remove('selected');
+                        }
+                    });
+                } else {
+                    // For single choice questions
+                    option.addEventListener('click', function() {
+                        const questionIndex = parseInt(this.dataset.question);
+                        const optionIndex = parseInt(this.dataset.option);
+                        
+                        // Remove selected class from all options in this question
+                        document.querySelectorAll(`.option[data-question="${questionIndex}"]`).forEach(opt => {
+                            opt.classList.remove('selected');
+                        });
+                        
+                        // Add selected class to clicked option
+                        this.classList.add('selected');
+                        
+                        // Save user's answer
+                        userAnswers[questionIndex] = [optionIndex];
+                    });
+                }
+            });
+        }
+        
+        // Handle user form submission
+        userSubmitBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Validate form
+            if (!firstNameInput.value.trim() || !lastNameInput.value.trim() || !emailInput.value.trim()) {
+                alert(currentLanguage === 'en' ? 'Please fill in all fields' : 'لطفاً تمام فیلدها را پر کنید');
+                return;
+            }
+            
+            if (!isValidEmail(emailInput.value)) {
+                alert(currentLanguage === 'en' ? 'Please enter a valid email address' : 'لطفاً یک آدرس ایمیل معتبر وارد کنید');
+                return;
+            }
+            
+            // Save user data
+            userData.firstName = firstNameInput.value.trim();
+            userData.lastName = lastNameInput.value.trim();
+            userData.email = emailInput.value.trim();
+            
+            // Hide form and show exam info
+            userForm.style.display = 'none';
+            userInfo.style.display = 'block';
+            userNameDisplay.textContent = `${userData.firstName} ${userData.lastName}`;
+            userEmailDisplay.textContent = userData.email;
+            
+            // Show instructions and start modal
+            instructions.style.display = 'block';
+            startModal.style.display = 'flex';
+        });
+        
+        // Email validation
+        function isValidEmail(email) {
+            const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(String(email).toLowerCase());
+        }
+        
+        // Start the exam
+        function startExam() {
+            startModal.style.display = 'none';
+            questionContainer.style.display = 'block';
+            submitBtnContainer.style.display = 'flex';
+            
+            // Start timer
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+        
+        // Update timer
+        function updateTimer() {
+            timeLeft--;
+            
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                submitExam();
+            }
+            
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            
+            timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            // Change color when time is running out
+            if (minutes < 5) {
+                timerElement.style.color = '#ff5555';
+            }
+        }
+        
+        // Submit exam
+        function submitExam() {
+            clearInterval(timerInterval);
+            
+            // Calculate score with partial credit for multiple choice questions
+            let score = 0;
+            questions.forEach((q, index) => {
+                const userAnswer = userAnswers[index];
+                const correctAnswers = q.correct;
+                
+                if (q.type === "multiple") {
+                    // Calculate partial credit for multiple choice questions
+                    let correctSelected = 0;
+                    let incorrectSelected = 0;
+                    
+                    userAnswer.forEach(answer => {
+                        if (correctAnswers.includes(answer)) {
+                            correctSelected++;
+                        } else {
+                            incorrectSelected++;
+                        }
+                    });
+                    
+                    // Calculate points: (correctSelected / totalCorrect) * 2.5
+                    // But if user selected any incorrect answers, they don't get full credit
+                    const pointsPerCorrect = 2.5 / correctAnswers.length;
+                    let questionScore = correctSelected * pointsPerCorrect;
+                    
+                    // If user selected any incorrect answers, reduce the score
+                    if (incorrectSelected > 0) {
+                        questionScore = Math.max(0, questionScore - (incorrectSelected * pointsPerCorrect * 0.5));
+                    }
+                    
+                    score += questionScore;
+                } else {
+                    // Single choice questions
+                    if (userAnswer.length === 1 && correctAnswers.includes(userAnswer[0])) {
+                        score += 2.5;
+                    }
+                }
+            });
+            
+            // Round to 2 decimal places
+            score = Math.round(score * 100) / 100;
+            
+            // Show sending email notification
+            sendingEmail.style.display = 'block';
+            
+            // Send email with results
+            sendEmailResults(score);
+            
+            // Show results modal
+            showResults(score);
+        }
+        
+        // Send email with results
+        function sendEmailResults(score) {
+            // Prepare email content
+            const subject = `Windows 11 Exam Results - ${userData.firstName} ${userData.lastName}`;
+            
+            let body = `Exam Results for ${userData.firstName} ${userData.lastName}\n`;
+            body += `Email: ${userData.email}\n`;
+            body += `Score: ${score}/50\n`;
+            body += `Percentage: ${((score/50)*100).toFixed(2)}%\n\n`;
+            
+            body += "Detailed Results:\n";
+            questions.forEach((q, index) => {
+                const userAnswerIndices = userAnswers[index];
+                const correctAnswerIndices = q.correct;
+                
+                let questionScore = 0;
+                if (q.type === "multiple") {
+                    let correctSelected = 0;
+                    let incorrectSelected = 0;
+                    
+                    userAnswerIndices.forEach(answer => {
+                        if (correctAnswerIndices.includes(answer)) {
+                            correctSelected++;
+                        } else {
+                            incorrectSelected++;
+                        }
+                    });
+                    
+                    const pointsPerCorrect = 2.5 / correctAnswerIndices.length;
+                    questionScore = correctSelected * pointsPerCorrect;
+                    
+                    if (incorrectSelected > 0) {
+                        questionScore = Math.max(0, questionScore - (incorrectSelected * pointsPerCorrect * 0.5));
+                    }
+                    questionScore = Math.round(questionScore * 100) / 100;
+                } else {
+                    if (userAnswerIndices.length === 1 && correctAnswerIndices.includes(userAnswerIndices[0])) {
+                        questionScore = 2.5;
+                    }
+                }
+                
+                body += `\nQuestion ${index + 1}: ${q.question}\n`;
+                body += `User Answer: ${userAnswerIndices.length > 0 ? userAnswerIndices.map(i => q.options[i]).join(', ') : 'Not answered'}\n`;
+                body += `Correct Answer: ${correctAnswerIndices.map(i => q.options[i]).join(', ')}\n`;
+                body += `Score: ${questionScore}/2.5\n`;
+            });
+            
+            // Use EmailJS to send the email
+            emailjs.send("service_b9r47cr", "template_sqx8wkj", {
+                to_email: "modasirhashimi0101@gmail.com",
+                from_name: "Windows 11 Exam",
+                subject: subject,
+                message: body
+            })
+            .then(function(response) {
+                console.log("Email sent successfully", response);
+                sendingEmail.innerHTML = `<h3>${currentLanguage === 'en' ? 'Results sent successfully!' : 'نتایج با موفقیت ارسال شد!'}</h3><p>${currentLanguage === 'en' ? 'Your exam results have been delivered to the instructor.' : 'نتایج امتحان شما به مربی تحویل داده شد.'}</p>`;
+            })
+            .catch(function(error) {
+                console.error("Failed to send email", error);
+                sendingEmail.innerHTML = `<h3>${currentLanguage === 'en' ? 'Email sending failed' : 'ارسال ایمیل ناموفق بود'}</h3><p>${currentLanguage === 'en' ? 'But your exam has been submitted. Please contact the instructor directly.' : 'اما امتحان شما ارسال شده است. لطفاً مستقیماً با مربی تماس بگیرید.'}</p>`;
+            });
+        }
+        
+        // Show detailed results
+        function showResults(score) {
+            scoreValue.textContent = score;
+            totalQuestions.textContent = 50;
+            
+            // Clear previous results
+            resultsContainer.innerHTML = '';
+            
+            // Generate results for each question
+            questions.forEach((q, index) => {
+                const userAnswerIndices = userAnswers[index];
+                const correctAnswerIndices = q.correct;
+                
+                let questionScore = 0;
+                let isFullyCorrect = false;
+                
+                if (q.type === "multiple") {
+                    let correctSelected = 0;
+                    let incorrectSelected = 0;
+                    
+                    userAnswerIndices.forEach(answer => {
+                        if (correctAnswerIndices.includes(answer)) {
+                            correctSelected++;
+                        } else {
+                            incorrectSelected++;
+                        }
+                    });
+                    
+                    const pointsPerCorrect = 2.5 / correctAnswerIndices.length;
+                    questionScore = correctSelected * pointsPerCorrect;
+                    
+                    if (incorrectSelected > 0) {
+                        questionScore = Math.max(0, questionScore - (incorrectSelected * pointsPerCorrect * 0.5));
+                    }
+                    questionScore = Math.round(questionScore * 100) / 100;
+                    
+                    isFullyCorrect = (correctSelected === correctAnswerIndices.length && incorrectSelected === 0);
+                } else {
+                    if (userAnswerIndices.length === 1 && correctAnswerIndices.includes(userAnswerIndices[0])) {
+                        questionScore = 2.5;
+                        isFullyCorrect = true;
+                    }
+                }
+                
+                const resultItem = document.createElement('div');
+                resultItem.className = `result-item ${isFullyCorrect ? 'correct' : 'incorrect'}`;
+                
+                resultItem.innerHTML = `
+                    <div class="result-question">${index + 1}. ${q.question}</div>
+                    <div class="result-answer user-answer">
+                        <strong>${currentLanguage === 'en' ? 'Your answer:' : 'جواب شما:'}</strong> ${userAnswerIndices.length > 0 ? userAnswerIndices.map(i => q.options[i]).join(', ') : (currentLanguage === 'en' ? 'Not answered' : 'پاسخ داده نشده')}
+                    </div>
+                    <div class="result-answer correct-answer">
+                        <strong>${currentLanguage === 'en' ? 'Correct answer:' : 'جواب صحیح:'}</strong> ${correctAnswerIndices.map(i => q.options[i]).join(', ')}
+                    </div>
+                    <div style="margin-top: 10px; font-weight: bold; color: ${isFullyCorrect ? '#4CAF50' : '#F44336'}">
+                        ${questionScore.toFixed(2)}/2.5 points
+                    </div>
+                `;
+                
+                resultsContainer.appendChild(resultItem);
+            });
+            
+            // Show results modal
+            resultsModal.style.display = 'flex';
+        }
+
+        // Language toggle function
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'en' ? 'fa' : 'en';
+            updateLanguage();
+        }
+
+        // Update all text content based on current language
+        function updateLanguage() {
+            const t = translations[currentLanguage];
+            
+            // Update direction
+            document.body.dir = currentLanguage === 'en' ? 'ltr' : 'rtl';
+            
+            // Update texts
+            document.getElementById('header-subtitle').textContent = t.headerSubtitle;
+            document.getElementById('exam-title').textContent = t.examTitle;
+            document.getElementById('exam-subtitle').textContent = t.examSubtitle;
+            document.getElementById('user-info-title').textContent = t.userInfoTitle;
+            document.getElementById('user-name-label').textContent = t.userNameLabel;
+            document.getElementById('user-email-label').textContent = t.userEmailLabel;
+            document.getElementById('form-title').textContent = t.formTitle;
+            document.getElementById('first-name-label').textContent = t.firstNameLabel;
+            document.getElementById('last-name-label').textContent = t.lastNameLabel;
+            document.getElementById('email-label').textContent = t.emailLabel;
+            document.getElementById('user-submit').textContent = t.userSubmit;
+            document.getElementById('instructions-title').textContent = t.instructionsTitle;
+            
+            // Update instructions list
+            const instructionsList = document.getElementById('instructions-list');
+            instructionsList.innerHTML = '';
+            t.instructions.forEach(instruction => {
+                const li = document.createElement('li');
+                li.textContent = instruction;
+                instructionsList.appendChild(li);
+            });
+            
+            document.getElementById('submit-btn').textContent = t.submitBtn;
+            document.getElementById('sending-title').textContent = t.sendingTitle;
+            document.getElementById('sending-message').textContent = t.sendingMessage;
+            document.getElementById('footer-text').textContent = t.footerText;
+            document.getElementById('start-modal-title').textContent = t.startModalTitle;
+            document.getElementById('start-modal-text').textContent = t.startModalText;
+            document.getElementById('start-exam').textContent = t.startExam;
+            document.getElementById('finished-modal-title').textContent = t.finishedModalTitle;
+            document.getElementById('finished-modal-text').textContent = t.finishedModalText;
+            document.getElementById('results-modal-title').textContent = t.resultsModalTitle;
+            document.getElementById('score-text').textContent = t.scoreText;
+            document.getElementById('out-of-text').textContent = t.outOfText;
+            document.getElementById('points-text').textContent = t.pointsText;
+            document.getElementById('review-answers').textContent = t.reviewAnswers;
+            document.getElementById('close-results').textContent = t.closeResults;
+            
+            // Update language toggle button
+            languageToggle.textContent = currentLanguage === 'en' ? 'دری / Dari' : 'English / انګلیسي';
+            
+            // Update placeholders
+            document.getElementById('first-name').placeholder = currentLanguage === 'en' ? 'Enter your first name' : 'نام خود را وارد کنید';
+            document.getElementById('last-name').placeholder = currentLanguage === 'en' ? 'Enter your last name' : 'تخلص خود را وارد کنید';
+            document.getElementById('email').placeholder = currentLanguage === 'en' ? 'Enter your email address' : 'آدرس ایمیل خود را وارد کنید';
+            
+            // Update multiple choice notes
+            document.querySelectorAll('.multiple-choice-note').forEach(note => {
+                note.textContent = t.multipleChoiceNote;
+            });
+        }
+        
+        // Event listeners
+        startExamBtn.addEventListener('click', startExam);
+        submitBtn.addEventListener('click', submitExam);
+        languageToggle.addEventListener('click', toggleLanguage);
+        
+        reviewAnswersBtn.addEventListener('click', function() {
+            resultsModal.style.display = 'none';
+            // اسکرول به بالای صفحه برای مشاهده سوالات
+            window.scrollTo(0, 0);
+            
+            // علامت‌گذاری پاسخ‌های کاربر و پاسخ‌های صحیح
+            questions.forEach((q, index) => {
+                const userAnswerIndices = userAnswers[index];
+                const correctAnswerIndices = q.correct;
+                
+                // علامت‌گذاری پاسخ کاربر
+                userAnswerIndices.forEach(userAnswerIndex => {
+                    const userOption = document.querySelector(`.option[data-question="${index}"][data-option="${userAnswerIndex}"]`);
+                    if (userOption) {
+                        userOption.classList.add('selected');
+                        if (!correctAnswerIndices.includes(userAnswerIndex)) {
+                            userOption.style.borderColor = '#F44336';
+                        }
+                    }
+                });
+                
+                // علامت‌گذاری پاسخ صحیح
+                correctAnswerIndices.forEach(correctAnswerIndex => {
+                    const correctOption = document.querySelector(`.option[data-question="${index}"][data-option="${correctAnswerIndex}"]`);
+                    if (correctOption) {
+                        correctOption.style.borderColor = '#4CAF50';
+                        correctOption.style.boxShadow = '0 0 8px #4CAF50';
+                    }
+                });
+            });
+        });
+        
+        closeResultsBtn.addEventListener('click', function() {
+            resultsModal.style.display = 'none';
+        });
+        
+        // Initialize the exam when page loads
+        window.addEventListener('load', function() {
+            initExam();
+            updateLanguage();
+        });
+    </script>
+    
+    <!-- Load EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        // Initialize EmailJS with your public key
+        (function() {
+            emailjs.init("zTlaq0rOCJbPFLB-t");
+        })();
+    </script>
+</body>
+</html>
