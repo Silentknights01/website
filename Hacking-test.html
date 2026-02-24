@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>امتحان   (نسخه کامل ۴۰ سوالی)</title>
+    <style>
+        /* ========== VARIABLES ========== */
+        :root{
+            --font-main: "Vazirmatn", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            --font-mono: "Fira Code", "Cascadia Code", ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+
+            /* Silent Knights Brand Colors */
+            --color-primary: #E31E27;
+            --color-primary-dark: #15151F;
+            --color-secondary: #999A93;
+            --color-accent: #E31E27;
+            --color-neon: #F8F8F8;
+            --color-bg: #030d33;
+            --color-bg-secondary: #0A0A0F;
+            --color-bg-card: #1A1A24;
+            --color-gray: #999A93;
+            --color-light: #F8F8F8;
+            --color-text: #F8F8F8;
+            --color-text-muted: #999A93;
+
+            /* Enhanced Shadows & Effects */
+            --radius: 16px;
+            --radius-small: 8px;
+            --shadow: 0 8px 32px rgba(227, 30, 39, 0.3);
+            --shadow-neon: 0 0 20px rgba(227, 30, 39, 0.4);
+            --shadow-glow: 0 0 40px rgba(227, 30, 39, 0.2);
+            --nav-height: 70px;
+            
+            /* Animation Speeds */
+            --transition-fast: 0.2s;
+            --transition-normal: 0.3s;
+            --transition-slow: 0.5s;
+        }
+
+        /* ========== RESET & BASE ========== */
+        *{box-sizing:border-box;margin:0;padding:0}
+        html{scroll-behavior:smooth}
+
+        html, body {
+            font-family: var(--font-main);
+            font-weight: 400;
+            font-synthesis: none;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background: linear-gradient(135deg, var(--color-bg) 0%, var(--color-bg-secondary) 100%);
+            color: var(--color-text);
+            line-height: 1.8;
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(153,154,147,.25);
+            position: relative;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                var(--color-primary) 50%, 
+                transparent 100%);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--color-primary);
+            text-shadow: 0 0 20px rgba(227, 30, 39, 0.5);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            margin-bottom: 20px;
+            color: var(--color-text-muted);
+        }
+        
+        .timer-container {
+            background: var(--color-bg-card);
+            padding: 15px;
+            border-radius: var(--radius);
+            margin: 20px auto;
+            max-width: 300px;
+            border: 1px solid rgba(227, 30, 39, 0.3);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timer-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                var(--color-primary), 
+                var(--color-secondary));
+            animation: scanline 3s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        #timer {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--color-primary);
+            text-shadow: 0 0 10px rgba(227, 30, 39, 0.5);
+            font-family: var(--font-mono);
+        }
+        
+        .instructions {
+            background: var(--color-bg-card);
+            padding: 25px;
+            border-radius: var(--radius);
+            margin: 20px 0;
+            border-right: 4px solid var(--color-primary);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .instructions::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, 
+                transparent 30%, 
+                rgba(227, 30, 39, 0.05) 50%, 
+                transparent 70%);
+            pointer-events: none;
+        }
+        
+        .instructions h2 {
+            margin-bottom: 15px;
+            color: var(--color-primary);
+        }
+        
+        .instructions ul {
+            margin-right: 20px;
+            line-height: 1.8;
+            color: var(--color-text);
+        }
+        
+        .instructions li {
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .instructions li::before {
+            content: '▶';
+            color: var(--color-primary);
+            position: absolute;
+            right: -20px;
+            font-size: 0.8em;
+        }
+        
+        .question-container {
+            background: var(--color-bg-card);
+            padding: 25px;
+            border-radius: var(--radius);
+            margin: 20px 0;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255,255,255,.03);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .question-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                var(--color-primary), 
+                var(--color-secondary));
+            transform: scaleX(0);
+            transition: transform var(--transition-normal) ease;
+        }
+
+        .question-container:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .question {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .question-number {
+            font-weight: bold;
+            color: var(--color-primary);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            text-shadow: 0 0 10px rgba(227, 30, 39, 0.3);
+        }
+        
+        .question-text {
+            margin-bottom: 20px;
+            line-height: 1.8;
+            color: var(--color-text);
+            font-size: 1.1rem;
+            text-align: right;
+            white-space: pre-wrap;
+        }
+
+        /* استایل مخصوص سوالات کد */
+        .code-question {
+            background: #14212b;
+            color: #e4f0fb;
+            padding: 16px 22px;
+            border-radius: 18px;
+            font-family: var(--font-mono);
+            direction: ltr;
+            text-align: left;
+            overflow-x: auto;
+            margin: 12px 0 18px 0;
+            border: 2px solid #1b5a7a;
+            box-shadow: inset 0 0 10px #00000070;
+            font-size: 1rem;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        .answer-box {
+            width: 100%;
+            min-height: 120px;
+            padding: 15px;
+            border-radius: var(--radius-small);
+            border: 1px solid rgba(153, 154, 147, 0.3);
+            background: rgba(30, 30, 40, 0.8);
+            color: var(--color-text);
+            font-family: var(--font-main);
+            font-size: 1rem;
+            line-height: 1.6;
+            resize: vertical;
+            transition: all var(--transition-normal) ease;
+            text-align: right;
+        }
+
+        .answer-box:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(227, 30, 39, 0.2);
+            background: rgba(30, 30, 40, 0.9);
+        }
+        
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, var(--color-primary) 0%, #c21820 100%);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            font-family: var(--font-main);
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-normal) ease;
+            box-shadow: var(--shadow);
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.2), 
+                transparent);
+            transition: left var(--transition-normal) ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-neon);
+            filter: brightness(1.1);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(3, 13, 51, 0.95);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, var(--color-bg-card) 0%, var(--color-primary-dark) 100%);
+            padding: 40px;
+            border-radius: var(--radius);
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            text-align: center;
+            box-shadow: var(--shadow-glow);
+            border: 1px solid rgba(227, 30, 39, 0.3);
+            color: var(--color-text);
+            position: relative;
+        }
+
+        .modal-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                var(--color-primary), 
+                var(--color-secondary));
+        }
+        
+        .modal h2 {
+            color: var(--color-primary);
+            margin-bottom: 20px;
+            font-size: 2rem;
+            text-shadow: 0 0 20px rgba(227, 30, 39, 0.5);
+        }
+        
+        .modal p {
+            margin-bottom: 25px;
+            line-height: 1.8;
+            color: var(--color-text-muted);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+        }
+        
+        /* استایل‌های جدید برای نمایش نتایج */
+        .results-container {
+            text-align: right;
+            margin-top: 20px;
+        }
+        
+        .result-item {
+            margin-bottom: 25px;
+            padding: 20px;
+            border-radius: var(--radius-small);
+            background: rgba(30, 30, 40, 0.7);
+            border-right: 5px solid var(--color-primary);
+            transition: all var(--transition-normal) ease;
+            text-align: right;
+        }
+
+        .result-item:hover {
+            transform: translateX(-5px);
+            box-shadow: var(--shadow);
+        }
+        
+        .result-question {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--color-primary);
+            font-size: 1.1rem;
+            white-space: pre-wrap;
+        }
+        
+        .result-answer {
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: var(--radius-small);
+            background: rgba(40, 40, 50, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+        
+        .review-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .review-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-weight: bold;
+            transition: all var(--transition-normal) ease;
+            font-family: var(--font-main);
+        }
+        
+        #review-answers {
+            background: linear-gradient(135deg, var(--color-primary) 0%, #c21820 100%);
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        #review-answers:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-neon);
+        }
+        
+        #close-results {
+            background: transparent;
+            color: var(--color-text);
+            border: 1px solid var(--color-secondary);
+        }
+
+        #close-results:hover {
+            background: var(--color-secondary);
+            transform: translateY(-2px);
+        }
+        
+        /* استایل‌های جدید برای فرم کاربر */
+        .user-form {
+            background: var(--color-bg-card);
+            padding: 30px;
+            border-radius: var(--radius);
+            margin: 20px 0;
+            border-right: 4px solid var(--color-primary);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            text-align: right;
+        }
+
+        .user-form::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, 
+                transparent 30%, 
+                rgba(227, 30, 39, 0.05) 50%, 
+                transparent 70%);
+            pointer-events: none;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            text-align: right;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border-radius: var(--radius-small);
+            border: 1px solid rgba(153, 154, 147, 0.3);
+            background: rgba(30, 30, 40, 0.8);
+            color: var(--color-text);
+            font-size: 1rem;
+            font-family: var(--font-main);
+            transition: all var(--transition-normal) ease;
+            text-align: right;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(227, 30, 39, 0.2);
+            background: rgba(30, 30, 40, 0.9);
+        }
+        
+        .user-info {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: var(--color-bg-card);
+            border-radius: var(--radius);
+            border-right: 4px solid var(--color-primary);
+            box-shadow: var(--shadow);
+        }
+        
+        .sending-email {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: var(--color-bg-card);
+            border-radius: var(--radius);
+            border-right: 4px solid var(--color-primary);
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .silent-knights-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: var(--color-bg-card);
+            border-radius: var(--radius);
+            border: 1px solid rgba(227, 30, 39, 0.3);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .silent-knights-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                var(--color-primary), 
+                var(--color-secondary));
+            animation: scanline 3s linear infinite;
+        }
+
+        .silent-knights-header h2 {
+            color: var(--color-primary);
+            font-size: 2rem;
+            margin-bottom: 5px;
+            text-shadow: 0 0 20px rgba(227, 30, 39, 0.5);
+        }
+
+        .silent-knights-header p {
+            color: var(--color-text-muted);
+            font-style: italic;
+        }
+
+        /* Cyberpunk Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--color-bg-secondary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-primary);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-neon);
+        }
+
+        /* RTL Specific Styles */
+        .form-group input::placeholder {
+            text-align: right;
+        }
+
+        .answer-box::placeholder {
+            color: var(--color-text-muted);
+            text-align: right;
+        }
+
+        .time-warning {
+            color: #ff5555;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .word-count {
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+            margin-top: 5px;
+            text-align: left;
+        }
+        
+        /* عنوان بخش */
+        .section-header {
+            font-size: 1.8rem;
+            color: var(--color-primary);
+            border-right: 6px solid var(--color-primary);
+            padding-right: 15px;
+            margin: 40px 0 25px 0;
+            background: linear-gradient(90deg, transparent, rgba(227,30,39,0.1));
+            border-radius: 0 10px 10px 0;
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="silent-knights-header">
+            <h2>Silent Knights</h2>
+            <p>تیم امنیت سایبری</p>
+        </div>
+        
+        <header>
+            <h1> (۴۰ سوال)</h1>
+            <div class="subtitle">ذهنیت خود را در اینجا با جواب دادن به سوالات تشریحی به چالش بکشید</div>
+            <div class="timer-container">
+                <div id="timer">30:00</div>
+            </div>
+        </header>
+        
+        <div class="user-info" id="user-info" style="display: none;">
+            <h3>اطلاعات شرکت کننده</h3>
+            <p>نام: <span id="user-name-display"></span></p>
+            <p>ایمیل: <span id="user-email-display"></span></p>
+        </div>
+        
+        <div class="user-form" id="user-form">
+            <h2>لطفا اطلاعات خود را وارد کنید</h2>
+            <div class="form-group">
+                <label for="first-name">نام</label>
+                <input type="text" id="first-name" placeholder="نام خود را وارد کنید" required>
+            </div>
+            <div class="form-group">
+                <label for="last-name">تخلص</label>
+                <input type="text" id="last-name" placeholder="تخلص خود را وارد کنید" required>
+            </div>
+            <div class="form-group">
+                <label for="email">آدرس ایمیل</label>
+                <input type="email" id="email" placeholder="آدرس ایمیل خود را وارد کنید" required>
+            </div>
+            <button class="btn" id="user-submit">ادامه به امتحان</button>
+        </div>
+        
+        <div class="instructions" style="display: none;" id="instructions">
+            <h2>دستورالعمل امتحان</h2>
+            <ul>
+                <li>مدت زمان آزمون 30 دقیقه می‌باشد</li>
+                <li>این امتحان شامل 40 سوال تشریحی در چهار بخش (مفاهیم امنیت، شبکه، لینوکس، برنامه‌نویسی) است</li>
+                <li>به هر سوال با دقت فکر کنید و پاسخ کامل بنویسید</li>
+                <li>می‌توانید پاسخ‌ها را قبل از ارسال تغییر دهید</li>
+                <li>تایمر با کلیک روی "شروع امتحان" فعال می‌شود</li>
+                <li>پس از اتمام زمان، پاسخ‌ها به طور خودکار ارسال می‌شوند</li>
+            </ul>
+        </div>
+        
+        <div class="question-container" style="display: none;" id="question-container">
+            <!-- Questions will be dynamically inserted here -->
+        </div>
+        
+        <div class="btn-container" style="display: none;" id="submit-btn-container">
+            <button class="btn" id="submit-btn">ارسال پاسخ‌ها</button>
+        </div>
+        
+        <div class="sending-email" id="sending-email">
+            <h3>در حال ارسال پاسخ‌ها به استاد...</h3>
+            <p>لطفا منتظر بمانید تا پاسخ‌های شما ارسال شود.</p>
+        </div>
+        
+        <footer>
+            <p>Silent Knights &copy; 2025 | امتحان   نسخه ۴۰ سوالی</p>
+        </footer>
+    </div>
+    
+    <div class="modal" id="start-modal">
+        <div class="modal-content">
+            <h2>آماده شروع هستید؟</h2>
+            <p>شما 30 دقیقه زمان دارید تا به 40 سوال تشریحی پاسخ دهید. تایمر بلافاصله پس از کلیک روی "شروع امتحان" فعال می‌شود.</p>
+            <button class="btn" id="start-exam">شروع امتحان</button>
+        </div>
+    </div>
+    
+    <div class="modal" id="finished-modal">
+        <div class="modal-content">
+            <h2>امتحان تکمیل شد!</h2>
+            <p>پاسخ‌های شما با موفقیت ثبت و ارسال شد. استاد دوره به زودی آن‌ها را بررسی خواهد کرد.</p>
+        </div>
+    </div>
+    
+    <!-- مودال جدید برای نمایش پاسخ‌ها -->
+    <div class="modal" id="results-modal">
+        <div class="modal-content">
+            <h2>پاسخ‌های شما</h2>
+            <div class="results-container" id="results-container">
+                <!-- پاسخ‌های کاربر اینجا نمایش داده می‌شود -->
+            </div>
+            <div class="review-buttons">
+                <button class="review-btn" id="close-results">بستن</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==================== لیست سوالات جدید (۴۰ سوال در چهار بخش) ====================
+        const questions = [
+            // بخش ۱: مفاهیم و ذهنیت امنیتی
+            { section: "🔐 بخش ۱: مفاهیم و ذهنیت امنیتی", question: "اگر یک سیستم هیچ پورتی باز نداشته باشد آیا صد در صد امن است؟ چرا؟" },
+            { section: null, question: "فرق برداشت یا ذهنیت یک Hacker و Script Kiddie در چیست؟" },
+            { section: null, question: "اولین کاری که در شروع حملات هکینگ انجام میدهی چیست؟" },
+            { section: null, question: "چرا بعضی وقت ها سیستم ها با وجود patch کردن خود بازم هک میشوند؟" },
+            { section: null, question: "بنظرت خطرناکترین ضعف امنیتی چیست، انسان یا سیستم ؟ چرا؟" },
+            { section: null, question: "اگر بخواهی یک حمله قوی را یاد بدهی کدام را انتخاب میکنی و چرا؟" },
+            { section: null, question: "فرق بین vulnerability و Exploit را با مثال توضیح بده" },
+            { section: null, question: "فرق بین black hat, white hat , Gray hat  و تیم های Blue team , Red team در چیست؟" },
+            { section: null, question: "به چی هدف یا منظوری وارد دنیایی سایبری یا هک و امینت شدی؟" },
+            { section: null, question: "همین لحظه به هیچی فکر نکن و بگو اگر همه اینای که میخواهی را تمام کردی و یاد گرفتی چی میکنی بعدش چی؟" },
+            
+            // بخش ۲: شبکه
+            { section: "🌐 بخش ۲: شبکه (OSI, TCP/IP, پروتکل‌ها)", question: "کارکرد هر لایه از OSI را بصورت خلاصه توضیح بده" },
+            { section: null, question: "اگر Ping بسته باشد ولی HTTP باز چی نتیجه میگیری؟" },
+            { section: null, question: "فرق TCP و UDP چیست و کدامش امنیت خوبی دارد و چر؟" },
+            { section: null, question: "ARP Spoofing  را با مثال واضح بساز" },
+            { section: null, question: "NAT چی کمکی به امینت میکند و چه محدودیتی دارد؟" },
+            { section: null, question: "DNS چیکار میکند؟" },
+            { section: null, question: "TCP/IP با OSI Model چی تفاوتی دارد؟" },
+            { section: null, question: "Man-In-The-Middle Attack  چیست واضح بساز" },
+            { section: null, question: "انواع Wireless Encryption  را نام ببر و قویترین شان را معرفی کن" },
+            { section: null, question: "اگر بخوایی به یک سیستم از طریق ای دو پروتوکلTelnet , SSH  وصل شوی از کدامش استفاده میکنی و جرا؟" },
+            
+            // بخش ۳: لینوکس
+            { section: "🐧 بخش ۳: لینوکس، دسترسی‌ها و لاگ‌ها", question: "فرق بین User عادی با root در چیست؟" },
+            { section: null, question: "چرا /etc/passwd هنوز استفاده میشود و برای چی؟" },
+            { section: null, question: "لاگ‌ها بیشتر به نفع Defender است یا  Attacker؟" },
+            { section: null, question: "چرا History در لینوکس خطر امنیتی دارد؟" },
+            { section: null, question: "اگر دسترسی sudo نداشته باشی، دنبال چه چیزی می‌گردی که بتوانی کار ات را انجام بدهی؟" },
+            { section: null, question: "یک لینوکس داری که اینترنت ندارد،  Payload را چطور انتقال میدهی؟" },
+            { section: null, question: "بعد از نصب کالی لینوکس اولین کار که انجام میدهی چیست؟" },
+            { section: null, question: "بخاطر هک وای فای یا حملات وایرلیس از کدام ابزار ها استفاده میکنی؟" },
+            { section: null, question: "Hashcat برای چی استفاده میشود؟" },
+            { section: null, question: "Metasploit framework  چیست؟" },
+            
+            // بخش ۴: برنامه‌نویسی
+            { section: "💻 بخش ۴: برنامه‌نویسی، آسیب‌پذیری کد و تحلیل", question: "چرا یک هکر باید برنامه‌نویسی بلد باشد؟" },
+            { section: null, question: "چرا یک هکر باید کد دیگران را بیشتر از کد خودش بخواند؟" },
+            { section: null, question: "چرا Obfuscation در Python هم لازم است، با وجود سورس باز بودن؟" },
+            { section: null, question: "این کد چی خطری دارد:\ncmd = input(\"Enter command: \")\nos.system(cmd)" },
+            { section: null, question: "میتوانی ای کد ره توضیح بدهی که چیکار میکند:\nusername = \"SMH\"\npassword = \"Pa$$w0rd\"\n\ntrue = 0\n\nwhile true != 1:\n        user = input(\"Enter username: \")\n        pas = input(\"Enter password: \")\n\n        if username == user and pas == password:\n            print(\"Login Successfuly\")\n            \n        else:\n            print(\"try again\")\n        true = 0" }
+        ];
+
+        // تابع برای escape کردن کاراکترهای خاص HTML (جهت نمایش امن کدها)
+        function escapeHtml(unsafe) {
+            return unsafe.replace(/[&<>"]/g, function(m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                if (m === '"') return '&quot;';
+                return m;
+            });
+        }
+
+        // DOM elements
+        const questionContainer = document.querySelector('.question-container');
+        const timerElement = document.getElementById('timer');
+        const startModal = document.getElementById('start-modal');
+        const finishedModal = document.getElementById('finished-modal');
+        const resultsModal = document.getElementById('results-modal');
+        const startExamBtn = document.getElementById('start-exam');
+        const submitBtn = document.getElementById('submit-btn');
+        const resultsContainer = document.getElementById('results-container');
+        const closeResultsBtn = document.getElementById('close-results');
+        const userForm = document.getElementById('user-form');
+        const userSubmitBtn = document.getElementById('user-submit');
+        const firstNameInput = document.getElementById('first-name');
+        const lastNameInput = document.getElementById('last-name');
+        const emailInput = document.getElementById('email');
+        const instructions = document.getElementById('instructions');
+        const submitBtnContainer = document.getElementById('submit-btn-container');
+        const userInfo = document.getElementById('user-info');
+        const userNameDisplay = document.getElementById('user-name-display');
+        const userEmailDisplay = document.getElementById('user-email-display');
+        const sendingEmail = document.getElementById('sending-email');
+        
+        // User data
+        let userData = {
+            firstName: '',
+            lastName: '',
+            email: ''
+        };
+        
+        // Timer variables
+        let timeLeft = 30 * 60; // 30 minutes in seconds
+        let timerInterval;
+        let userAnswers = new Array(questions.length).fill('');
+        
+        // Initialize the exam: نمایش تمام سوالات با بخش‌بندی
+        function initExam() {
+            questions.forEach((q, index) => {
+                // اگر این سوال اولین سوال یک بخش باشد، عنوان بخش را اضافه کن
+                if (q.section !== null) {
+                    const sectionHeader = document.createElement('h3');
+                    sectionHeader.className = 'section-header';
+                    sectionHeader.textContent = q.section;
+                    questionContainer.appendChild(sectionHeader);
+                }
+                
+                const questionEl = document.createElement('div');
+                questionEl.className = 'question';
+                
+                // شماره سوال (شماره کلی، صرف نظر از بخش)
+                const questionNumber = document.createElement('div');
+                questionNumber.className = 'question-number';
+                questionNumber.textContent = `سوال ${index + 1} از ${questions.length}`;
+                
+                // متن سوال: اگر شامل newline باشد (کد) با استایل مخصوص نمایش بده
+                const questionTextDiv = document.createElement('div');
+                if (q.question.includes('\n')) {
+                    // سوال شامل کد است
+                    const escapedCode = escapeHtml(q.question);
+                    questionTextDiv.className = 'code-question';
+                    questionTextDiv.textContent = q.question; // textContent خودش escaped می‌کند
+                } else {
+                    questionTextDiv.className = 'question-text';
+                    questionTextDiv.textContent = q.question;
+                }
+                
+                const textarea = document.createElement('textarea');
+                textarea.className = 'answer-box';
+                textarea.placeholder = 'پاسخ خود را اینجا بنویسید...';
+                textarea.setAttribute('data-question', index);
+                textarea.oninput = (e) => updateAnswer(index, e.target.value);
+                
+                const wordCount = document.createElement('div');
+                wordCount.className = 'word-count';
+                wordCount.id = `word-count-${index}`;
+                wordCount.textContent = '0 کلمه';
+                
+                questionEl.appendChild(questionNumber);
+                questionEl.appendChild(questionTextDiv);
+                questionEl.appendChild(textarea);
+                questionEl.appendChild(wordCount);
+                questionContainer.appendChild(questionEl);
+            });
+        }
+
+        // Update answer function
+        function updateAnswer(index, value) {
+            userAnswers[index] = value;
+            const wordCount = value.trim() === '' ? 0 : value.trim().split(/\s+/).length;
+            document.getElementById(`word-count-${index}`).textContent = `${wordCount} کلمه`;
+        }
+        
+        // Handle user form submission
+        userSubmitBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Validate form
+            if (!firstNameInput.value.trim() || !lastNameInput.value.trim() || !emailInput.value.trim()) {
+                alert('لطفا تمام فیلدها را پر کنید');
+                return;
+            }
+            
+            if (!isValidEmail(emailInput.value)) {
+                alert('لطفا یک آدرس ایمیل معتبر وارد کنید');
+                return;
+            }
+            
+            // Save user data
+            userData.firstName = firstNameInput.value.trim();
+            userData.lastName = lastNameInput.value.trim();
+            userData.email = emailInput.value.trim();
+            
+            // Hide form and show exam info
+            userForm.style.display = 'none';
+            userInfo.style.display = 'block';
+            userNameDisplay.textContent = `${userData.firstName} ${userData.lastName}`;
+            userEmailDisplay.textContent = userData.email;
+            
+            // Show instructions and start modal
+            instructions.style.display = 'block';
+            startModal.style.display = 'flex';
+        });
+        
+        // Email validation
+        function isValidEmail(email) {
+            const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(String(email).toLowerCase());
+        }
+        
+        // Start the exam
+        function startExam() {
+            startModal.style.display = 'none';
+            questionContainer.style.display = 'block';
+            submitBtnContainer.style.display = 'flex';
+            
+            // Start timer
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+        
+        // Update timer
+        function updateTimer() {
+            timeLeft--;
+            
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                submitExam();
+            }
+            
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            
+            timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            // Change color when time is running out
+            if (minutes < 5) {
+                timerElement.classList.add('time-warning');
+            }
+        }
+        
+        // Submit exam
+        function submitExam() {
+            clearInterval(timerInterval);
+            
+            // Show sending email notification
+            sendingEmail.style.display = 'block';
+            
+            // Send email with results
+            sendEmailResults();
+            
+            // Show results modal
+            showResults();
+        }
+        
+        // Send email with results
+        function sendEmailResults() {
+            // Prepare email content
+            const subject = `امتحان هکر صفر - ${userData.firstName} ${userData.lastName}`;
+            
+            let body = `نتایج امتحان هکر صفر (۴۰ سوال)\n`;
+            body += `نام: ${userData.firstName} ${userData.lastName}\n`;
+            body += `ایمیل: ${userData.email}\n`;
+            body += `تاریخ: ${new Date().toLocaleString('fa-IR')}\n\n`;
+            
+            body += "پاسخ‌های شرکت کننده:\n\n";
+            questions.forEach((q, index) => {
+                body += `سوال ${index + 1}: ${q.question}\n`;
+                body += `پاسخ: ${userAnswers[index] || 'پاسخی داده نشده'}\n`;
+                body += `---\n\n`;
+            });
+            
+            // Use EmailJS to send the email
+            emailjs.send("service_b9r47cr", "template_sqx8wkj", {
+                to_email: "modasirhashimi0101@gmail.com",
+                from_name: "امتحان هکر صفر",
+                subject: subject,
+                message: body
+            })
+            .then(function(response) {
+                console.log("Email sent successfully", response);
+                sendingEmail.innerHTML = "<h3>پاسخ‌ها با موفقیت ارسال شد!</h3><p>استاد دوره به زودی پاسخ‌های شما را بررسی خواهد کرد.</p>";
+            })
+            .catch(function(error) {
+                console.error("Failed to send email", error);
+                sendingEmail.innerHTML = "<h3>ارسال ایمیل با مشکل مواجه شد</h3><p>اما پاسخ‌های شما ذخیره شده است. لطفا با استاد تماس بگیرید.</p>";
+            });
+        }
+        
+        // Show detailed results
+        function showResults() {
+            // Clear previous results
+            resultsContainer.innerHTML = '';
+            
+            // Generate results for each question
+            questions.forEach((q, index) => {
+                const userAnswer = userAnswers[index];
+                
+                const resultItem = document.createElement('div');
+                resultItem.className = `result-item`;
+                
+                // نمایش سوال (با حفظ خطوط)
+                const questionDisplay = q.question.includes('\n') ? 
+                    `<pre style="background:#1e2b3a; padding:10px; border-radius:8px; font-family:monospace; direction:ltr; text-align:left;">${escapeHtml(q.question)}</pre>` : 
+                    q.question;
+                
+                resultItem.innerHTML = `
+                    <div class="result-question">سوال ${index + 1}: ${questionDisplay}</div>
+                    <div class="result-answer">
+                        <strong>پاسخ شما:</strong><br>
+                        ${userAnswer ? userAnswer.replace(/\n/g, '<br>') : '<em style="color: #999">پاسخی داده نشده</em>'}
+                    </div>
+                `;
+                
+                resultsContainer.appendChild(resultItem);
+            });
+            
+            // Show results modal
+            resultsModal.style.display = 'flex';
+        }
+        
+        // Event listeners
+        startExamBtn.addEventListener('click', startExam);
+        submitBtn.addEventListener('click', submitExam);
+        
+        closeResultsBtn.addEventListener('click', function() {
+            resultsModal.style.display = 'none';
+            finishedModal.style.display = 'flex';
+        });
+        
+        // Initialize the exam when page loads
+        window.addEventListener('load', initExam);
+
+        // Make updateAnswer function available globally
+        window.updateAnswer = updateAnswer;
+    </script>
+    
+    <!-- Load EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        // Initialize EmailJS with your public key
+        (function() {
+            emailjs.init("zTlaq0rOCJbPFLB-t");
+        })();
+    </script>
+</body>
+</html>
