@@ -600,14 +600,14 @@
                             <input type="radio" name="paymentType" value="paid" checked>
                             <div class="payment-label">
                                 <span class="payment-name">پرداخت ۵۰۰ افغانی <span class="fee-amount-badge">۵۰۰ AFN</span></span>
-                                <span class="payment-desc">دریافت گواهی + ویدیوهای آموزشی + جزوات + کتاب‌ها</span>
+                                <span class="payment-desc">دریافت سند + ویدیوهای آموزشی + جزوات + کتاب‌ها</span>
                             </div>
                         </label>
                         <label class="payment-radio-item">
                             <input type="radio" name="paymentType" value="free">
                             <div class="payment-label">
                                 <span class="payment-name">اشتراک رایگان <span class="free-badge">رایگان</span></span>
-                                <span class="payment-desc">فقط حضور در کلاس‌ها (بدون گواهی و مواد درسی)</span>
+                                <span class="payment-desc">فقط حضور در کلاس‌ها (بدون سند و مواد درسی)</span>
                             </div>
                         </label>
                     </div>
@@ -690,14 +690,14 @@
             return {
                 type: 'paid',
                 title: 'پرداخت ۵۰۰ افغانی',
-                description: 'دریافت گواهی + ویدیوهای آموزشی + جزوات + کتاب‌ها',
+                description: 'دریافت سند + ویدیوهای آموزشی + جزوات + کتاب‌ها',
                 amount: '۵۰۰ افغانی'
             };
         } else {
             return {
                 type: 'free',
                 title: 'اشتراک رایگان',
-                description: 'فقط حضور در کلاس‌ها (بدون گواهی و مواد درسی)',
+                description: 'فقط حضور در کلاس‌ها (بدون سند و مواد درسی)',
                 amount: 'رایگان'
             };
         }
