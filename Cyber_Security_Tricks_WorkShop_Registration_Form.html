@@ -233,7 +233,6 @@
             word-break: break-word;
         }
 
-        /* گزینه‌های پرداخت / اشتراک */
         .payment-options {
             background: rgba(0, 0, 0, 0.35);
             border-radius: 28px;
@@ -434,7 +433,7 @@
             background: rgba(3, 13, 51, 0.95);
             z-index: 1000;
             justify-content: center;
-  .          align-items: center;
+            align-items: center;
             backdrop-filter: blur(8px);
         }
 
@@ -549,11 +548,11 @@
                 <div class="two-columns">
                     <div class="input-field">
                         <label>نام</label>
-                        <input type="text" id="firstName" placeholder="" required>
+                        <input type="text" id="firstName" required>
                     </div>
                     <div class="input-field">
                         <label>تخلص</label>
-                        <input type="text" id="lastName" placeholder="" required>
+                        <input type="text" id="lastName" required>
                     </div>
                 </div>
                 <div class="input-field">
@@ -591,7 +590,6 @@
                     <div class="topic-item"><span class="topic-marker"></span><span class="topic-title">OSINT</span><span class="topic-desc">Open-Source Intelligence Techniques</span></div>
                 </div>
 
-                <!-- بخش انتخاب نوع اشتراک / پرداخت -->
                 <div class="section-title">نوع اشتراک</div>
                 <div class="payment-options">
                     <div class="payment-title">لطفاً گزینه مورد نظر خود را انتخاب کنید</div>
@@ -620,208 +618,6 @@
                 <div class="contact-block">
                     <div class="contact-row"><strong>شماره تماس دفتر:</strong> 0747404030</div>
                     <div class="contact-row"><strong>آدرس:</strong></div>
-                    <div class="address-text">کوته سنگی، گولایی دواخانه، مارکت تجارتی سهیل، منزل سوم، روبه‌روی شفاخانه مولا علی </div>
+                    <div class="address-text">کوته سنگی، گولایی دواخانه، مارکت تجارتی سهیل، منزل سوم، روبه‌روی شفاخانه مولا علی</div>
                     <a href="https://maps.app.goo.gl/dhBWF2KdtB4uXbfR8" target="_blank" class="map-link">مشاهده موقعیت روی نقشه (Google Maps)</a>
-                </div>
-
-                <button type="submit" class="btn-register"><span>ثبت نام در ورکشاپ</span></button>
-                <div id="statusMsg" class="status-msg"></div>
-            </form>
-        </div>
-    </div>
-    <footer>اطلاعات با امنیت کامل ذخیره می‌شود. پس از ثبت نام، هماهنگی با شما انجام خواهد شد.</footer>
-</div>
-
-<!-- مودال نمایش اطلاعات ثبت نام -->
-<div id="successModal" class="success-modal">
-    <div class="success-modal-content">
-        <h2>✅ ثبت نام موفقیت آمیز!</h2>
-        <div id="modalInfo" class="success-info-box"></div>
-        <button class="success-modal-btn" id="closeModalBtn">تایید و بستن</button>
-    </div>
-</div>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-<script>
-    emailjs.init("qBJw_znQzPgpHJ5fb");
-
-    const form = document.getElementById('workshopForm');
-    const statusDiv = document.getElementById('statusMsg');
-    const successModal = document.getElementById('successModal');
-    const modalInfo = document.getElementById('modalInfo');
-    const closeModalBtn = document.getElementById('closeModalBtn');
-
-    const topicsList = [
-        "JPG Payload - File-Based Attack Concepts",
-        "Camphish - Social Engineering for Location & Camera",
-        "WiFi Password Analyzer (Python Script)",
-        "Full Windows Control via Telegram",
-        "Automation (AI Agent) - Intelligent Automation",
-        "Wi-Fi Deauthentication - Wireless Disruption",
-        "Bad USB (Flipper Zero) - USB Attack",
-        "Android Hacking - Mobile Security",
-        "Web Hacking - Web App Security",
-        "OSINT - Reconnaissance Techniques"
-    ];
-
-    function isValidPhone(phone) {
-        let digits = phone.replace(/[\s\-+()]/g, '');
-        return digits.length >= 9 && /^\d+$/.test(digits);
-    }
-
-    function showMessage(msg, isError = false) {
-        statusDiv.innerText = msg;
-        statusDiv.className = 'status-msg';
-        if(isError) {
-            statusDiv.classList.add('status-error');
-        } else {
-            statusDiv.classList.add('status-success');
-        }
-        statusDiv.style.display = 'block';
-        setTimeout(() => {
-            statusDiv.style.display = 'none';
-            statusDiv.className = 'status-msg';
-        }, 4000);
-    }
-
-    function getPaymentInfo() {
-        const selected = document.querySelector('input[name="paymentType"]:checked');
-        if (selected && selected.value === 'paid') {
-            return {
-                type: 'paid',
-                title: 'پرداخت ۵۰۰ افغانی',
-                description: 'دریافت سند + ویدیوهای آموزشی + جزوات + کتاب‌ها',
-                amount: '۵۰۰ افغانی'
-            };
-        } else {
-            return {
-                type: 'free',
-                title: 'اشتراک رایگان',
-                description: 'فقط حضور در کلاس‌ها (بدون سند و مواد درسی)',
-                amount: 'رایگان'
-            };
-        }
-    }
-
-    function sendEmail(firstName, lastName, phone, selectedTime, paymentInfo) {
-        const emailBody = `✅ ثبت نام جدید ورکشاپ Blue Byte
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-اطلاعات شخصی:
-نام: ${firstName} ${lastName}
-شماره تماس: ${phone}
-تایم انتخابی: ${selectedTime}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-جزئیات دوره:
-مدت دوره: 10 روز
-تاریخ شروع: یکشنبه
-سرفصل‌ها: ${topicsList.length} عنوان تخصصی
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-نوع اشتراک:
-${paymentInfo.title}
-${paymentInfo.description}
-مبلغ: ${paymentInfo.amount}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-اطلاعات تماس دفتر: 0747404030
-آدرس: کوته سنگی، گولایی دواخانه، مارکت تجارتی سهیل، منزل سوم، روبه‌روی شفاخانه مولا علی 
-
-تاریخ ثبت نام: ${new Date().toLocaleString('fa-IR')}`;
-
-        return emailjs.send("(service_vq3okn4)", "template_lrvjje7", {
-            to_email: "silentknights0101@gmail.com",
-            from_name: "Blue Byte Registration",
-            subject: `ثبت نام ورکشاپ - ${firstName} ${lastName} - ${paymentInfo.type === 'paid' ? 'پرداختی' : 'رایگان'}`,
-            message: emailBody
-        });
-    }
-
-    function showSuccessModal(firstName, lastName, phone, selectedTime, paymentInfo) {
-        modalInfo.innerHTML = `
-            <div class="success-info-item"><strong>نام:</strong> ${firstName} ${lastName}</div>
-            <div class="success-info-item"><strong>شماره تماس:</strong> ${phone}</div>
-            <div class="success-info-item"><strong>تایم انتخابی:</strong> ${selectedTime}</div>
-            <div class="success-info-item"><strong>دوره:</strong> 10 روزه (شروع یکشنبه)</div>
-            <div class="success-info-item"><strong>نوع اشتراک:</strong> ${paymentInfo.title}</div>
-            <div class="success-info-item"><strong>مبلغ:</strong> ${paymentInfo.amount}</div>
-            <div class="success-info-item"><strong>سرفصل‌ها:</strong> ${topicsList.length} عنوان تخصصی</div>
-            <hr style="border-color:#2c4a6e; margin:15px 0">
-            <div class="success-info-item"><strong>📞 تیم پشتیبانی:</strong> 0747404030</div>
-            <div class="success-info-item"><strong>📍 آدرس:</strong>کوته سنگی، گولایی دواخانه، مارکت تجارتی سهیل، منزل سوم، روبه‌روی شفاخانه مولا علی </div>
-        `;
-        successModal.style.display = 'flex';
-    }
-
-    closeModalBtn.addEventListener('click', () => {
-        successModal.style.display = 'none';
-        document.getElementById('workshopForm').reset();
-        const timeRadios = document.querySelectorAll('input[name="sessionTime"]');
-        timeRadios.forEach(r => r.checked = false);
-        const paidRadio = document.querySelector('input[name="paymentType"][value="paid"]');
-        if (paidRadio) paidRadio.checked = true;
-    });
-
-    window.addEventListener('click', (e) => {
-        if (e.target === successModal) {
-            successModal.style.display = 'none';
-            document.getElementById('workshopForm').reset();
-            const timeRadios = document.querySelectorAll('input[name="sessionTime"]');
-            timeRadios.forEach(r => r.checked = false);
-            const paidRadio = document.querySelector('input[name="paymentType"][value="paid"]');
-            if (paidRadio) paidRadio.checked = true;
-        }
-    });
-
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        const firstName = document.getElementById('firstName').value.trim();
-        const lastName = document.getElementById('lastName').value.trim();
-        const phone = document.getElementById('phone').value.trim();
-
-        let selectedTime = '';
-        const timeRadios = document.querySelectorAll('input[name="sessionTime"]');
-        for(let radio of timeRadios) {
-            if(radio.checked) {
-                selectedTime = radio.value;
-                break;
-            }
-        }
-
-        const paymentInfo = getPaymentInfo();
-
-        if(!firstName || !lastName || !phone) {
-            showMessage('لطفاً نام، تخلص و شماره تماس را کامل وارد کنید.', true);
-            return;
-        }
-        if(!isValidPhone(phone)) {
-            showMessage('شماره تماس معتبر وارد کنید (حداقل ۹ رقم).', true);
-            return;
-        }
-        if(!selectedTime) {
-            showMessage('لطفاً یکی از تایم‌های 6:30 صبح یا 4:00 شام را انتخاب کنید.', true);
-            return;
-        }
-
-        const submitSpan = document.querySelector('.btn-register span');
-        const originalText = submitSpan.innerText;
-        submitSpan.innerText = 'در حال ثبت نام...';
-        document.querySelector('.btn-register').disabled = true;
-
-        try {
-            await sendEmail(firstName, lastName, phone, selectedTime, paymentInfo);
-            showSuccessModal(firstName, lastName, phone, selectedTime, paymentInfo);
-            showMessage('ثبت نام با موفقیت انجام شد!', false);
-        } catch(error) {
-            console.error('Email error:', error);
-            showMessage('خطا در ارسال اطلاعات. لطفاً دوباره تلاش کنید.', true);
-        } finally {
-            submitSpan.innerText = originalText;
-            document.querySelector('.btn-register').disabled = false;
-        }
-    });
-</script>
-</body>
-</html>
+          
