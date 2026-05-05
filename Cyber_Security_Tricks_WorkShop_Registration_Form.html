@@ -13,7 +13,7 @@
 
         body {
             background: radial-gradient(circle at 10% 20%, #0b121f, #03060c);
-            font-family: 'Vazirmatn', 'Inter', 'Poppins', 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Vazirmatn', 'Inter', 'Poppins', 'Segoe UI', system-ui, sans-serif;    
             padding: 2rem 1.2rem;
             color: #eef2ff;
             min-height: 100vh;
@@ -233,88 +233,63 @@
             word-break: break-word;
         }
 
-        .payment-options {
+        .fee-container {
             background: rgba(0, 0, 0, 0.35);
             border-radius: 28px;
-            padding: 1.2rem 1.5rem;
-            margin: 0.8rem 0 1rem 0;
-            border: 1px solid #2c4a6e;
-        }
-
-        .payment-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #ffcf9a;
-            margin-bottom: 15px;
+            padding: 1.3rem 1.6rem;
+            margin: 1rem 0;
+            border: 1px solid #2c6b5a;
             text-align: right;
         }
 
-        .payment-radio-group {
+        .fee-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #ffcf9a;
+            margin-bottom: 0.5rem;
+            text-align: right;
+        }
+
+        .fee-amount {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #ffba7a;
+            background: #0f192e;
+            display: inline-block;
+            padding: 4px 28px;
+            border-radius: 60px;
+            margin: 8px 0;
+            border: 1px solid #3f7e68;
+        }
+
+        .materials-grid {
+            list-style: none;
             display: flex;
             flex-wrap: wrap;
-            gap: 1.5rem;
-            justify-content: flex-start;
+            gap: 1.2rem 2rem;
+            margin-top: 1rem;
         }
 
-        .payment-radio-item {
+        .materials-grid li {
             display: flex;
             align-items: center;
-            gap: 0.7rem;
-            cursor: pointer;
+            gap: 10px;
             font-weight: 500;
-            background: rgba(16, 24, 44, 0.8);
-            padding: 10px 22px;
-            border-radius: 50px;
-            border: 1px solid #3f5172;
-            transition: 0.2s;
-            flex: 1;
-            min-width: 200px;
+            color: #cfdef5;
         }
 
-        .payment-radio-item:hover {
-            background: #1a2742;
-            border-color: #2c9b7c;
-        }
-
-        .payment-radio-item input {
-            accent-color: #2c9b7c;
-            width: 18px;
-            height: 18px;
-            margin: 0;
-        }
-
-        .payment-radio-item .payment-label {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .payment-name {
-            font-weight: 700;
-            color: #ffcf9a;
-        }
-
-        .payment-desc {
-            font-size: 0.7rem;
-            color: #9bb5d4;
-        }
-
-        .fee-amount-badge {
+        .materials-grid li::before {
+            content: "✓";
             background: #2c9b7c;
-            padding: 2px 10px;
-            border-radius: 30px;
-            font-size: 0.7rem;
+            color: white;
             font-weight: bold;
-            margin-right: 8px;
-        }
-
-        .free-badge {
-            background: #5a6e8a;
-            padding: 2px 10px;
+            width: 22px;
+            height: 22px;
             border-radius: 30px;
-            font-size: 0.7rem;
-            font-weight: bold;
-            margin-right: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
         }
 
         .mode-note {
@@ -423,6 +398,7 @@
             color: #6c86a3;
         }
 
+        /* مودال موفقیت */
         .success-modal {
             display: none;
             position: fixed;
@@ -473,7 +449,7 @@
         .success-info-item strong {
             color: #ffcf9a;
             display: inline-block;
-            min-width: 130px;
+            min-width: 110px;
         }
 
         .success-modal-btn {
@@ -528,9 +504,6 @@
             .success-modal-content {
                 padding: 20px;
             }
-            .payment-radio-group {
-                flex-direction: column;
-            }
         }
     </style>
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
@@ -548,11 +521,11 @@
                 <div class="two-columns">
                     <div class="input-field">
                         <label>نام</label>
-                        <input type="text" id="firstName" required>
+                        <input type="text" id="firstName" placeholder="" required>
                     </div>
                     <div class="input-field">
                         <label>تخلص</label>
-                        <input type="text" id="lastName" required>
+                        <input type="text" id="lastName" placeholder="" required>
                     </div>
                 </div>
                 <div class="input-field">
@@ -590,25 +563,16 @@
                     <div class="topic-item"><span class="topic-marker"></span><span class="topic-title">OSINT</span><span class="topic-desc">Open-Source Intelligence Techniques</span></div>
                 </div>
 
-                <div class="section-title">نوع اشتراک</div>
-                <div class="payment-options">
-                    <div class="payment-title">لطفاً گزینه مورد نظر خود را انتخاب کنید</div>
-                    <div class="payment-radio-group">
-                        <label class="payment-radio-item">
-                            <input type="radio" name="paymentType" value="paid" checked>
-                            <div class="payment-label">
-                                <span class="payment-name">پرداخت ۵۰۰ افغانی <span class="fee-amount-badge">۵۰۰ AFN</span></span>
-                                <span class="payment-desc">دریافت سند + ویدیوهای آموزشی + جزوات + کتاب‌ها</span>
-                            </div>
-                        </label>
-                        <label class="payment-radio-item">
-                            <input type="radio" name="paymentType" value="free">
-                            <div class="payment-label">
-                                <span class="payment-name">اشتراک رایگان <span class="free-badge">رایگان</span></span>
-                                <span class="payment-desc">فقط حضور در کلاس‌ها (بدون سند و مواد درسی)</span>
-                            </div>
-                        </label>
-                    </div>
+                <div class="fee-container">
+                    <div class="fee-title">هزینه مواد درسی</div>
+                    <div class="fee-amount">۵۰۰ افغانی</div>
+                    <div style="font-weight: 500; margin: 10px 0 6px 0; color:#b9d0f0;">مبلغ ۵۰۰ افغانی بابت مواد درسی شامل موارد زیر است:</div>
+                    <ul class="materials-grid">
+                        <li>سنند (Certificate)</li>
+                        <li>ویدیوهای آموزشی</li>
+                        <li>چپترها و جزوات</li>
+                        <li>کتاب‌ها</li>
+                    </ul>
                 </div>
 
                 <div class="mode-note">
@@ -618,7 +582,7 @@
                 <div class="contact-block">
                     <div class="contact-row"><strong>شماره تماس دفتر:</strong> 0747404030</div>
                     <div class="contact-row"><strong>آدرس:</strong></div>
-                    <div class="address-text">کوته سنگی، گولایی دواخانه، مارکت تجارتی سهیل، منزل سوم، روبه‌روی شفاخانه مولا علی</div>
+                    <div class="address-text">کوتاه‌سنگی، کوالیی دواخانه، مارکت تجارتی سهیل، منزل سوم، روبروی شفاخانه مهال علی</div>
                     <a href="https://maps.app.goo.gl/dhBWF2KdtB4uXbfR8" target="_blank" class="map-link">مشاهده موقعیت روی نقشه (Google Maps)</a>
                 </div>
 
@@ -630,6 +594,7 @@
     <footer>اطلاعات با امنیت کامل ذخیره می‌شود. پس از ثبت نام، هماهنگی با شما انجام خواهد شد.</footer>
 </div>
 
+<!-- مودال نمایش اطلاعات ثبت نام -->
 <div id="successModal" class="success-modal">
     <div class="success-modal-content">
         <h2>✅ ثبت نام موفقیت آمیز!</h2>
@@ -640,10 +605,7 @@
 
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script>
-    // مقداردهی با Public Key درست
-    // توجه: qBJw_znQzPgpHJ5fb به نظر می‌رسد Private Key است
-    // برای تست از Public Key عمومی استفاده می‌کنم
-    emailjs.init("zTlaq0rOCJbPFLB-t");
+    emailjs.init("v7N60GaP3VY7s9bgX-t");
 
     const form = document.getElementById('workshopForm');
     const statusDiv = document.getElementById('statusMsg');
@@ -684,73 +646,41 @@
         }, 4000);
     }
 
-    function getPaymentInfo() {
-        const selected = document.querySelector('input[name="paymentType"]:checked');
-        if (selected && selected.value === 'paid') {
-            return {
-                type: 'paid',
-                title: 'پرداخت ۵۰۰ افغانی',
-                description: 'دریافت سند + ویدیوهای آموزشی + جزوات + کتاب‌ها',
-                amount: '۵۰۰ افغانی'
-            };
-        } else {
-            return {
-                type: 'free',
-                title: 'اشتراک رایگان',
-                description: 'فقط حضور در کلاس‌ها (بدون سند و مواد درسی)',
-                amount: 'رایگان'
-            };
-        }
-    }
-
-    function sendEmail(firstName, lastName, phone, selectedTime, paymentInfo) {
+    function sendEmail(firstName, lastName, phone, selectedTime) {
         const emailBody = `✅ ثبت نام جدید ورکشاپ Blue Byte
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-اطلاعات شخصی:
 نام: ${firstName} ${lastName}
 شماره تماس: ${phone}
 تایم انتخابی: ${selectedTime}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-جزئیات دوره:
 مدت دوره: 10 روز
 تاریخ شروع: یکشنبه
+هزینه مواد درسی: ۵۰۰ افغانی
 سرفصل‌ها: ${topicsList.length} عنوان تخصصی
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-نوع اشتراک:
-${paymentInfo.title}
-${paymentInfo.description}
-مبلغ: ${paymentInfo.amount}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-اطلاعات تماس دفتر: 0747404030
-آدرس: کوته سنگی، گولایی دواخانه، مارکت تجارتی سهیل، منزل سوم، روبه‌روی شفاخانه مولا علی
+شماره تماس دفتر: 0747404030
+آدرس: کوتاه‌سنگی، کوالیی دواخانه، مارکت تجارتی سهیل، منزل سوم، روبروی شفاخانه مهال علی
 
 تاریخ ثبت نام: ${new Date().toLocaleString('fa-IR')}`;
 
-        // استفاده از اطلاعات شما
-        return emailjs.send("service_vq3okn4", "template_lrvjje7", {
-            to_email: "modasirhashimi0101@gmail.com",
+        return emailjs.send("service_4qgvymu", "template_zf2gsxi", {
+            to_email: "silentknights0101@gmail.com",
             from_name: "Blue Byte Registration",
-            subject: `ثبت نام ورکشاپ - ${firstName} ${lastName} - ${paymentInfo.type === 'paid' ? 'پرداختی' : 'رایگان'}`,
+            subject: `ثبت نام ورکشاپ - ${firstName} ${lastName}`,
             message: emailBody
         });
     }
 
-    function showSuccessModal(firstName, lastName, phone, selectedTime, paymentInfo) {
+    function showSuccessModal(firstName, lastName, phone, selectedTime) {
         modalInfo.innerHTML = `
             <div class="success-info-item"><strong>نام:</strong> ${firstName} ${lastName}</div>
             <div class="success-info-item"><strong>شماره تماس:</strong> ${phone}</div>
             <div class="success-info-item"><strong>تایم انتخابی:</strong> ${selectedTime}</div>
             <div class="success-info-item"><strong>دوره:</strong> 10 روزه (شروع یکشنبه)</div>
-            <div class="success-info-item"><strong>نوع اشتراک:</strong> ${paymentInfo.title}</div>
-            <div class="success-info-item"><strong>مبلغ:</strong> ${paymentInfo.amount}</div>
+            <div class="success-info-item"><strong>هزینه مواد درسی:</strong> ۵۰۰ افغانی</div>
             <div class="success-info-item"><strong>سرفصل‌ها:</strong> ${topicsList.length} عنوان تخصصی</div>
             <hr style="border-color:#2c4a6e; margin:15px 0">
             <div class="success-info-item"><strong>📞 تیم پشتیبانی:</strong> 0747404030</div>
-            <div class="success-info-item"><strong>📍 آدرس:</strong> کوته سنگی، گولایی دواخانه، مارکت تجارتی سهیل</div>
+            <div class="success-info-item"><strong>📍 آدرس:</strong> کوتاه‌سنگی، کوالیی دواخانه، مارکت تجارتی سهیل</div>
         `;
         successModal.style.display = 'flex';
     }
@@ -760,8 +690,6 @@ ${paymentInfo.description}
         document.getElementById('workshopForm').reset();
         const timeRadios = document.querySelectorAll('input[name="sessionTime"]');
         timeRadios.forEach(r => r.checked = false);
-        const paidRadio = document.querySelector('input[name="paymentType"][value="paid"]');
-        if (paidRadio) paidRadio.checked = true;
     });
 
     window.addEventListener('click', (e) => {
@@ -770,8 +698,6 @@ ${paymentInfo.description}
             document.getElementById('workshopForm').reset();
             const timeRadios = document.querySelectorAll('input[name="sessionTime"]');
             timeRadios.forEach(r => r.checked = false);
-            const paidRadio = document.querySelector('input[name="paymentType"][value="paid"]');
-            if (paidRadio) paidRadio.checked = true;
         }
     });
 
@@ -790,8 +716,6 @@ ${paymentInfo.description}
                 break;
             }
         }
-
-        const paymentInfo = getPaymentInfo();
 
         if(!firstName || !lastName || !phone) {
             showMessage('لطفاً نام، تخلص و شماره تماس را کامل وارد کنید.', true);
@@ -812,8 +736,8 @@ ${paymentInfo.description}
         document.querySelector('.btn-register').disabled = true;
 
         try {
-            await sendEmail(firstName, lastName, phone, selectedTime, paymentInfo);
-            showSuccessModal(firstName, lastName, phone, selectedTime, paymentInfo);
+            await sendEmail(firstName, lastName, phone, selectedTime);
+            showSuccessModal(firstName, lastName, phone, selectedTime);
             showMessage('ثبت نام با موفقیت انجام شد!', false);
         } catch(error) {
             console.error('Email error:', error);
