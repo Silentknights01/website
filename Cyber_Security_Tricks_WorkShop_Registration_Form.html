@@ -233,7 +233,6 @@
             word-break: break-word;
         }
 
-        /* گزینه‌های پرداخت / اشتراک */
         .payment-options {
             background: rgba(0, 0, 0, 0.35);
             border-radius: 28px;
@@ -549,11 +548,11 @@
                 <div class="two-columns">
                     <div class="input-field">
                         <label>نام</label>
-                        <input type="text" id="firstName" placeholder="" required>
+                        <input type="text" id="firstName" required>
                     </div>
                     <div class="input-field">
                         <label>تخلص</label>
-                        <input type="text" id="lastName" placeholder="" required>
+                        <input type="text" id="lastName" required>
                     </div>
                 </div>
                 <div class="input-field">
@@ -591,7 +590,6 @@
                     <div class="topic-item"><span class="topic-marker"></span><span class="topic-title">OSINT</span><span class="topic-desc">Open-Source Intelligence Techniques</span></div>
                 </div>
 
-                <!-- بخش انتخاب نوع اشتراک / پرداخت -->
                 <div class="section-title">نوع اشتراک</div>
                 <div class="payment-options">
                     <div class="payment-title">لطفاً گزینه مورد نظر خود را انتخاب کنید</div>
@@ -600,14 +598,14 @@
                             <input type="radio" name="paymentType" value="paid" checked>
                             <div class="payment-label">
                                 <span class="payment-name">پرداخت ۵۰۰ افغانی <span class="fee-amount-badge">۵۰۰ AFN</span></span>
-                                <span class="payment-desc">دریافت گواهی + ویدیوهای آموزشی + جزوات + کتاب‌ها</span>
+                                <span class="payment-desc">دریافت سند + ویدیوهای آموزشی + جزوات + کتاب‌ها</span>
                             </div>
                         </label>
                         <label class="payment-radio-item">
                             <input type="radio" name="paymentType" value="free">
                             <div class="payment-label">
                                 <span class="payment-name">اشتراک رایگان <span class="free-badge">رایگان</span></span>
-                                <span class="payment-desc">فقط حضور در کلاس‌ها (بدون گواهی و مواد درسی)</span>
+                                <span class="payment-desc">فقط حضور در کلاس‌ها (بدون سند و مواد درسی)</span>
                             </div>
                         </label>
                     </div>
@@ -632,7 +630,6 @@
     <footer>اطلاعات با امنیت کامل ذخیره می‌شود. پس از ثبت نام، هماهنگی با شما انجام خواهد شد.</footer>
 </div>
 
-<!-- مودال نمایش اطلاعات ثبت نام -->
 <div id="successModal" class="success-modal">
     <div class="success-modal-content">
         <h2>✅ ثبت نام موفقیت آمیز!</h2>
@@ -640,15 +637,14 @@
         <button class="success-modal-btn" id="closeModalBtn">تایید و بستن</button>
     </div>
 </div>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script type="text/javascript">
-   (function(){
-      emailjs.init({
-        publicKey: "v7N60GaP3VY7s9bgX",
-      });
-   })();
-</script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script>
+    // مقداردهی با Public Key درست
+    // توجه: qBJw_znQzPgpHJ5fb به نظر می‌رسد Private Key است
+    // برای تست از Public Key عمومی استفاده می‌کنم
+    emailjs.init("v7N60GaP3VY7s9bgX");
+
     const form = document.getElementById('workshopForm');
     const statusDiv = document.getElementById('statusMsg');
     const successModal = document.getElementById('successModal');
@@ -688,41 +684,73 @@
         }, 4000);
     }
 
-    function sendEmail(firstName, lastName, phone, selectedTime) {
+    function getPaymentInfo() {
+        const selected = document.querySelector('input[name="paymentType"]:checked');
+        if (selected && selected.value === 'paid') {
+            return {
+                type: 'paid',
+                title: 'پرداخت ۵۰۰ افغانی',
+                description: 'دریافت سند + ویدیوهای آموزشی + جزوات + کتاب‌ها',
+                amount: '۵۰۰ افغانی'
+            };
+        } else {
+            return {
+                type: 'free',
+                title: 'اشتراک رایگان',
+                description: 'فقط حضور در کلاس‌ها (بدون سند و مواد درسی)',
+                amount: 'رایگان'
+            };
+        }
+    }
+
+    function sendEmail(firstName, lastName, phone, selectedTime, paymentInfo) {
         const emailBody = `✅ ثبت نام جدید ورکشاپ Blue Byte
 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+اطلاعات شخصی:
 نام: ${firstName} ${lastName}
 شماره تماس: ${phone}
 تایم انتخابی: ${selectedTime}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+جزئیات دوره:
 مدت دوره: 10 روز
 تاریخ شروع: یکشنبه
-هزینه مواد درسی: ۵۰۰ افغانی
 سرفصل‌ها: ${topicsList.length} عنوان تخصصی
 
-شماره تماس دفتر: 0747404030
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+نوع اشتراک:
+${paymentInfo.title}
+${paymentInfo.description}
+مبلغ: ${paymentInfo.amount}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+اطلاعات تماس دفتر: 0747404030
 آدرس: کوته سنگی، گولایی دواخانه، مارکت تجارتی سهیل، منزل سوم، روبه‌روی شفاخانه مولا علی
 
 تاریخ ثبت نام: ${new Date().toLocaleString('fa-IR')}`;
 
+        // استفاده از اطلاعات شما
         return emailjs.send("service_4qgvymu", "template_zf2gsxi", {
             to_email: "silentknights0101@gmail.com",
             from_name: "Blue Byte Registration",
-            subject: `ثبت نام ورکشاپ - ${firstName} ${lastName}`,
+            subject: `ثبت نام ورکشاپ - ${firstName} ${lastName} - ${paymentInfo.type === 'paid' ? 'پرداختی' : 'رایگان'}`,
             message: emailBody
         });
     }
 
-    function showSuccessModal(firstName, lastName, phone, selectedTime) {
+    function showSuccessModal(firstName, lastName, phone, selectedTime, paymentInfo) {
         modalInfo.innerHTML = `
             <div class="success-info-item"><strong>نام:</strong> ${firstName} ${lastName}</div>
             <div class="success-info-item"><strong>شماره تماس:</strong> ${phone}</div>
             <div class="success-info-item"><strong>تایم انتخابی:</strong> ${selectedTime}</div>
             <div class="success-info-item"><strong>دوره:</strong> 10 روزه (شروع یکشنبه)</div>
-            <div class="success-info-item"><strong>هزینه مواد درسی:</strong> ۵۰۰ افغانی</div>
+            <div class="success-info-item"><strong>نوع اشتراک:</strong> ${paymentInfo.title}</div>
+            <div class="success-info-item"><strong>مبلغ:</strong> ${paymentInfo.amount}</div>
             <div class="success-info-item"><strong>سرفصل‌ها:</strong> ${topicsList.length} عنوان تخصصی</div>
             <hr style="border-color:#2c4a6e; margin:15px 0">
             <div class="success-info-item"><strong>📞 تیم پشتیبانی:</strong> 0747404030</div>
-            <div class="success-info-item"><strong>📍 آدرس:</strong> کوته سنگی، گولایی دواخانه، مارکت تجارتی سهیل، منزل سوم، روبه‌روی شفاخانه مولا علی</div>
+            <div class="success-info-item"><strong>📍 آدرس:</strong> کوته سنگی، گولایی دواخانه، مارکت تجارتی سهیل</div>
         `;
         successModal.style.display = 'flex';
     }
@@ -732,6 +760,8 @@
         document.getElementById('workshopForm').reset();
         const timeRadios = document.querySelectorAll('input[name="sessionTime"]');
         timeRadios.forEach(r => r.checked = false);
+        const paidRadio = document.querySelector('input[name="paymentType"][value="paid"]');
+        if (paidRadio) paidRadio.checked = true;
     });
 
     window.addEventListener('click', (e) => {
@@ -740,6 +770,8 @@
             document.getElementById('workshopForm').reset();
             const timeRadios = document.querySelectorAll('input[name="sessionTime"]');
             timeRadios.forEach(r => r.checked = false);
+            const paidRadio = document.querySelector('input[name="paymentType"][value="paid"]');
+            if (paidRadio) paidRadio.checked = true;
         }
     });
 
@@ -758,6 +790,8 @@
                 break;
             }
         }
+
+        const paymentInfo = getPaymentInfo();
 
         if(!firstName || !lastName || !phone) {
             showMessage('لطفاً نام، تخلص و شماره تماس را کامل وارد کنید.', true);
@@ -778,8 +812,8 @@
         document.querySelector('.btn-register').disabled = true;
 
         try {
-            await sendEmail(firstName, lastName, phone, selectedTime);
-            showSuccessModal(firstName, lastName, phone, selectedTime);
+            await sendEmail(firstName, lastName, phone, selectedTime, paymentInfo);
+            showSuccessModal(firstName, lastName, phone, selectedTime, paymentInfo);
             showMessage('ثبت نام با موفقیت انجام شد!', false);
         } catch(error) {
             console.error('Email error:', error);
