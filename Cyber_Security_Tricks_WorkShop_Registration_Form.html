@@ -643,7 +643,7 @@
     // مقداردهی با Public Key درست
     // توجه: qBJw_znQzPgpHJ5fb به نظر می‌رسد Private Key است
     // برای تست از Public Key عمومی استفاده می‌کنم
-    emailjs.init("v7N60GaP3VY7s9bgX");
+    emailjs.init("wW5SNhxT4QcSI6Fpx");
 
     const form = document.getElementById('workshopForm');
     const statusDiv = document.getElementById('statusMsg');
@@ -731,8 +731,8 @@ ${paymentInfo.description}
 تاریخ ثبت نام: ${new Date().toLocaleString('fa-IR')}`;
 
         // استفاده از اطلاعات شما
-        return emailjs.send("service_4qgvymu", "template_zf2gsxi", {
-            to_email: "silentknights0101@gmail.com",
+        return emailjs.send("service_0iiak8c", "template_c9c5xwv", {
+            to_email: "goldentouch.af@gmail.com",
             from_name: "Blue Byte Registration",
             subject: `ثبت نام ورکشاپ - ${firstName} ${lastName} - ${paymentInfo.type === 'paid' ? 'پرداختی' : 'رایگان'}`,
             message: emailBody
