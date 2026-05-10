@@ -427,12 +427,12 @@
         <div class="section-divider basic-divider"><i class="fas fa-code-branch"></i> مهارت‌های اساسی</div>
         <div class="section-divider advanced-divider"><i class="fas fa-trophy"></i> مدارک بین‌المللی</div>
         
-        <div class="timeline-point point-01">۰</div>
-        <div class="timeline-point point-02">۱</div>
-        <div class="timeline-point point-03">۲</div>
-        <div class="timeline-point point-04">۳</div>
-        <div class="timeline-point point-05">۴</div>
-        <div class="timeline-point point-06">۵</div>
+        <div class="timeline-point point-01">0</div>
+        <div class="timeline-point point-02">1</div>
+        <div class="timeline-point point-03">2</div>
+        <div class="timeline-point point-04">3</div>
+        <div class="timeline-point point-05">4</div>
+        <div class="timeline-point point-06">5</div>
 
         <!-- کارت‌ها (در موبایل اعداد روی آن‌ها نمایش داده می‌شود) -->
         <div class="timeline-card card-right card-01" onclick="openCourseModal(0)">
@@ -481,12 +481,127 @@
 
 <script>
     const coursesData = [
-        { title: "Zero Hacker - شروع حرفه‌ای از صفر", description: "دوره جامع پایه‌گذاری ذهنیت هک و امنیت، بدون نیاز به دانش قبلی. یادگیری تفکر هکری، رمزنگاری مقدماتی، مدلسازی تهدید و CTF.", syllabus: ["مفاهیم CIA Triad", "انواع هکرها و kill chain", "تنظیم محیط مجازی", "معرفی TryHackMe و Hack The Box", "مهندسی اجتماعی"], videoUrl: "https://www.youtube.com/embed/3Kq1MIfTWCE", extra: "نمونه ویدیوهای ضبط شده" },
-        { title: "Network For Hacker", description: "شبکه قلب امنیت سایبری است. پروتکل‌ها، TCP/IP، مسیریابی، Wireshark، حملات MITM و امنیت شبکه.", syllabus: ["مدل OSI و TCP/IP", "اسکن با Nmap", "نفوذ به VLAN", "فایروال و IDS/IPS", "ARP Spoofing"], videoUrl: "https://www.youtube.com/embed/3QJNNDBx6Pw", extra: "به همراه لاب عملی" },
-        { title: "Linux For Hacker", description: "تسلط بر خط فرمان لینوکس، امنیت فایل‌سیستم، Bash، ابزارهای Kali و مدیریت آسیب‌پذیری.", syllabus: ["فایل سیستم و مجوزها", "grep, awk, sed", "نصب ابزارهای هک", "اتوماسیون با Bash", "مدیریت سرویس‌ها"], videoUrl: "https://www.youtube.com/embed/VbGT3EN3lU0", extra: "آموزش Metasploit و Netcat" },
-        { title: "Python For Hacker", description: "نوشتن ابزارهای امنیتی، اسکنر پورت، brute force، keylogger و reverse shell.", syllabus: ["سوکت و برنامه‌نویسی شبکه", "اسکنر آسیب‌پذیری", "reverse shell ساده", "پردازش packet با Scapy", "API امنیتی"], videoUrl: "https://www.youtube.com/embed/Mf4fLnwEmjs", extra: "پروژه ساخت Vulnerability Scanner" },
-        { title: "CEHv13 | هکر اخلاقی", description: "دوره رسمی CEH نسخه ۱۳ شامل جدیدترین تکنیک‌های تست نفوذ، بدافزارها، رمزنگاری و امنیت وب.", syllabus: ["Footprinting", "اسکن و فرار از IDS", "Enumeration", "هک وب (SQLi, XSS)", "رمزنگاری"], videoUrl: "https://www.youtube.com/embed/3Kq1MIfTWCE", extra: "آمادگی آزمون 312-50" },
-        { title: "PWK (Pen-200) مسیر OSCP", description: "دوره آفنسیو سکوریتی، ۹۰ روز لاب عملی، Buffer Overflow، اکتیو دایرکتوری و گزارش حرفه‌ای.", syllabus: ["Buffer Overflow", "حرکت جانبی", "privilege escalation", "هک بی‌سیم", "گزارش نویسی"], videoUrl: "https://www.youtube.com/embed/8HznGcBzG10", extra: "آزمون ۲۴ ساعته" }
+       {
+  "title": "Zero Hacker - شروع حرفه‌ای از صفر",
+  "description": "دوره‌ای جامع برای ورود به دنیای هک و امنیت سایبری؛ از مفاهیم پایه، ذهنیت هکری و تست نفوذ گرفته تا لینوکس، ابزارهای هک، مهندسی اجتماعی، امنیت وای‌فای و آینده هوش مصنوعی در سایبرسکیوریتی. این دوره بدون نیاز به دانش قبلی طراحی شده تا شما را قدم‌به‌قدم با دنیای واقعی هکرها و امنیت آشنا کند.",
+  "syllabus": [
+    "1. هک چیست و هکر کیست؟",
+    "2. باورهای غلط درباره هکرها",
+    "3. آیا به‌درد هک می‌خورید؟",
+    "4. ذهنیت یک هکر",
+    "5. انواع هکرها و اخلاق هکری",
+    "6. دانشگاه، کورس یا خودآموزی",
+    "7. آیا باید انگلیسی بلد باشیم؟",
+    "8. مهارت‌های لازم برای یک هکر",
+    "9. مفهوم برنامه‌نویسی برای هکرها",
+    "10. تست نفوذ چیست؟",
+    "11. مراحل تست نفوذ",
+    "12. چرا هکرها از لینوکس استفاده می‌کنند؟",
+    "13. کالی لینوکس چیست؟",
+    "14. ابزارهای اصلی هکرها",
+    "15. ابزار و سیستم مورد نیاز برای شروع حرفه‌ای",
+    "16. ابزارهای سخت‌افزاری",
+    "17. هک واتساپ",
+    "18. هک وای‌فای",
+    "19. هک دوربین‌ها",
+    "20. مهندسی اجتماعی",
+    "21. نقشه راه هک و امنیت",
+    "22. نقش هوش مصنوعی در امنیت سایبری",
+    "23. آیندهٔ تکنولوژی",
+    "24. ناشناس ماندن در اینترنت",
+    "25. اشتباهات رایج مبتدیان",
+    "26. آسیب‌پذیری‌های امنیتی و حفاظت از داده‌ها",
+    "27. راه‌های درآمدی هکرها"]
+  ,"videoUrl": "https://www.youtube.com/watch?v=rWk3fzlrmT4",
+  "extra": "نمونه ویدیوهای ضبط شده"
+},
+       
+    { title: "Network For Hacker", description: "دوره Network For Hackers شما را با مفاهیم اساسی شبکه و طرز کار ارتباطات در دنیای سایبری آشنا می‌کند. در این دوره، از مبانی شبکه، Subnetting و تحلیل ترافیک گرفته تا فایروال‌های لینوکس، امنیت وای‌فای، پروتکل‌های مهم شبکه مانند DNS، ARP، SMB و HTTP را به‌صورت عملی یاد می‌گیرید. همچنان با شبکه‌های بلوتوث، RF، سیستم‌های صنعتی SCADA/ICS و حتی امنیت شبکه‌های موتر آشنا می‌شوید تا درک عمیق‌تری از دنیای هک و امنیت شبکه به‌دست بیاورید."
+        ,   "syllabus": [
+    "1. Network Basics",
+    "2. Sub-netting and CIDR",
+    "3. Network Analysis",
+    "4. Linux Firewalls",
+    "5. Wi-Fi Networks and Hacking",
+    "6. Bluetooth Networks",
+    "7. Address Resolution Protocol (ARP)",
+    "8. Domain Name Service (DNS)",
+    "9. Server Message Block (SMB)",
+    "10. SMTP",
+    "11. SNMP",
+    "12. HTTP",
+    "13. Automobile Networks",
+    "14. SCADA/ICS Networks",
+    "15. Radio Frequency (RF) Networks",
+    "16. Appendix A Cyberwarrior Wisdom"]
+        , videoUrl: "", extra: "به همراه لاب عملی" },
+       
+        { title: "Linux For Hacker", description: "دوره  Linux For Hackers شما را با لینوکس از سطح پایه تا مباحث پیشرفته امنیتی آشنا می‌کند. در این دوره، کار با ترمینل، مدیریت فایل‌ها، شبکه، نصب نرم‌افزارها و Bash Scripting را به‌صورت عملی یاد می‌گیرید. همچنان با مفاهیمی مانند دسترسی‌ها و Privilege Escalation، مدیریت پروسه‌ها، لاگ‌ها، سرویس‌هایی مثل Apache و SSH، ناشناس ماندن در اینترنت، امنیت شبکه‌های وایرلس، کرنل لینوکس و Python Scripting آشنا می‌شوید تا بتوانید لینوکس را به‌عنوان یک هکر و متخصص امنیت به‌صورت حرفه‌ای استفاده کنید.",
+         "syllabus": [
+    "1. File system & terminal basics",
+    "2. Text manipulation",
+    "3. Network management",
+    "4. Adding/removing software",
+    "5. File permissions & privilege escalation",
+    "6. Process management",
+    "7. Environment variables",
+    "8. Bash scripting",
+    "9. Archiving & filesystem management",
+    "10. Logging system",
+    "11. Apache, SSH, MySQL",
+    "12. Anonymity (Tor, VPN, proxies)",
+    "13. Wireless networks",
+    "14. Kernel & LKMs",
+    "15. Job scheduling",
+    "16. Python scripting"]
+         , videoUrl: "https://www.youtube.com/watch?v=UjUtAF-sprc", extra: "آموزش Metasploit و Netcat" },
+      
+         { title: "Python For Hacker", description: "نوشتن ابزارهای امنیتی، اسکنر پورت، brute force، keylogger و reverse shell.",
+          syllabus: ["سوکت و برنامه‌نویسی شبکه", "اسکنر آسیب‌پذیری", "reverse shell ساده", "پردازش packet با Scapy", "API امنیتی"], videoUrl: "https://www.youtube.com/embed/Mf4fLnwEmjs", extra: "پروژه ساخت Vulnerability Scanner" },
+        
+        { title: "CEHv13 | هکر اخلاقی", description: "دوره **CEHv13 (Certified Ethical Hacker v13)** یک دوره تخصصی و عملی در زمینه هک اخلاقی و تست نفوذ است که شما را با تکنیک‌ها، ابزارها و روش‌های واقعی هکرها آشنا می‌کند. در این دوره، از شناسایی و اسکن شبکه‌ها گرفته تا تحلیل آسیب‌پذیری، هک سیستم‌ها، امنیت وب، SQL Injection، مهندسی اجتماعی، امنیت وایرلس، موبایل، Cloud و IoT را به‌صورت عملی یاد می‌گیرید. همچنان با روش‌های دور زدن فایروال‌ها، Sniffing، Session Hijacking، حملات DoS و مفاهیم Cryptography آشنا می‌شوید تا بتوانید مانند یک متخصص امنیت، تهدیدات سایبری را شناسایی و تحلیل کنید.",
+          "syllabus": [
+    "1. Introduction to Ethical Hacking",
+    "2. Footprinting and Reconnaissance",
+    "3. Scanning Networks",
+    "4. Enumeration",
+    "5. Vulnerability Analysis",
+    "6. System Hacking",
+    "7. Malware Threats",
+    "8. Sniffing",
+    "9. Social Engineering",
+    "10. Denial-of-Service (DoS)",
+    "11. Session Hijacking",
+    "12. Evading IDS, Firewalls, and Honeypots",
+    "13. Hacking Web Servers",
+    "14. Hacking Web Applications",
+    "15. SQL Injection",
+    "16. Hacking Wireless Networks",
+    "17. Hacking Mobile Platforms",
+    "18. IoT and OT Hacking",
+    "19. Cloud Computing",
+    "20. Cryptography"]
+        , videoUrl: "https://www.youtube.com/embed/3Kq1MIfTWCE", extra: "ورد به دنیایی سایبری" },
+        
+        { title: "PWK (Pen-200) مسیر OSCP", description: "دوره **PWK (Penetration Testing with Kali Linux)** یک دوره پیشرفته و عملی در زمینه تست نفوذ و هک اخلاقی است که بر مهارت‌های واقعی و تفکر تحلیلی تمرکز دارد. در این دوره، یاد می‌گیرید چگونه اهداف را شناسایی و تحلیل کنید، آسیب‌پذیری‌ها را کشف کرده و به‌صورت عملی Exploit نمایید. همچنان با حملات وب، SQL Injection، Client-Side Attacks، Privilege Escalation، Password Cracking، Pivoting، Active Directory Attacks و استفاده حرفه‌ای از Metasploit آشنا می‌شوید. این دوره با تمرکز بر روش “Try Harder” شما را برای سناریوهای واقعی تست نفوذ، گزارش‌نویسی حرفه‌ای و ورود به دنیای حرفه‌ای Offensive Security آماده می‌کند.",
+          "syllabus": [
+    "1. Introduction to Cybersecurity - Core concepts and threat actor profiles",
+    "2. Effective Learning Strategies - OffSec Try Harder methodology",
+    "3. Report Writing - Professional technical findings and remediation advice",
+    "4. Passive & Active Information Gathering - OSINT (Shodan, Google Hacking), Nmap, DNS, SMB enumeration",
+    "5. Vulnerability Scanning - Identifying weaknesses with Nessus",
+    "6. Web Application Attacks - XSS, Directory Traversal, File Inclusion",
+    "7. SQL Injection - Manual and automated (sqlmap) exploitation",
+    "8. Client-Side Attacks - Microsoft Office macros and browser-based vulnerabilities",
+    "9. Public Exploits - Locating, modifying, and fixing public exploit code",
+    "10. Privilege Escalation - Windows and Linux systems",
+    "11. Password Attacks - Cracking NTLM hashes and SSH passphrases",
+    "12. Port Redirection & Tunneling - Pivoting through internal networks",
+    "13. Active Directory Attacks - Enumeration, authentication attacks, lateral movement",
+    "14. Antivirus Evasion - Manual and automated methods to bypass security software",
+    "15. The Metasploit Framework - Advanced usage for managing exploits",
+    "16. Cloud Security - Enumerating and attacking AWS infrastructure"]
+        , videoUrl: "https://www.youtube.com/embed/8HznGcBzG10", extra: "امتحان ۲۴ ساعته" }
     ];
 
     function openCourseModal(index) {
@@ -500,10 +615,10 @@
         modalBody.innerHTML = `
             <p><i class="fas fa-info-circle"></i> ${data.description}</p>
             <div class="video-sample"><iframe src="${data.videoUrl}" allowfullscreen></iframe></div>
-            <h4 style="color:#7affc9;"><i class="fas fa-list-ul"></i> سرفصل‌های اصلی :</h4>
+            <h4 style="color:#7affc9;"><i class="fas fa-list-ul"></i> عنوان های دوره </h4>
             ${syllabusHtml}
             <div style="margin-top:20px; background:#00f0ff10; padding:12px; border-radius:20px;">
-                <i class="fas fa-star-of-life"></i> <strong>ویژگی ویژه :</strong> ${data.extra}
+                <i class="fas fa-star-of-life"></i> <strong>ویژگی  :</strong> ${data.extra}
             </div>
             <div class="card-badge" style="margin-top:16px;"><i class="fas fa-video"></i> فیلم‌های جلسات ضبط شده و پروژه‌های عملی</div>
         `;
